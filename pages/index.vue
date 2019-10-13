@@ -1,96 +1,41 @@
 <template>
     <div class="container">
-        <div class="homeTestClass">
-            <p>hello {{name}}</p>
-            <h3><a :href="url"> hi HomePage</a></h3>
-            <h3>{{userInfo}}</h3>
-            <button class='btn' @click="changeName">change to Niki</button>
-            <button class='btn' @click="returnName">change to Nik</button>
-
-            <br><br>
-            Add book: <input type="text" v-model="currentBook">
-            <button class='btn' @click="addBook">Add Book</button>
-            <br><br>
-            <div v-if="books.length > 0">
-                books
-                <ul>
-                    <li v-for="book in books">{{book}}</li>
-                </ul>
-            </div>
+        <div>
+            <test-component class="container__test"
+                            :title="'teeeest'"/>
         </div>
     </div>
 </template>
 
 <script>
+    import TestComponent from '../componets/test/index'
 
     export default {
+        name: 'Index',
 
-        head: {
-            title: 'homeTitleTest'
-        },
         components: {
-
-        },
-
-        data() {
-
-            return {
-                name: 'nik',
-                age: '26',
-                url: "http://google.com",
-                currentBook: 'VueJS Book',
-                books: []
-            }
-
+            TestComponent,
         },
 
         methods: {
-            changeName: function () {
-                this.name = "Niki";
-                this.age = "26";
-            },
+            createObject() {
+                let object = {};
+                object.property = {};
+                object.property.anotherProperty = 123;
 
-            returnName: function () {
-                this.name = "nik";
-                this.age = "85";
-            },
-
-            addBook: function () {
-                this.books.push(this.currentBook);
-            }
-        }
-        ,
-
-        computed: {
-            userInfo: function () {
-                return this.name + " is " + this.age;
-            }
-        },
-
-        watch: {
-            name: function () {
-                console.log(this.name);
+                console.log(object);
             }
         }
     }
 </script>
 
-<style lang='scss'>
-
+<style>
     .container {
-        margin: 0 auto;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+        /*margin: 0 auto;*/
+        /*min-height: 100vh;*/
+        /*display: flex;*/
+        /*justify-content: center;*/
+        /*align-items: center;*/
+        /*text-align: center;*/
     }
-
-    .btn {
-        padding: 10px;
-
-        border-radius: 5px;
-        border: 1px solid green;
-    }
-
 </style>

@@ -1,7 +1,7 @@
 export default {
     mode: 'universal',
     /*
-    ** Headers of the page
+    ** Headers of the pagee
     */
     head: {
         title: process.env.npm_package_name || '',
@@ -50,8 +50,8 @@ export default {
     */
     modules: [
         '@nuxtjs/style-resources',
-        '@nuxtjs/svg-sprite',
         '@nuxtjs/axios',
+        '@nuxtjs/svg-sprite',
     ],
     /*
     ** Build configuration

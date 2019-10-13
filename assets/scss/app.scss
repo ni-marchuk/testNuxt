@@ -30,23 +30,25 @@ body {
     margin: 0;
     padding: 0;
 
-    font-family: $GothamPro;
-    font-size: $md-font-size;
-    font-weight: 400;
-    color: $mainText;
+    font-family: $Roboto;
+    font-size: 14px;
+    font-weight: 300;
+    color: $greyLight;
     line-height: 1.4;
-    background-color: $mainBg;
+    background-color: #fff;
 }
 
 p {
     margin: 0;
-    font-size: $md-font-size;
-    font-weight: 400;
+    font-size: 16px;
+    font-weight: 300;
 }
 
 a {
-    text-decoration: none;
-    color: #000000;
+    text-decoration: underline;
+    font-size: 14px;
+
+    color: $red;
     outline: none;
     cursor: pointer;
 }
@@ -95,7 +97,6 @@ input[type="number"] {
 
 input[type="number"]:hover,
 input[type="number"]:focus {
-    -moz-appearance: number-input;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -133,27 +134,23 @@ textarea {
 }
 
 .container {
-    max-width: 1565px;
+    max-width: 1175px;
     width: 100%;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0;
 
-    @media screen and (max-width: $md-desktop) {
-        max-width: 1266px;
+    @include below($md-desktop) {
+        max-width: 1000px;
     }
 
-    @media screen and (max-width: $lg-tablet) {
+    @include below($lg-tablet) {
         padding: 0 30px;
-        max-width: 100%;
     }
 
-    @media screen and (max-width: $md-tablet) {
+    @include below($md-tablet) {
         padding: 0 20px;
     }
 
-    @media screen and (max-width: $md-mobile) {
-        padding: 0 15px;
-    }
 }
 
 .items-container {
@@ -193,9 +190,9 @@ textarea {
 
 .h1 {
     font-size: 36px;
-    font-family: $GothamPro;
+    font-family: $Bebas;
     font-weight: 400;
-    color: $black;
+    color: $grey;
 }
 
 //animations
@@ -228,12 +225,3 @@ textarea {
 .fade-enter, .fade-leave-to {
     opacity: 0;
 }
-
-.page-enter-active, .page-leave-active {
-    transition: opacity .2s;
-}
-.page-enter, .page-leave-active {
-    opacity: 0;
-}
-
-
