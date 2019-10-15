@@ -1,7 +1,7 @@
 export default {
     mode: 'universal',
     /*
-    ** Headers of the pagee
+    ** Headers of the v1
     */
     head: {
         title: process.env.npm_package_name || '',
