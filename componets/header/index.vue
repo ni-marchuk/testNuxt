@@ -25,10 +25,6 @@
 <style lang="scss">
     .header {
 
-        @include below($lg-tablet) {
-            padding-top: 20px;
-        }
-
         &__top {
             margin-bottom: 20px;
 
@@ -39,6 +35,9 @@
 
         &__bottom {
 
+            @include below($lg-tablet) {
+                padding-top: 20px;
+            }
         }
     }
 </style>

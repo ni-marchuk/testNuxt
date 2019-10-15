@@ -24,6 +24,7 @@
 <script>
 
     export default {
+        name: 'v1',
 
         head: {
             title: 'homeTitleTest'
