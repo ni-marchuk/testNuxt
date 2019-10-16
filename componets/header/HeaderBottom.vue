@@ -19,7 +19,7 @@
         </div>
 
         <div class="headerBottom__phone">
-            <p class="headerBottom__phoneNumber">+7 (3532) 78-13-37</p>
+            <p class="headerBottom__phoneNumber" type="tel">+7 (3532) 78-13-37</p>
             <a class="headerBottom__requestCall">Заказать звонок</a>
         </div>
 
@@ -174,6 +174,7 @@
 
             font-size: 14px;
             font-weight: 400;
+            text-decoration: none;
 
             color: $grey;
 
@@ -185,6 +186,8 @@
         &__requestCall {
             font-size: 12px;
             font-weight: 400;
+
+            color: $red;
         }
 
         &__hambruger {
