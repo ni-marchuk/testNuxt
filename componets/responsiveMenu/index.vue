@@ -1,10 +1,10 @@
 <template>
-    <div class="responsiveMenu">
+    <div class="responsiveMenu" v-bind:class="{ active: isActive }">
         <div class="responsiveMenu__top">
             <a class="responsiveMenu__logoLink" href="">
                 <svg-icon class="responsiveMenu__logo" name="logo"/>
             </a>
-            <button class="responsiveMenu__close" type="submit" v-on:click.prevent="btnHamb">
+            <button class="responsiveMenu__close" type="submit" v-on:click="closeClick">
                 <svg-icon class="responsiveMenu__closeIcn" name="close"></svg-icon>
             </button>
         </div>
@@ -35,14 +35,26 @@
 </template>
 
 <script>
+
+    import HeaderBottom from "../header/HeaderBottom";
+
     export default {
+
         name: "ResponsiveMenu",
+        components: {HeaderBottom},
+        data() {
+            return {
+                isActive: false,
+            }
+        },
+
+        comments: {
+            HeaderBottom,
+        },
 
         methods: {
-            btnHamb: function () {
-                let btnOpen = document.querySelectorAll('.responsiveMenu__close');
-
-                console.log(btnOpen.classList);
+            closeClick: function () {
+                this.isActive = (this.isActive !== true);
             }
         }
     }
@@ -50,13 +62,16 @@
 
 <style lang="scss">
 
-    .responsiveMenu {
+    .responsiveMenu.active {
+        display: flex;
+    }
 
+    .responsiveMenu {
         position: absolute;
         top: 0;
         right: 0;
 
-        display: flex;
+        display: none;
         justify-content: space-between;
         flex-direction: column;
 
@@ -69,6 +84,7 @@
         box-shadow: 0 0 10px;
 
         z-index: 3;
+
 
         &__top {
             display: flex;
@@ -183,8 +199,6 @@
                 border-radius: 50%;
             }
         }
-
-
     }
 
 </style>

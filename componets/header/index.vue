@@ -17,8 +17,8 @@
 
         components: {
             HeaderTop,
-            HeaderBottom
-        }
+            HeaderBottom,
+        },
     }
 </script>
 
@@ -38,6 +38,7 @@
             @include below($lg-tablet) {
                 padding-top: 20px;
             }
+
         }
     }
 </style>

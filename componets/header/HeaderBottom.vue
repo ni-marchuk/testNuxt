@@ -23,18 +23,33 @@
             <a class="headerBottom__requestCall">Заказать звонок</a>
         </div>
 
-        <svg-icon class="headerBottom__hambruger" name="hamburger"></svg-icon>
-
+        <div class="headerBottom__hambrugerBtn" type="submit">
+            <svg-icon class="headerBottom__hambruger" name="hamburger"></svg-icon>
+        </div>
     </div>
+
 </template>
 
 <script>
+
     export default {
         name: "HeaderBottom",
-        components: {
-            //
+
+        props: [],
+
+        data() {
+            return {
+
+            }
+        },
+
+        components: {},
+
+        methods: {
+
         }
     }
+
 </script>
 
 <style lang="scss">
