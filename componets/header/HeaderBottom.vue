@@ -206,7 +206,7 @@
         }
 
         &__hambruger {
-            display: none;
+            display: flex;
             width: 25px;
             height: 30px;
 

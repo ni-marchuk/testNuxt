@@ -1,20 +1,24 @@
 <template>
     <div class="container">
         <div>
-            <test-component class="container__test"
-                            :title="'teeeest'"/>
+<!--            <test-component class="container__test"-->
+<!--                            :title="'teeeest'"/>-->
+           <short-info/>
         </div>
     </div>
 </template>
 
 <script>
-    import TestComponent from '../componets/test/index'
+    import ShortInfo from '../componets/shortInfo/index';
+
+    import TestComponent from '../componets/test/index';
 
     export default {
         name: 'Index',
 
         components: {
             TestComponent,
+            ShortInfo,
         },
 
         methods: {

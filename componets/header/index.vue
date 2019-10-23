@@ -34,6 +34,7 @@
         }
 
         &__bottom {
+            margin-bottom: 20px;
 
             @include below($lg-tablet) {
                 padding-top: 20px;
