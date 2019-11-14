@@ -41,7 +41,9 @@
     export default {
 
         name: "ResponsiveMenu",
-        components: {HeaderBottom},
+        components: {
+            HeaderBottom
+        },
         data() {
             return {
                 isActive: false,

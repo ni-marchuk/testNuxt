@@ -16,6 +16,33 @@ h1 {
     padding: 0;
     margin: 0;
     text-align: left;
+
+    font-size: 56px;
+    font-family: $Bebas;
+    font-weight: 400;
+    color: $grey;
+
+    @include below($md-desktop) {
+        font-size: 48px;
+    }
+
+    @include below($lg-tablet) {
+        font-size: 44px;
+    }
+
+    @include below($md-tablet) {
+        font-size: 32px;
+    }
+}
+
+h2 {
+    padding: 0;
+    margin: 0;
+
+    font-size: 38px;
+    font-family: $Bebas;
+    font-weight: 400;
+    color: $grey;
 }
 
 figure {
@@ -186,12 +213,7 @@ textarea {
     overflow: hidden;
 }
 
-.h1 {
-    font-size: 36px;
-    font-family: $Bebas;
-    font-weight: 400;
-    color: $grey;
-}
+
 
 //animations
 .fade-enter-active, .fade-leave-active {

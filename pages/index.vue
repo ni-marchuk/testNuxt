@@ -1,15 +1,17 @@
 <template>
-    <div class="container">
-        <div>
-<!--            <test-component class="container__test"-->
-<!--                            :title="'teeeest'"/>-->
-           <short-info/>
-        </div>
+    <div>
+        <!--            <test-component class="container__test"-->
+        <!--                            :title="'teeeest'"/>-->
+        <short-info/>
+        <services/>
+        <work-scheme/>
     </div>
 </template>
 
 <script>
     import ShortInfo from '../componets/shortInfo/index';
+    import Services from '../componets/services/index';
+    import WorkScheme from '../componets/workScheme/index'
 
     import TestComponent from '../componets/test/index';
 
@@ -19,6 +21,8 @@
         components: {
             TestComponent,
             ShortInfo,
+            Services,
+            WorkScheme,
         },
 
         methods: {
@@ -33,13 +37,10 @@
     }
 </script>
 
-<style>
-    .container {
-        /*margin: 0 auto;*/
-        /*min-height: 100vh;*/
-        /*display: flex;*/
-        /*justify-content: center;*/
-        /*align-items: center;*/
-        /*text-align: center;*/
+<style lang="scss">
+
+    .services {
+        margin-bottom: 100px;
     }
+
 </style>

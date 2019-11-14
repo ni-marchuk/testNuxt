@@ -26,7 +26,7 @@
         justify-content: center;
         align-items: center;
 
-        width: 200px;
+        width: 220px;
         height: 55px;
 
         padding: 15px;
