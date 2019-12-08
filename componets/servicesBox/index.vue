@@ -1,40 +1,40 @@
 <template>
-    <div class="services">
+    <div class="servicesBox">
         <div class="container">
-            <h2 class="services__title">Наши услуги</h2>
-            <div class="services__container">
-                <div class="services__item">
-                    <div class="services__itemTitleBox">
-                        <div class="services__itemTitle">Судебное представительство</div>
-                        <svg-icon class="services__itemIcon" name="servicesHammer"></svg-icon>
+            <h2 class="servicesBox__title">{{title}}</h2>
+            <div class="servicesBox__container">
+                <div class="servicesBox__item">
+                    <div class="servicesBox__itemTitleBox">
+                        <div class="servicesBox__itemTitle">Судебное представительство</div>
+                        <svg-icon class="servicesBox__itemIcon" name="servicesBoxHammer"></svg-icon>
                     </div>
-                    <ul class="services__itemList">
+                    <ul class="servicesBox__itemList">
                         <li>Взыскание задолженности</li>
                         <li>Налоговые споры</li>
                         <li>Сопровождение банкротства</li>
                     </ul>
-                    <p class="services__text">Юридическая фирма «Паритет» предоставляет эффективные решения по
+                    <p class="servicesBox__text">Юридическая фирма «Паритет» предоставляет эффективные решения по
                         представлению
                         интересов в судах
                         и последующего исполнению судебных решений для реализации бизнес задач наших партнеров.</p>
-                    <Btn class="services__btn"
+                    <Btn class="servicesBox__btn"
                          :title="'Подробнее'"></Btn>
                 </div>
-                <div class="services__item">
-                    <div class="services__itemTitleBox">
-                        <div class="services__itemTitle">Исполнительное производство</div>
-                        <svg-icon class="services__itemIcon" name="servicesLibra"></svg-icon>
+                <div class="servicesBox__item">
+                    <div class="servicesBox__itemTitleBox">
+                        <div class="servicesBox__itemTitle">Исполнительное производство</div>
+                        <svg-icon class="servicesBox__itemIcon" name="servicesBoxLibra"></svg-icon>
                     </div>
-                    <ul class="services__itemList">
+                    <ul class="servicesBox__itemList">
                         <li>Взыскание задолженности</li>
                         <li>Налоговые споры</li>
                         <li>Сопровождение банкротства</li>
                     </ul>
-                    <p class="services__text">Юридическая фирма «Паритет» предоставляет эффективные решения по
+                    <p class="servicesBox__text">Юридическая фирма «Паритет» предоставляет эффективные решения по
                         представлению
                         интересов в судах и
                         последующего исполнению судебных решений для реализации бизнес задач наших партнеров.</p>
-                    <Btn class="services__btn"
+                    <Btn class="servicesBox__btn"
                          :title="'Подробнее'"></Btn>
                 </div>
             </div>
@@ -46,22 +46,23 @@
     import Btn from "../btn/index";
 
     export default {
-        name: "Services",
+        name: "servicesBox",
 
         components: {
             Btn,
-        }
+        },
+        //
+        // data: function () {
+        //     return {
+        //         title: "Наши улуги",
+        //     }
+        // },
     }
 </script>
 
 <style lang="scss">
 
-    .services {
-
-        padding-top: 30px;
-        padding-bottom: 50px;
-
-        background-color: #EEEEEE;
+    .servicesBox {
 
         &__title {
             margin-left: 15px;
@@ -112,7 +113,6 @@
                     margin-bottom: 20px;
                 }
             }
-
         }
 
         &__itemTitleBox {
@@ -135,7 +135,6 @@
             max-width: 60px;
             max-height: 60px;
             min-width: 60px;
-            max-height: 60px;
         }
 
         &__itemList {

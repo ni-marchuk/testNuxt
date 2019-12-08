@@ -11,10 +11,10 @@
 
         <div class="headerBottom__menuBox">
             <ul class="headerBottom__menuList">
-                <li class="headerBottom__menuItem"><a class="headerBottom__itemLink">О компании</a></li>
-                <li class="headerBottom__menuItem"><a class="headerBottom__itemLink">Услуги</a></li>
-                <li class="headerBottom__menuItem"><a class="headerBottom__itemLink">Вакансии</a></li>
-                <li class="headerBottom__menuItem"><a class="headerBottom__itemLink">Контакты</a></li>
+                <li class="headerBottom__menuItem"><a class="headerBottom__itemLink" href="about">О компании</a></li>
+                <li class="headerBottom__menuItem"><a class="headerBottom__itemLink" href="services">Услуги</a></li>
+                <li class="headerBottom__menuItem"><a class="headerBottom__itemLink" href="vacancies">Вакансии</a></li>
+                <li class="headerBottom__menuItem"><a class="headerBottom__itemLink" href="contacts">Контакты</a></li>
             </ul>
         </div>
 
@@ -95,7 +95,7 @@
             }
         }
 
-        //временно
+        //время сокращенный формат
         &__operatingModeAdapt {
             display: none;
             position: relative;

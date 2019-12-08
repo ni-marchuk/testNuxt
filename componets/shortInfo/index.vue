@@ -8,7 +8,7 @@
                          :title="'Подробнее'">
                     </Btn>
                 </div>
-                <img class="shortInfo__hero" src="../../assets/img/man.png">
+                <img class="shortInfo__hero" src="/img/man.png">
                 <div class="shortInfo__statistics">
                     <div class="shortInfo__statisticItem">
                         <p class="shortInfo__itemTitle">50+</p>
@@ -61,7 +61,7 @@
             padding-bottom: 30px;
         }
 
-        background-image: url("../../assets/img/bg.png");
+        background-image: url("/img/bg.png");
         background-repeat: repeat;
         background-position: center top;
 

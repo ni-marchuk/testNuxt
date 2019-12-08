@@ -40,7 +40,15 @@ export default {
     /*
     ** Plugins to load before mounting the App
     */
-    plugins: [],
+    plugins: [
+        { src: '~/plugins/swiper.js', ssr: false },
+        { src: '~plugins/vue-modal-js.js', ssr: false},
+    ],
+
+    axios: {
+        baseUrl: "https://api.ufparitet.ru/api/",
+    },
+
     /*
     ** Nuxt.js dev-modules
     */
@@ -61,6 +69,7 @@ export default {
         ** You can extend webpack config here
         */
         extend(config, ctx) {
+
         }
     }
 }

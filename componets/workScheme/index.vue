@@ -1,5 +1,6 @@
 <template>
     <div class="workScheme">
+        <div class="workScheme__background"></div>
         <div class="container">
             <div class="workScheme__stage">
                 <h2 class="workScheme__titleStage">Схема работы</h2>
@@ -39,19 +40,103 @@
                         </div>
                         <div class="workScheme__stageItemText">Получение денег</div>
                     </div>
+                </div>
+            </div>
+            <div class="workScheme__slider" v-swiper:mySwiper="swiperOption">
+                <div class="workScheme__sliderWrapper swiper-wrapper">
+                    <div class="workScheme__sliderSlide swiper-slide" v-for="banner in banners">
+                        <div class="workScheme__slideContent">
+                            <img class="workScheme__sliderImg" :src="banner.img">
+                            <div class="workScheme__sliderTextContent">
+                                <p class="workScheme__sliderStep">{{banner.step}}</p>
+                                <h2 class="workScheme__sliderTitle">{{banner.title}}</h2>
+                                <p class="workScheme__sliderText">{{banner.text}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="workScheme__sliderNavigation">
+                    <button class="workScheme__sliderNext swiper-button-next"></button>
+                    <button class="workScheme__sliderPrev swiper-button-prev"></button>
+                </div>
+                <div class="swiper-pagination swiper-pagination-bullets">
 
                 </div>
             </div>
         </div>
-        <div class="workScheme__slider">
 
-        </div>
     </div>
+
 </template>
 
 <script>
     export default {
         name: "workScheme",
+
+        mounted() {
+            // console.log('app init', this)
+            // setTimeout(() => {
+            //     this.banners.push('/5.jpg')
+            //     console.log('banners update')
+            // }, 3000)
+            // console.log(
+            //     'This is current swiper instance object', this.mySwiper,
+            //     'I will slideTo banners 3');
+            // this.mySwiper.slideTo(3)
+        },
+
+        data() {
+            return {
+                banners: [
+                    {
+                        step: 'Этап 1',
+                        title: 'Анализ документов',
+                        text: `Вы излагаете суть проблемы, после чего мы уточняем нюансы, важные для дела и сообщаем о документах, необходимых для проведения полного анализа ситуации.
+                               Первичная консультация может быть проведена как при личной встрече, так и онлайн по Skype. Конкретное время первичной консультации, согласовывается заранее (возможно после окончания рабочего дня).`,
+                        img: '/img/banners/doc.png',
+                    },
+                    {
+                        step: 'Этап 1',
+                        title: 'Анализ документов',
+                        text: `Вы излагаете суть проблемы, после чего мы уточняем нюансы, важные для дела и сообщаем о документах, необходимых для проведения полного анализа ситуации.
+                               Первичная консультация может быть проведена как при личной встрече, так и онлайн по Skype. Конкретное время первичной консультации, согласовывается заранее (возможно после окончания рабочего дня).`,
+                        img: '/img/banners/port.png',
+                    },
+                    {
+                        step: 'Этап 1',
+                        title: 'Анализ документов',
+                        text: `Вы излагаете суть проблемы, после чего мы уточняем нюансы, важные для дела и сообщаем о документах, необходимых для проведения полного анализа ситуации.
+                               Первичная консультация может быть проведена как при личной встрече, так и онлайн по Skype. Конкретное время первичной консультации, согласовывается заранее (возможно после окончания рабочего дня).`,
+                        img: '/img/banners/port.png',
+                    },
+                ],
+
+                swiperOption: {
+                    loop: true,
+                    slidesPerView: 'auto',
+                    centeredSlides: true,
+                    spaceBetween: 30,
+                    pagination: {
+                        el: '.swiper-pagination',
+                        dynamicBullets: false,
+                        clickable: true
+                    },
+                    on: {
+                        slideChange() {
+                            console.log('onSlideChangeEnd', this);
+                        },
+                        tap() {
+                            console.log('onTap', this);
+                        }
+                    },
+
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                }
+            }
+        }
     }
 
 </script>
@@ -59,7 +144,21 @@
 <style lang="scss">
 
     .workScheme {
-        margin-bottom: 500px;
+        position: relative;
+
+        &__background {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: url("/img/bgSlider.png");
+            opacity: .2;
+
+            background-position-x: right;
+            background-repeat-x: no-repeat;
+            background-size: contain;
+        }
 
         &__titleStage {
             display: flex;
@@ -84,7 +183,6 @@
             width: 100%;
 
             cursor: pointer;
-            background-color: white;
 
             &:not(:last-child):before {
                 position: absolute;
@@ -109,6 +207,7 @@
             }
 
             &.isActive {
+
                 .workScheme__stageItemState {
                     border: 5px solid $red;
                 }
@@ -126,12 +225,28 @@
                     display: flex;
                 }
 
+                .workScheme__stageItemTitle {
+                    color: $red;
+                }
+
+                .workScheme__stageItemText {
+                    color: $red;
+                }
+
             }
 
             &.isFullActive {
 
                 .workScheme__stageItemState {
                     border: 5px solid $red;
+                }
+
+                .workScheme__stageItemTitle {
+                    color: $red;
+                }
+
+                .workScheme__stageItemText {
+                    color: $red;
                 }
 
                 &:after {
@@ -182,9 +297,75 @@
 
         &__slider {
             width: 100%;
-            height: 500px;
-
-            background-color: #3AA18E;
+            height: 400px;
         }
+
+        &__sliderSlide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 100%;
+            max-width: 100%;
+        }
+
+        &__slideContent {
+            display: flex;
+            justify-content: space-between;
+            align-content: flex-start;
+
+            width: 80%;
+        }
+
+        &__sliderImg {
+            width: 40%;
+            max-height: 300px;
+            object-fit: contain;
+        }
+
+        &__sliderTextContent {
+            max-width: 50%;
+            max-height: 300px;
+        }
+
+        &__sliderStep {
+            margin-bottom: 10px;
+
+            font-weight: 700;
+            text-transform: uppercase;
+            color: $red;
+        }
+
+        &__sliderTitle {
+            margin-bottom: 15px;
+        }
+
+        &__sliderNavigation {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &__sliderPrev {
+            /*left: 50px;*/
+            width: 50px;
+            height: 50px;
+            color: white;
+            border-radius: 50%;
+            background-color: $red;
+            background-image: url("/img/sprite/prev.svg");
+            background-size: 10px;
+        }
+
+        &__sliderNext {
+            /*right: 50px;*/
+            width: 50px;
+            height: 50px;
+            color: white;
+            border-radius: 50%;
+            background-color: $red;
+            background-image: url("/img/sprite/next.svg");
+            background-size: 10px;
+        }
+
     }
 </style>
