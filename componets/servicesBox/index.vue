@@ -51,12 +51,12 @@
         components: {
             Btn,
         },
-        //
-        // data: function () {
-        //     return {
-        //         title: "Наши улуги",
-        //     }
-        // },
+
+        data: function () {
+            return {
+                title: "Наши улуги",
+            }
+        },
     }
 </script>
 

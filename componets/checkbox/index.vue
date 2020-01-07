@@ -15,18 +15,21 @@
     export default {
         name: 'Checkbox',
         props: {
+
             type: {
                 type: String,
                 default() {
                     return 'checkbox'
                 }
             },
+
             disabled: {
                 type: Boolean,
                 default() {
                     return false
                 }
             }
+
         },
 
         methods: {

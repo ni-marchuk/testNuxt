@@ -1,17 +1,17 @@
 <template>
-    <modal name="FeedBackForm" class="feedBackForm"
+    <modal name="modalForm" class="modalForm"
            :width="300"
            :height="300"
            @before-open="beforeOpen"
            @before-close="beforeClose">
         <b>{{time}}</b>
-        <p class="feedBackForm__title">Закажите консультацию специалиста</p>
-        <p class="feedBackForm__text">Просто заполните форму ниже. Мы перезвоним, назначим время для собеседования</p>
-        <form class="feedBackForm__form">
-            <custom-input class="feedBackForm__input"/>
-            <custom-input class="feedBackForm__input"/>
+        <p class="modalForm__title">Закажите консультацию специалиста</p>
+        <p class="modalForm__text">Просто заполните форму ниже. Мы перезвоним, назначим время для собеседования</p>
+        <form class="modalForm__form">
+            <custom-input class="modalForm__input"/>
+            <custom-input class="modalForm__input"/>
 
-            <checkbox class="checkbox--roll feedBackForm__checkbox"
+            <checkbox class="checkbox--roll modalForm__checkbox"
                       type="checkbox"
                       v-model="status"
                       @change="status = $event">
@@ -25,7 +25,7 @@
     import Checkbox from "../checkbox/index"
 
     export default {
-        name: "FeedBackForm",
+        name: "modalForm",
 
         props: {
 
@@ -64,7 +64,7 @@
 
 <style lang="scss">
 
-    .feedBackForm {
+    .modalForm {
 
         width: 100%;
 

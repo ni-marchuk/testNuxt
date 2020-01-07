@@ -1,7 +1,7 @@
 <template>
     <div class="about">
         <bread-crumbs class="about__breadCrumbs"/>
-        <company-info class="about__companyInfo"/>
+        <company-info class="about__companyInfo" :pageInfo="pageInfo"/>
         <our-values class="about__ourValues"/>
         <statistic-company class="about__statisticCompany"/>
         <office-atmosphere class="about__officeAtmosphere"/>
@@ -19,6 +19,14 @@
 
     export default {
         name: "Index",
+
+        data() {
+            return {
+                pageInfo: {},
+                pageInfoParse: {},
+            }
+        },
+
         components: {
             BreadCrumbs,
             CompanyInfo,
@@ -26,6 +34,16 @@
             StatisticCompany,
             OfficeAtmosphere,
             Mission,
+        },
+
+        created() {
+            this.fetchSomething();
+        },
+
+        methods: {
+            async fetchSomething() {
+                this.pageInfo = await this.$axios.$get('/pageInfo?page=about');
+            },
         }
     }
 </script>

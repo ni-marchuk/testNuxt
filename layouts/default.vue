@@ -5,8 +5,8 @@
         <overlay/>
         <nuxt/>
         <app-footer/>
-        <feed-back-form/>
-        <button @click="$modal.show('FeedBackForm')">XXXX</button>
+        <modal-form/>
+        <button @click="$modal.show('modalForm')">XXXX</button>
     </div>
 </template>
 <script>
@@ -14,7 +14,7 @@
     import AppFooter from "../componets/footer/index";
     import ResponsiveMenu from "../componets/responsiveMenu/index";
     import Overlay from "../componets/Overlay/index";
-    import FeedBackForm from "../componets/FeedBackForm/index";
+    import ModalForm from "../componets/modalForm/index";
 
     export default {
         components: {
@@ -22,7 +22,7 @@
             AppFooter,
             ResponsiveMenu,
             Overlay,
-            FeedBackForm,
+            ModalForm,
         }
     }
 </script>

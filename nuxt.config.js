@@ -46,7 +46,9 @@ export default {
     ],
 
     axios: {
+        // proxyHeaders: false,
         baseUrl: "https://api.ufparitet.ru/api/",
+        browserBaseURL: "https://api.ufparitet.ru/api/",
     },
 
     /*
@@ -71,5 +73,5 @@ export default {
         extend(config, ctx) {
 
         }
-    }
+    },
 }

@@ -1,10 +1,9 @@
 <template>
     <div class="test">
-
-        <span class="test__title">{{ title }}</span>
-
-        <p class="test__text">{{ text }}</p>
-
+        <input type="text"
+               class="testInput"
+               v-model="inputText"
+               @blur="sendToSave">
     </div>
 </template>
 
@@ -12,20 +11,37 @@
     export default {
         name: "Test",
 
+        data() {
+            return {
+                inputText: '',
+                newInputTxt: '',
+                arrayMessageDelete228: [],
+            }
+        },
+
         props: {
             title: {
                 type: String,
-                required: true,
+                required:
+                    true,
             },
 
             text: {
                 type: String,
-                default() {
+                default
+                    () {
                     return 'TEST TEXT';
                 }
-            }
+            },
+        },
+        methods: {
+            sendToSave(newInputTxt) {
+                newInputTxt = this.inputText + "228";
+                this.$emit('send-to-save', newInputTxt)
+            },
         }
     }
+
 </script>
 
 <style lang="scss">

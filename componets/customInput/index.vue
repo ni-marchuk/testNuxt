@@ -1,13 +1,97 @@
 <template>
-    <div class="customInput">
-        <input id="" class="customInput__input" type="" name="" placeholder="">
-        <p class="customInput__errorMessage">testError</p>
+    <div class="customInput"
+         :class="{'isError': error}"
+         @click="$emit('click')">
+
+        <template v-if="type === 'text'">
+            <label class="input__wrapper">
+                {{ label }}
+                <input class="input__input"
+                       :type="type"
+                       :name="name"
+                       :placeholder="placeholder"
+                       :value="value"
+                       :readonly="readonly"
+                       :disabled="disabled"
+                       autocomplete="off"
+                       @input="$emit('input', $event.target.value)"
+                       @focus="focus()"
+                       @focusout="$emit('focusout')"
+                       @blur="isFocused = true">
+            </label>
+
+            <template v-if="error">
+                <p class="input__errorMessage">{{ error }}</p>
+            </template>
+        </template>
+
     </div>
 </template>
 
 <script>
     export default {
-        name: "CustomInput"
+        name: "CustomInput",
+
+        props: {
+            label: {
+                type: String,
+                default() {
+                    return ''
+                }
+            },
+
+            readonly: {
+                type: Boolean,
+                default() {
+                    return false
+                }
+            },
+
+            error: {
+                default() {
+                    return null
+                }
+            },
+
+            value: {},
+
+            disabled: {
+                type: Boolean,
+                default() {
+                    return false
+                }
+            },
+
+            type: {
+                type: String,
+                default() {
+                    return 'text'
+                }
+            },
+
+            name: {
+                type: String,
+                default() {
+                    return ''
+                }
+            },
+
+            placeholder: {
+                type: String,
+                default() {
+                    return ''
+                }
+            },
+        },
+
+        methods: {
+            focus() {
+                this.isFocused = true;
+
+                this.$emit('clearError');
+            },
+        },
+
     }
 </script>
 

@@ -1,13 +1,13 @@
 <template>
-    <div class="feedBack">
+    <div class="feedback">
         <div class="container">
-            <div class="feedBack__box">
-                <p class="feedBack__text">Хочешь в нашу растущую команду?</p>
-                <div class="feedBack__contacts">
-                    <p class="feedBack__text">Звони&nbsp</p>
-                    <a class="feedBack__phone" href="tel:+353278-13-37">8 (3532) 78-13-37&nbsp</a>
-                    <p class="feedBack__text">или напиши&nbsp</p>
-                    <a class="feedBack__mail">hr@ufparitet.ru</a>
+            <div class="feedback__box">
+                <p class="feedback__text">Хочешь в нашу растущую команду?</p>
+                <div class="feedback__contacts">
+                    <p class="feedback__text">Звони&nbsp</p>
+                    <a class="feedback__phone" href="tel:+353278-13-37">8 (3532) 78-13-37&nbsp</a>
+                    <p class="feedback__text">или напиши&nbsp</p>
+                    <a class="feedback__mail">hr@ufparitet.ru</a>
                 </div>
             </div>
         </div>
@@ -16,12 +16,13 @@
 
 <script>
     export default {
-        name: "feedBack"
+        name: "Feedback"
     }
 </script>
 
 <style lang="scss">
-    .feedBack {
+
+    .feedback {
         display: flex;
         justify-content: center;
 

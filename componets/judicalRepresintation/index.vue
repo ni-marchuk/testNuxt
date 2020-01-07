@@ -1,8 +1,8 @@
 <template>
     <div class="judicalRepresintation">
         <div class="container">
-            <article>
-                <div class="judicalRepresintation__wrapper">
+            <div class="judicalRepresintation__wrapper">
+                <div class="judicalRepresintation__inner">
                     <h1 class="judicalRepresintation__title">Судебное представительство</h1>
                     <p class="judicalRepresintation__subTitle">Массовое судебное взыскание</p>
                     <p class="judicalRepresintation__text">Взаимодействие по агентской схеме работы с Юридической фирмой
@@ -67,19 +67,20 @@
                         </ul>
                     </div>
                 </div>
-            </article>
+                <feedback-form class="judicalRepresintation__feedbackForm"/>
+            </div>
         </div>
-        <div class="judicalRepresintation__sidebar"></div>
     </div>
 </template>
 
 <script>
+    import FeedbackForm from "../../componets/feedbackForm/index"
 
     export default {
         name: "JudicalRepresintation",
 
         components: {
-            //
+            FeedbackForm,
         }
     }
 </script>
@@ -88,6 +89,10 @@
     .judicalRepresintation {
 
         &__wrapper {
+            display: flex;
+        }
+
+        &__inner {
             padding: 0 5%;
             width: 70%;
         }
@@ -138,11 +143,6 @@
 
         &__schemeItem {
             padding-bottom: 10px;
-        }
-
-        &__feedBackForm {
-            width: 30%;
-            height: 400px;
         }
 
     }
