@@ -1,12 +1,9 @@
 <template>
     <div class="ourValues">
         <div class="container">
-            <h2 class="ourValues__title">Наши ценности</h2>
+            <h2 class="ourValues__title">{{aboutContent.values['title']}}</h2>
             <ul class="ourValues__list">
-                <li class="ourValues__item">Профессионализм</li>
-                <li class="ourValues__item">Нацеленность на результат</li>
-                <li class="ourValues__item">Проактивность</li>
-                <li class="ourValues__item">Инновационность</li>
+                <li class="ourValues__item" v-for="value in aboutContent.values.items">{{value}}</li>
             </ul>
         </div>
     </div>
@@ -14,7 +11,11 @@
 
 <script>
     export default {
-        name: "OurValues"
+        name: "OurValues",
+
+        props: {
+            aboutContent: {},
+        },
     }
 </script>
 

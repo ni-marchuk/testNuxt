@@ -1,9 +1,10 @@
 <template>
-    <div class="about">
+    <div class="about"
+         v-if="aboutContent && aboutContent !== null && aboutContent !== undefined && typeof(aboutContent) === 'object'">
         <bread-crumbs class="about__breadCrumbs"/>
-        <company-info class="about__companyInfo" :pageInfo="pageInfo"/>
-        <our-values class="about__ourValues"/>
-        <statistic-company class="about__statisticCompany"/>
+        <company-info class="about__companyInfo" :aboutContent="aboutContent"/>
+        <our-values class="about__ourValues" :aboutContent="aboutContent"/>
+        <statistic-company class="about__statisticCompany" :aboutContent="aboutContent"/>
         <office-atmosphere class="about__officeAtmosphere"/>
         <mission class="about__mission"/>
     </div>
@@ -22,8 +23,7 @@
 
         data() {
             return {
-                pageInfo: {},
-                pageInfoParse: {},
+                aboutContent: {},
             }
         },
 
@@ -36,15 +36,25 @@
             Mission,
         },
 
-        created() {
-            this.fetchSomething();
+        async mounted() {
+            await this.fetchSomething();
         },
 
         methods: {
             async fetchSomething() {
-                this.pageInfo = await this.$axios.$get('/pageInfo?page=about');
+                this.aboutContent = await this.$axios.$get('/pageInfo?page=about');
+                return this.aboutContent;
             },
-        }
+        },
+
+        // computed: {
+        //     checkOnContent() {
+        //         if (this.aboutContent === null && this.aboutContent === undefined && typeof (this.aboutContent.values) === 'object') {
+        //             return true;
+        //         } else
+        //             return false;
+        //     }
+        // },
     }
 </script>
 

@@ -7,6 +7,8 @@
                     <p class="statisticCompany__itemValue">50+</p>
                     <p class="statisticCompany__itemText">Профессиональных юристов</p>
                 </div>
+
+
                 <div class="statisticCompany__item">
                     <p class="statisticCompany__itemValue">18</p>
                     <p class="statisticCompany__itemText">Лет успешной работы</p>
@@ -27,7 +29,11 @@
 
 <script>
     export default {
-        name: "StatisticCompany"
+        name: "StatisticCompany",
+
+        props: {
+            aboutContent: {},
+        },
     }
 </script>
 

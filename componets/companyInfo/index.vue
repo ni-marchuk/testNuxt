@@ -1,8 +1,8 @@
 <template>
     <div class="companyInfo">
         <div class="container">
-            <h1 class="companyInfo__title">{{pageInfo.h1}}</h1>
-            <div class="companyInfo__textContent" v-html="pageInfo.text">
+            <h1 class="companyInfo__title">{{aboutContent.h1}}</h1>
+            <div class="companyInfo__textContent" v-html="aboutContent.text">
             </div>
         </div>
     </div>
@@ -13,7 +13,7 @@
         name: "CompanyInfo",
 
         props: {
-            pageInfo: {},
+            aboutContent: {},
         },
     }
 </script>
