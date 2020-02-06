@@ -1,8 +1,8 @@
 <template>
     <div class="mission">
         <div class="mission__bg"></div>
-            <h2 class="mission__title">{{about.mission.title}}</h2>
-            <p class="mission__text">{{about.mission.text}}</p>
+        <h2 class="mission__title">{{about.mission.title}}</h2>
+        <p class="mission__text">{{about.mission.text}}</p>
     </div>
 </template>
 
