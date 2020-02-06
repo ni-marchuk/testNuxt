@@ -1,16 +1,21 @@
 <template>
     <div class="mission">
         <div class="mission__bg"></div>
-            <h2 class="mission__title">Миссия «Паритет»</h2>
-            <p class="mission__text">Юридическая фирма «Паритет» предоставляет эффективные решения по представлению
-                интересов в судах и последующего исполнению судебных решений для реализации бизнес задач наших
-                партнеров.</p>
+            <h2 class="mission__title">{{about.mission.title}}</h2>
+            <p class="mission__text">{{about.mission.text}}</p>
     </div>
 </template>
 
 <script>
     export default {
-        name: "Mission"
+        name: "Mission",
+
+        props: {
+            about: {
+                required: true,
+            },
+        },
+
     }
 </script>
 

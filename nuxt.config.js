@@ -43,12 +43,13 @@ export default {
     plugins: [
         { src: '~/plugins/swiper.js', ssr: false },
         { src: '~plugins/vue-modal-js.js', ssr: false},
+        "~/plugins/axios",
     ],
 
     axios: {
         // proxyHeaders: false,
-        baseUrl: "https://api.ufparitet.ru/api/",
-        browserBaseURL: "https://api.ufparitet.ru/api/",
+        baseURL: "https://api.ufparitet.ru/api",
+        browserBaseURL: "https://api.ufparitet.ru/api",
     },
 
     /*

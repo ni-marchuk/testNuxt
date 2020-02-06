@@ -11,7 +11,12 @@
 
         <div class="headerBottom__menuBox">
             <ul class="headerBottom__menuList">
-                <li class="headerBottom__menuItem"><a class="headerBottom__itemLink" href="about">О компании</a></li>
+                <li class="headerBottom__menuItem">
+                    <nuxt-link class="headerBottom__itemLink"
+                               :to="{name: 'about'}">
+                        О компании
+                    </nuxt-link>
+                </li>
                 <li class="headerBottom__menuItem"><a class="headerBottom__itemLink" href="services">Услуги</a></li>
                 <li class="headerBottom__menuItem"><a class="headerBottom__itemLink" href="vacancies">Вакансии</a></li>
                 <li class="headerBottom__menuItem"><a class="headerBottom__itemLink" href="contacts">Контакты</a></li>
@@ -38,16 +43,12 @@
         props: [],
 
         data() {
-            return {
-
-            }
+            return {}
         },
 
         components: {},
 
-        methods: {
-
-        }
+        methods: {}
     }
 
 </script>

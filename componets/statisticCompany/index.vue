@@ -3,25 +3,10 @@
         <div class="container">
             <div class="statisticCompany__list">
                 <img class="statisticCompany__bg" src="/img/bgParitet.png">
-                <div class="statisticCompany__item">
-                    <p class="statisticCompany__itemValue">50+</p>
-                    <p class="statisticCompany__itemText">Профессиональных юристов</p>
+                <div class="statisticCompany__item" v-for="item in statistics">
+                    <p class="statisticCompany__itemValue">{{item.title}}</p>
+                    <p class="statisticCompany__itemText">{{item.text}}</p>
                 </div>
-
-
-                <div class="statisticCompany__item">
-                    <p class="statisticCompany__itemValue">18</p>
-                    <p class="statisticCompany__itemText">Лет успешной работы</p>
-                </div>
-                <div class="statisticCompany__item">
-                    <p class="statisticCompany__itemValue">51 232</p>
-                    <p class="statisticCompany__itemText">Удачно решенных дел</p>
-                </div>
-                <div class="statisticCompany__item">
-                    <p class="statisticCompany__itemValue">656</p>
-                    <p class="statisticCompany__itemText">Млн. руб. возвращено клиентам</p>
-                </div>
-
             </div>
         </div>
     </div>
@@ -30,9 +15,10 @@
 <script>
     export default {
         name: "StatisticCompany",
-
         props: {
-            aboutContent: {},
+            statistics: {
+                required: true,
+            },
         },
     }
 </script>

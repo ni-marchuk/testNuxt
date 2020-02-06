@@ -1,12 +1,15 @@
 <template>
-    <div class="about"
-         v-if="aboutContent && aboutContent !== null && aboutContent !== undefined && typeof(aboutContent) === 'object'">
+    <div class="about">
         <bread-crumbs class="about__breadCrumbs"/>
-        <company-info class="about__companyInfo" :aboutContent="aboutContent"/>
-        <our-values class="about__ourValues" :aboutContent="aboutContent"/>
-        <statistic-company class="about__statisticCompany" :aboutContent="aboutContent"/>
+        <company-info class="about__companyInfo"
+                      :about="about"/>
+        <our-values class="about__ourValues"
+                    :about="about"/>
+        <statistic-company class="about__statisticCompany"
+                           :statistics="statistics"/>
         <office-atmosphere class="about__officeAtmosphere"/>
-        <mission class="about__mission"/>
+        <!--        <mission class="about__mission"-->
+        <!--                 :about="about"/>-->
     </div>
 </template>
 
@@ -23,7 +26,8 @@
 
         data() {
             return {
-                aboutContent: {},
+                about: null,
+                statistics: null,
             }
         },
 
@@ -35,24 +39,109 @@
             OfficeAtmosphere,
             Mission,
         },
+        //
 
-        async mounted() {
-            await this.fetchSomething();
+        async asyncData({app}) {
+            let [about, statistics] = await Promise.all([
+                    app.$axios.$get("pageInfo?page=abouts")
+                    console.log(about)
+                        .catch(err => {
+                            console.log(err);
+                        }),
+                    app.$axios.$get("statistics")
+                    console.log(res)
+                        .catch(err => {
+                            console.log(err);
+                        }),
+                ])
+            ;
+            return {
+                about: about,
+                statistics: statistics
+            }
         },
+
+        // async asyncData({app}) {
+        //     let [about, statistics] = await Promise.all([
+        //         app.$axios.$get("pageInfo?page=abouts"),
+        //         app.$axios.$get("statistics"),
+        //     ])
+        //         .catch(err => {
+        //             console.log(err);
+        //         });
+        //     return {
+        //         about: about,
+        //         statistics: statistics
+        //     }
+        // },
+        //
+
+
+        // async asyncData({app}) {
+        //     // const aboutPromise = new Promise((res, rej) => {
+        //     //     app.$axios.$get("pageInfo?page=about")
+        //     //         .then(res => {
+        //     //             console.log(res, 'about');
+        //     //         }).catch(err => {
+        //     //         console.log(err, 'about');
+        //     //     })
+        //     // });
+        //     // const statisticsPromise = new Promise((res, rej) => {
+        //     //     app.$axios.$get("statistics")
+        //     //         .then(res => {
+        //     //             console.log(res, 'about');
+        //     //         }).catch(err => {
+        //     //         console.log(err, 'statistics');
+        //     //     })
+        //     // });
+        //     //
+        //     // await Promise.allSettled([aboutPromise, statisticsPromise]).then((res) => res.forEach((result) => console.log(result)));
+        //
+        //     const promise1 = app.$axios.$get("pageInfo?page=about");
+        //     const promise2 = app.$axios.$get("statistics");
+        //     const results = await Promise.allSettled([promise1, promise2]);
+        //     results.forEach(res => console.log(res))
+        // },
 
         methods: {
-            async fetchSomething() {
-                this.aboutContent = await this.$axios.$get('/pageInfo?page=about');
-                return this.aboutContent;
-            },
-        },
+//
+        }
 
-        // computed: {
-        //     checkOnContent() {
-        //         if (this.aboutContent === null && this.aboutContent === undefined && typeof (this.aboutContent.values) === 'object') {
-        //             return true;
-        //         } else
-        //             return false;
+
+        //example request dependent sellerRes
+
+        // asyncData ({params, app, error }) {
+        //     return app.$axios.$get(`/seller/${params.username}`).then(async sellerRes => {
+        //         let [categoriesRes, reviewsRes, productsRes] = await Promise.all([
+        //             app.$axios.$get(`/categories`),
+        //             app.$axios.$get(`/seller/${params.username}/reviews`),
+        //             app.$axios.$get(`/seller/${params.username}/products`)
+        //         ])
+        //         return {
+        //             seller: sellerRes.data,
+        //             metaTitle: sellerRes.data.name,
+        //             categories: categoriesRes.data,
+        //             reviewsSummary: reviewsRes.summary,
+        //             products: productsRes.data,
+        //         }
+        //     }).catch(e => {
+        //         error({ statusCode: 404, message: 'Seller not found' })
+        //     });
+        // },
+        //
+        // async asyncData({app}) {
+        //     const about = await app.$axios.$get("pageInfo?page=about")
+        //         .catch(err => {
+        //             console.log(err, 'About');
+        //         });
+        //     const statistics = await app.$axios.$get("statistics")
+        //         .catch(err => {
+        //             console.log(err, 'Statistics');
+        //         });
+        //     console.log(about, statistics);
+        //     return {
+        //         about: about,
+        //         statistics: statistics
         //     }
         // },
     }
