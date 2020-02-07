@@ -1,6 +1,8 @@
 <template>
     <div class="about">
-        <bread-crumbs class="about__breadCrumbs"/>
+        <bread-crumbs class="about__breadCrumbs"
+                      :breadcrumbs="breadcrumbs"
+        />
         <company-info class="about__companyInfo"
                       :about="about"/>
         <our-values class="about__ourValues"
@@ -24,13 +26,6 @@
     export default {
         name: "Index",
 
-        data() {
-            return {
-                about: null,
-                statistics: null,
-            }
-        },
-
         components: {
             BreadCrumbs,
             CompanyInfo,
@@ -38,6 +33,35 @@
             StatisticCompany,
             OfficeAtmosphere,
             Mission,
+        },
+
+        data() {
+            return {
+                about: null,
+                statistics: null,
+                breadcrumbs: [
+                    {
+                        name: '/',
+                        text: 'Главная/',
+                        params: {
+                            //
+                        },
+                        query: {
+                            id: 1,
+                        }
+                    },
+                    {
+                        name: 'about',
+                        text: 'О компании',
+                        params: {
+                            id: 2,
+                        },
+                        query: {
+                            //
+                        }
+                    },
+                ],
+            }
         },
 
         async asyncData({app}) {

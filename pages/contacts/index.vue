@@ -1,6 +1,6 @@
 <template>
     <div class="contacts">
-        <bread-crumbs class="contacts__breadCrumbs"/>
+<!--        <bread-crumbs class="contacts__breadCrumbs"/>-->
         <contacts-box class="contacts__contactsBox"/>
         <driving-directions class="contacts__drivingDirections"/>
     </div>
