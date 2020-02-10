@@ -1,6 +1,8 @@
 <template>
-
-    <div class="overlay"></div>
+    <div class="overlay"
+         :class="{ active: responsiveState }"
+         @click="responsiveClose">
+    </div>
 
 </template>
 
@@ -9,16 +11,31 @@
 
     export default {
         name: "Overlay",
+
         components: {
             ResponsiveMenu,
         },
+
+        props: {
+            responsiveState: {
+                required: true,
+                type: Boolean,
+            },
+        },
+
+        methods: {
+            responsiveClose() {
+                this.$emit('responsive-close');
+            }
+        }
+
     }
 </script>
 
 <style lang="scss">
 
     .overlay {
-        display: none;
+        display: flex;
 
         position: fixed;
         top: 0;
@@ -26,11 +43,14 @@
 
         width: 100%;
         height: 100%;
-        /*transition(all 0.3s ease-in-out);*/
         background-color: white;
         opacity: 0.8;
-        /*visibility: hidden;*/
+        visibility: hidden;
         z-index: 2;
+    }
+
+    .overlay.active {
+        visibility: unset;
     }
 
 </style>

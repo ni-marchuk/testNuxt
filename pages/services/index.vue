@@ -8,7 +8,7 @@
 </template>
 
 <script>
-    import BreadCrumbs from "../../componets/breadCrumbs/index"
+    import BreadCrumbs from "../../componets/breadcrumbs/breadcrumbs"
     import ServicesBox from "../../componets/servicesBox/index"
 
     export default {

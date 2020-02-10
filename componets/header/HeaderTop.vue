@@ -1,12 +1,23 @@
 <template>
     <div class="headerTop">
         <div class="headerTop__addressBox">
-            <a class="headerTop__address">г. Оренбург, ул. ул.Хабаровская, 53</a>
-            <a class="headerTop__mapsLink">Схема проезда</a>
+            <a class="headerTop__address">
+                {{settings.address}}
+            </a>
+            <nuxt-link class="headerTop__mapsLink"
+                       :to="{name: 'contacts'}">
+                Схема проезда
+            </nuxt-link>
         </div>
         <div class="headerTop__call">
-            <a class="headerTop__phoneNumber" type="tel">+7 (3532) 78-13-37</a>
-            <a class="headerTop__requestCall">Заказать звонок</a>
+            <a class="headerTop__phoneNumber"
+               type="tel">
+                {{settings.phones[0]}}
+            </a>
+            <button class="headerTop__requestCall"
+                    @click="$modal.show('modalForm')">
+                Заказать звонок
+            </button>
         </div>
     </div>
 
@@ -16,6 +27,12 @@
 
     export default {
         name: "headerTop",
+
+        props: {
+            settings: {
+                required: true,
+            },
+        },
     }
 
 </script>
@@ -34,7 +51,7 @@
             margin-right: 75px;
         }
 
-        &__address{
+        &__address {
             margin-right: 10px;
 
             text-decoration: none;
@@ -42,9 +59,12 @@
 
         &__mapsLink {
             font-weight: 400;
+            font-size: 14px;
+
+            color: $red;
         }
 
-        &__call{
+        &__call {
             display: flex;
         }
 
@@ -59,8 +79,10 @@
         }
 
         &__requestCall {
+            font-family: $Roboto;
             font-weight: 400;
-
+            font-size: 14px;
+            text-decoration: underline;
             color: $red;
         }
     }

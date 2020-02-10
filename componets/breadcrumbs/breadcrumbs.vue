@@ -1,10 +1,12 @@
 <template>
-    <div class="breadCrumbs">
+    <div class="breadcrumbs">
         <div class="container">
-            <ul class="breadCrumbs__list">
-                <nuxt-link v-for="(item,index) in breadcrumbs"
+            <ul class="breadcrumbs__list">
+                <nuxt-link v-for="(item, index) in breadcrumbs"
+                           :key="index"
                            :to="{path: item.name, query:item.query}"
-                           class="breadCrumbs__item"
+                           class="breadcrumbs__item"
+                           :class="{active: index === breadcrumbs.length-1}"
                 >
                     {{item.text}}
                 </nuxt-link>
@@ -15,7 +17,7 @@
 
 <script>
     export default {
-        name: "BreadCrumbs",
+        name: "Breadcrumbs",
 
         props: {
             breadcrumbs: {
@@ -28,7 +30,7 @@
 </script>
 
 <style lang="scss">
-    .breadCrumbs {
+    .breadcrumbs {
 
         margin-bottom: 25px;
 
@@ -50,10 +52,13 @@
 
         &__item {
             display: inline;
+            text-decoration: none;
+            color: $greyLight;
         }
 
         &__item.active {
-            color: #929394;
+            color: #A4A4A3;
+            cursor: default;
         }
     }
 </style>

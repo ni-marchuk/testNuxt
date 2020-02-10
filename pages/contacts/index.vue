@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import BreadCrumbs from "../../componets/breadCrumbs/index"
+    import BreadCrumbs from "../../componets/breadcrumbs/breadcrumbs"
     import ContactsBox from "../../componets/contactsBox/index"
     import DrivingDirections from "../../componets/drivingDirections/index"
 

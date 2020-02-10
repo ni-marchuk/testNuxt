@@ -1,14 +1,15 @@
 <template>
     <div class="headerBottom">
-
         <div class="headerBottom__logoBox">
-            <a class="headerBottom__logoLink" href="">
+            <nuxt-link class="headerBottom__logoLink"
+                       :to="{path: '/'}">
                 <svg-icon class="headerBottom__logo" name="logo"/>
-            </a>
-            <p class="headerBottom__operatingMode">Открыто с 9:00 до 18:00</p>
-            <p class="headerBottom__operatingModeAdapt">Открыто до 18:00</p>
+            </nuxt-link>
+            <p class="headerBottom__operatingMode"
+               :class="{'open': settings.workTime.status}">
+                {{settings.workTime.text}}
+            </p>
         </div>
-
         <div class="headerBottom__menuBox">
             <ul class="headerBottom__menuList">
                 <li class="headerBottom__menuItem">
@@ -17,38 +18,75 @@
                         О компании
                     </nuxt-link>
                 </li>
-                <li class="headerBottom__menuItem"><a class="headerBottom__itemLink" href="services">Услуги</a></li>
-                <li class="headerBottom__menuItem"><a class="headerBottom__itemLink" href="vacancies">Вакансии</a></li>
-                <li class="headerBottom__menuItem"><a class="headerBottom__itemLink" href="contacts">Контакты</a></li>
+                <li class="headerBottom__menuItem">
+                    <nuxt-link class="headerBottom__itemLink"
+                               :to="{name: 'services'}">
+                        Услуги
+                    </nuxt-link>
+                </li>
+                <li class="headerBottom__menuItem">
+                    <nuxt-link class="headerBottom__itemLink"
+                               :to="{name: 'vacancies'}">
+                        Вакансии
+                    </nuxt-link>
+                </li>
+                <li class="headerBottom__menuItem">
+                    <nuxt-link class="headerBottom__itemLink"
+                               :to="{name: 'contacts'}">
+                        Контакты
+                    </nuxt-link>
+                </li>
             </ul>
         </div>
-
         <div class="headerBottom__phone">
             <p class="headerBottom__phoneNumber" type="tel">+7 (3532) 78-13-37</p>
             <a class="headerBottom__requestCall">Заказать звонок</a>
         </div>
 
-        <div class="headerBottom__hambrugerBtn" type="submit">
-            <svg-icon class="headerBottom__hambruger" name="hamburger"></svg-icon>
+        <div class="headerBottom__hambrugerBtn">
+            <svg-icon class="headerBottom__hambruger"
+                      name="hamburger"
+                      @click="responsiveSwitch"/>
         </div>
+        <responsive-menu :responsiveState="responsiveState"
+                         @responsive-close="responsiveSwitch"
+                         :settings="settings"/>
+        <overlay :responsiveState="responsiveState"
+                 @responsive-close="responsiveSwitch"/>
     </div>
 
 </template>
 
 <script>
+    import ResponsiveMenu from "../../componets/responsiveMenu/index";
+    import Overlay from "../../componets/Overlay/index";
+
 
     export default {
         name: "HeaderBottom",
 
-        props: [],
-
-        data() {
-            return {}
+        components: {
+            ResponsiveMenu,
+            Overlay,
         },
 
-        components: {},
+        props: {
+            settings: {
+                required: true,
+            },
+        },
 
-        methods: {}
+        data() {
+            return {
+                responsiveState: false,
+            }
+        },
+
+        methods: {
+            responsiveSwitch() {
+                this.responsiveState = !this.responsiveState;
+            },
+        }
     }
 
 </script>
@@ -80,10 +118,6 @@
             display: flex;
             position: relative;
 
-            @include below($md-desktop) {
-                display: none;
-            }
-
             &:before {
                 content: '';
                 position: absolute;
@@ -91,33 +125,18 @@
                 left: -7%;
                 width: 5px;
                 height: 5px;
-                background-color: #20D267;
+                background-color: $red;
                 border-radius: 50%;
-            }
-        }
-
-        //время сокращенный формат
-        &__operatingModeAdapt {
-            display: none;
-            position: relative;
-
-            @include below($md-desktop) {
-                display: flex;
             }
 
             @include below($lg-tablet) {
                 display: none;
             }
+        }
 
+        &__operatingMode.open {
             &:before {
-                content: '';
-                position: absolute;
-                top: 40%;
-                left: -7%;
-                width: 5px;
-                height: 5px;
                 background-color: #20D267;
-                border-radius: 50%;
             }
         }
 
@@ -207,7 +226,7 @@
         }
 
         &__hambruger {
-            display: flex;
+            display: none;
             width: 25px;
             height: 30px;
 

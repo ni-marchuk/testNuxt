@@ -1,6 +1,6 @@
 <template>
     <div class="about">
-        <bread-crumbs class="about__breadCrumbs"
+        <breadcrumbs class="about__breadсrumbs"
                       :breadcrumbs="breadcrumbs"
         />
         <company-info class="about__companyInfo"
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-    import BreadCrumbs from "../../componets/breadCrumbs/index"
+    import Breadcrumbs from "../../componets/breadcrumbs/breadcrumbs"
     import CompanyInfo from "../../componets/companyInfo/index"
     import OurValues from "../../componets/ourValues/index"
     import StatisticCompany from "../../componets/statisticCompany/index"
@@ -27,7 +27,7 @@
         name: "Index",
 
         components: {
-            BreadCrumbs,
+            Breadcrumbs,
             CompanyInfo,
             OurValues,
             StatisticCompany,
@@ -42,19 +42,19 @@
                 breadcrumbs: [
                     {
                         name: '/',
-                        text: 'Главная/',
+                        text: 'Главная /',
                         params: {
                             //
                         },
                         query: {
-                            id: 1,
+                            // id: 1,
                         }
                     },
                     {
                         name: 'about',
                         text: 'О компании',
                         params: {
-                            id: 2,
+                            // id: 2,
                         },
                         query: {
                             //
@@ -67,12 +67,10 @@
         async asyncData({app}) {
             const about = await app.$axios.$get("pageInfo?page=about");
             const statistics = await app.$axios.$get('statistics');
-            if (about !== '' && statistics !== '') {
+            if (about && statistics) {
                 return {about: about, statistics: statistics};
-            } else if (about !== '') {
-                return {statistics: statistics};
-            } else if (statistics !== '') {
-                return {about: about};
+            } else {
+                console.log('statistic or about Error')
             }
         },
 

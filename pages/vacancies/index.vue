@@ -9,7 +9,7 @@
 </template>
 
 <script>
-    import BreadCrumbs from "../../componets/breadCrumbs/index"
+    import BreadCrumbs from "../../componets/breadcrumbs/breadcrumbs"
     import Career from "../../componets/career/index"
     import NewsSlider from "../../componets/newsSlider/index"
     import Feedback from "../../componets/feedback/index"

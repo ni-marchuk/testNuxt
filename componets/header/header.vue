@@ -1,11 +1,11 @@
 <template>
     <header class="header">
         <div class="container">
-            <header-top class="header__top"/>
-            <header-bottom class="header__bottom"/>
+            <header-top class="header__top" :settings="settings"/>
+            <header-bottom class="header__bottom"
+                           :settings="settings"/>
         </div>
     </header>
-
 </template>
 
 <script>
@@ -19,6 +19,13 @@
             HeaderTop,
             HeaderBottom,
         },
+
+        props: {
+            settings: {
+                required: true,
+            },
+        },
+
     }
 </script>
 

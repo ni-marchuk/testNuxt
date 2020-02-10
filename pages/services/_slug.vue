@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import BreadCrumbs from "../../componets/breadCrumbs/index"
+    import BreadCrumbs from "../../componets/breadcrumbs/breadcrumbs"
     import JudicalRepresintation from "../../componets/judicalRepresintation/index"
 
     export default {

@@ -1,34 +1,69 @@
 <template>
-    <div class="responsiveMenu" v-bind:class="{ active: isActive }">
+    <div class="responsiveMenu"
+         :class="{ active: responsiveState }">
         <div class="responsiveMenu__top">
-            <a class="responsiveMenu__logoLink" href="">
+            <nuxt-link class="responsiveMenu__logoLink"
+                       :to="{path: '/'}">
                 <svg-icon class="responsiveMenu__logo" name="logo"/>
-            </a>
-            <button class="responsiveMenu__close" type="submit" v-on:click="closeClick">
-                <svg-icon class="responsiveMenu__closeIcn" name="close"></svg-icon>
+            </nuxt-link>
+            <button class="responsiveMenu__close"
+                    @click="responsiveClose">
+                <svg-icon class="responsiveMenu__closeIcn"
+                          name="close"/>
             </button>
         </div>
-
         <div class="responsiveMenu__bottom">
             <div class="responsiveMenu__menuBox">
                 <ul class="responsiveMenu__menuList">
-                    <li class="responsiveMenu__menuItem"><a class="responsiveMenu__itemLink">О компании</a></li>
-                    <li class="responsiveMenu__menuItem"><a class="responsiveMenu__itemLink">Услуги</a></li>
-                    <li class="responsiveMenu__menuItem"><a class="responsiveMenu__itemLink">Вакансии</a></li>
-                    <li class="responsiveMenu__menuItem"><a class="responsiveMenu__itemLink">Контакты</a></li>
+                    <li class="responsiveMenu__menuItem">
+                        <nuxt-link class="responsiveMenu__itemLink"
+                                   :to="{name: 'about'}">
+                            О компании
+                        </nuxt-link>
+                    </li>
+                    <li class="responsiveMenu__menuItem">
+                        <nuxt-link class="responsiveMenu__itemLink"
+                                   :to="{name: 'services'}">
+                            Услуги
+                        </nuxt-link>
+                    </li>
+                    <li class="responsiveMenu__menuItem">
+                        <nuxt-link class="responsiveMenu__itemLink"
+                                   :to="{name: 'vacancies'}">
+                            Вакансии
+                        </nuxt-link>
+                    </li>
+                    <li class="responsiveMenu__menuItem">
+                        <nuxt-link class="responsiveMenu__itemLink"
+                                   :to="{name: 'contacts'}">
+                            Контакты
+                        </nuxt-link>
+                    </li>
                 </ul>
             </div>
-
             <div class="responsiveMenu__boxInfo">
                 <div class="responsiveMenu__call">
-                    <a class="responsiveMenu__requestCall">Заказать звонок</a>
-                    <a class="responsiveMenu__phoneNumber" type="tel">+7 (3532) 78-13-37</a>
+                    <button class="responsiveMenu__requestCall"
+                            @click="$modal.show('modalForm')">
+                        Заказать звонок
+                    </button>
+                    <a class="responsiveMenu__phoneNumber" type="tel">
+                        {{settings.phones[0]}}
+                    </a>
                 </div>
                 <div class="responsiveMenu__addressBox">
-                    <a class="responsiveMenu__mapsLink">Схема проезда</a>
-                    <p class="responsiveMenu__address">г. Оренбург, ул.Хабаровская, 53</p>
+                    <nuxt-link class="responsiveMenu__mapsLink"
+                               :to="{name: 'contacts'}">
+                        Схема проезда
+                    </nuxt-link>
+                    <p class="responsiveMenu__address">
+                        {{settings.address}}
+                    </p>
                 </div>
-                <p class="responsiveMenu__operatingMode">Открыто с 9:00 до 18:00</p>
+                <p class="responsiveMenu__operatingMode"
+                   :class="{'open': settings.workTime.status}">
+                    {{settings.workTime.text}}
+                </p>
             </div>
         </div>
     </div>
@@ -41,12 +76,26 @@
     export default {
 
         name: "ResponsiveMenu",
+
         components: {
             HeaderBottom
         },
+
+        props: {
+
+            settings: {
+                required: true,
+            },
+
+            responsiveState: {
+                required: true,
+                type: Boolean,
+            },
+        },
+
         data() {
             return {
-                isActive: false,
+//
             }
         },
 
@@ -55,8 +104,8 @@
         },
 
         methods: {
-            closeClick: function () {
-                this.isActive = (this.isActive !== true);
+            responsiveClose() {
+                this.$emit('responsive-close');
             }
         }
     }
@@ -69,7 +118,7 @@
     }
 
     .responsiveMenu {
-        position: absolute;
+        position: fixed;
         top: 0;
         right: 0;
 
@@ -87,6 +136,16 @@
 
         z-index: 3;
 
+        /*&__overlay {*/
+        /*    position: fixed;*/
+        /*    top: 0;*/
+        /*    left: 0;*/
+        /*    width: calc(100% - 270px);*/
+        /*    height: 100%;*/
+        /*    background-color: white;*/
+        /*    opacity: .7;*/
+        /*    z-index: 2;*/
+        /*}*/
 
         &__top {
             display: flex;
@@ -146,9 +205,10 @@
             margin-bottom: 5px;
             margin-left: auto;
 
-            font-size: 12px;
+            font-family: $Roboto;
             font-weight: 400;
-
+            font-size: 12px;
+            text-decoration: underline;
             color: $red;
         }
 
@@ -182,6 +242,7 @@
 
             font-size: 12px;
             text-decoration: none;
+            text-align: right;
         }
 
         &__operatingMode {
@@ -194,13 +255,20 @@
                 content: '';
                 position: absolute;
                 top: 40%;
-                left: 5%;
+                left: 45%;
                 width: 5px;
                 height: 5px;
-                background-color: #20D267;
+                background-color: $red;
                 border-radius: 50%;
             }
         }
+
+        &__operatingMode.open {
+            &:before {
+                background-color: #20D267;
+            }
+        }
+
     }
 
 </style>
