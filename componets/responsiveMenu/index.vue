@@ -1,13 +1,12 @@
 <template>
-    <div class="responsiveMenu"
-         :class="{ active: responsiveState }">
+    <div class="responsiveMenu">
         <div class="responsiveMenu__top">
             <nuxt-link class="responsiveMenu__logoLink"
                        :to="{path: '/'}">
                 <svg-icon class="responsiveMenu__logo" name="logo"/>
             </nuxt-link>
             <button class="responsiveMenu__close"
-                    @click="responsiveClose">
+                    @click="$emit('responsiveClose')">
                 <svg-icon class="responsiveMenu__closeIcn"
                           name="close"/>
             </button>
@@ -87,10 +86,6 @@
                 required: true,
             },
 
-            responsiveState: {
-                required: true,
-                type: Boolean,
-            },
         },
 
         data() {
@@ -103,17 +98,12 @@
             HeaderBottom,
         },
 
-        methods: {
-            responsiveClose() {
-                this.$emit('responsive-close');
-            }
-        }
     }
 </script>
 
 <style lang="scss">
 
-    .responsiveMenu.active {
+    .responsiveMenu.is-active {
         display: flex;
     }
 
@@ -135,17 +125,6 @@
         box-shadow: 0 0 10px;
 
         z-index: 3;
-
-        /*&__overlay {*/
-        /*    position: fixed;*/
-        /*    top: 0;*/
-        /*    left: 0;*/
-        /*    width: calc(100% - 270px);*/
-        /*    height: 100%;*/
-        /*    background-color: white;*/
-        /*    opacity: .7;*/
-        /*    z-index: 2;*/
-        /*}*/
 
         &__top {
             display: flex;

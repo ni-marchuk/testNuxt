@@ -1,9 +1,11 @@
 <template>
     <header class="header">
         <div class="container">
-            <header-top class="header__top" :settings="settings"/>
+            <header-top class="header__top"
+                        :settings="settings"/>
             <header-bottom class="header__bottom"
-                           :settings="settings"/>
+                           :settings="settings"
+                           @responsiveSwitch="$emit('responsiveSwitch')"/>
         </div>
     </header>
 </template>

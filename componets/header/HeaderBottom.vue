@@ -43,16 +43,11 @@
             <a class="headerBottom__requestCall">Заказать звонок</a>
         </div>
 
-        <div class="headerBottom__hambrugerBtn">
+        <button class="headerBottom__hambrugerBtn"
+                @click="$emit('responsiveSwitch')">
             <svg-icon class="headerBottom__hambruger"
-                      name="hamburger"
-                      @click="responsiveSwitch"/>
-        </div>
-        <responsive-menu :responsiveState="responsiveState"
-                         @responsive-close="responsiveSwitch"
-                         :settings="settings"/>
-        <overlay :responsiveState="responsiveState"
-                 @responsive-close="responsiveSwitch"/>
+                      name="hamburger"/>
+        </button>
     </div>
 
 </template>
@@ -76,17 +71,6 @@
             },
         },
 
-        data() {
-            return {
-                responsiveState: false,
-            }
-        },
-
-        methods: {
-            responsiveSwitch() {
-                this.responsiveState = !this.responsiveState;
-            },
-        }
     }
 
 </script>

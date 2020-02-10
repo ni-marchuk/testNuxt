@@ -1,6 +1,10 @@
 <template>
-    <div class="wrapper">
-        <app-header :settings="getSettings"/>
+    <div class="wrapper" @click="handleClick($event)">
+        <app-header :settings="getSettings"
+                    @responsiveSwitch="responsiveSwitch"/>
+        <responsive-menu :class="{'is-active' : responsiveState}"
+                         @responsiveClose="hideResponsive"
+                         :settings="getSettings"/>
         <nuxt/>
         <app-footer/>
         <modal-form/>
@@ -10,11 +14,13 @@
     import AppHeader from "../componets/header/header";
     import AppFooter from "../componets/footer/index";
     import ModalForm from "../componets/modalForm/index";
+    import ResponsiveMenu from "../componets/responsiveMenu/index";
 
     export default {
         data() {
             return {
                 settings: {},
+                responsiveState: false,
             }
         },
 
@@ -22,6 +28,7 @@
             AppHeader,
             AppFooter,
             ModalForm,
+            ResponsiveMenu
         },
 
         computed: {
@@ -31,7 +38,21 @@
         },
 
         methods: {
-//
+
+            responsiveSwitch() {
+                this.responsiveState = !this.responsiveState;
+            },
+
+            hideResponsive() {
+                this.responsiveState = false;
+            },
+
+            handleClick(e) {
+                if (e.target.closest('.headerBottom__hambrugerBtn') === null && e.target.closest('.responsiveMenu') === null) {
+                    this.hideResponsive();
+                    console.log('privetik andrei')
+                }
+            },
         },
 
     }

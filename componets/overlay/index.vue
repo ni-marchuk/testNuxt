@@ -17,10 +17,7 @@
         },
 
         props: {
-            responsiveState: {
-                required: true,
-                type: Boolean,
-            },
+//
         },
 
         methods: {
