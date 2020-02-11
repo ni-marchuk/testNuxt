@@ -1,39 +1,37 @@
 <template>
     <modal name="modalForm" class="modalForm"
            :width="300"
-           :height="300"
-           @before-open="beforeOpen"
-           @before-close="beforeClose">
-        <b>{{time}}</b>
+           :height="300">
         <p class="modalForm__title">Закажите консультацию специалиста</p>
         <p class="modalForm__text">Просто заполните форму ниже. Мы перезвоним, назначим время для собеседования</p>
         <form class="modalForm__form">
-            <custom-input class="modalForm__input"/>
-            <custom-input class="modalForm__input"/>
+            <custom-input class="modalForm__input modalForm__inputName"
+                          :placeholder="'Имя и фамилия'"
+            />
+            <custom-input class="modalForm__input modalForm__inputPhone"/>
 
-            <checkbox class="checkbox--roll modalForm__checkbox"
-                      type="checkbox"
-                      v-model="status"
-                      @change="status = $event">
-            </checkbox>
+            <custom-checkbox class="modalForm__checkbox"
+                             :id="'javascript'"
+                             :name="'javascript'"
+                             :value="'3'"
+                             @input="newMeth()"
+            />
         </form>
     </modal>
 </template>
 
 <script>
     import CustomInput from "../customInput/index"
-    import Checkbox from "../checkbox/index"
+    import CustomCheckbox from "../customCheckbox/index"
 
     export default {
         name: "modalForm",
 
-        props: {
-
-        },
+        props: {},
 
         components: {
             CustomInput,
-            Checkbox,
+            CustomCheckbox,
         },
 
         data() {
@@ -45,19 +43,9 @@
         },
 
         methods: {
-            beforeOpen(event) {
-                console.log(event);
-                // Set the opening time of the modal
-                this.time = Date.now()
+            newMeth(){
+                console.log('hello')
             },
-
-            beforeClose(event) {
-                console.log(event);
-                // If modal was open less then 5000 ms - prevent closing it
-                if (this.time + this.duration < Date.now()) {
-                    event.stop()
-                }
-            }
         }
     }
 </script>

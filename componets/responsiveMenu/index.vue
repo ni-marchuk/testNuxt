@@ -46,7 +46,9 @@
                             @click="$modal.show('modalForm')">
                         Заказать звонок
                     </button>
-                    <a class="responsiveMenu__phoneNumber" type="tel">
+                    <a class="responsiveMenu__phoneNumber"
+                       type="tel"
+                       v-if="settings">
                         {{settings.phones[0]}}
                     </a>
                 </div>
@@ -55,11 +57,13 @@
                                :to="{name: 'contacts'}">
                         Схема проезда
                     </nuxt-link>
-                    <p class="responsiveMenu__address">
+                    <p class="responsiveMenu__address"
+                       v-if="settings">
                         {{settings.address}}
                     </p>
                 </div>
                 <p class="responsiveMenu__operatingMode"
+                   v-if="settings"
                    :class="{'open': settings.workTime.status}">
                     {{settings.workTime.text}}
                 </p>
@@ -88,12 +92,6 @@
 
         },
 
-        data() {
-            return {
-//
-            }
-        },
-
         comments: {
             HeaderBottom,
         },
@@ -105,6 +103,7 @@
 
     .responsiveMenu.is-active {
         display: flex;
+
     }
 
     .responsiveMenu {
@@ -132,6 +131,19 @@
             align-items: flex-start;
 
             width: 100%;
+
+            /*&:before {*/
+            /*    content: '';*/
+            /*    display: flex;*/
+            /*    position: fixed;*/
+            /*    top: 0;*/
+            /*    left: 0;*/
+            /*    width: calc(100% - 270px);*/
+            /*    height: 100%;*/
+            /*    opacity: 0.7;*/
+            /*    z-index: 2;*/
+            /*    background-image: linear-gradient(120deg, #eaee44, #33d0ff);*/
+            /*}*/
         }
 
         &__logo {

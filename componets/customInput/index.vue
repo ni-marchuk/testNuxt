@@ -1,12 +1,12 @@
 <template>
     <div class="customInput"
-         :class="{'isError': error}"
+         :class="{'is-error': error}"
          @click="$emit('click')">
 
         <template v-if="type === 'text'">
-            <label class="input__wrapper">
+            <label class="customInput__wrapper">
                 {{ label }}
-                <input class="input__input"
+                <input class="customInput__input"
                        :type="type"
                        :name="name"
                        :placeholder="placeholder"

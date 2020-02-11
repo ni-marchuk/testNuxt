@@ -5,7 +5,7 @@
                         :settings="settings"/>
             <header-bottom class="header__bottom"
                            :settings="settings"
-                           @responsiveSwitch="$emit('responsiveSwitch')"/>
+                           @responsiveOpen="$emit('responsiveOpen')"/>
         </div>
     </header>
 </template>

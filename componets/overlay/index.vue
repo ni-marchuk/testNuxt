@@ -1,53 +1,32 @@
 <template>
-    <div class="overlay"
-         :class="{ active: responsiveState }"
-         @click="responsiveClose">
+    <div class="overlay">
     </div>
-
 </template>
 
 <script>
-    import ResponsiveMenu from "../responsiveMenu/index";
 
     export default {
         name: "Overlay",
-
-        components: {
-            ResponsiveMenu,
-        },
-
-        props: {
-//
-        },
-
-        methods: {
-            responsiveClose() {
-                this.$emit('responsive-close');
-            }
-        }
-
     }
 </script>
 
 <style lang="scss">
 
-    .overlay {
+    .overlay.is-active {
         display: flex;
+    }
 
+    .overlay {
+        display: none;
         position: fixed;
         top: 0;
         left: 0;
-
         width: 100%;
+        /*width: calc(100% - 270px);*/
         height: 100%;
-        background-color: white;
-        opacity: 0.8;
-        visibility: hidden;
+        opacity: 0.5;
         z-index: 2;
-    }
-
-    .overlay.active {
-        visibility: unset;
+        background-image: linear-gradient(120deg, #eaee44, #33d0ff);
     }
 
 </style>

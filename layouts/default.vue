@@ -1,10 +1,11 @@
 <template>
     <div class="wrapper" @click="handleClick($event)">
         <app-header :settings="getSettings"
-                    @responsiveSwitch="responsiveSwitch"/>
+                    @responsiveOpen="responsiveOpen()"/>
         <responsive-menu :class="{'is-active' : responsiveState}"
                          @responsiveClose="hideResponsive"
                          :settings="getSettings"/>
+        <overlay :class="{'is-active' : responsiveState}"/>
         <nuxt/>
         <app-footer/>
         <modal-form/>
@@ -13,6 +14,7 @@
 <script>
     import AppHeader from "../componets/header/header";
     import AppFooter from "../componets/footer/index";
+    import Overlay from "../componets/overlay/index";
     import ModalForm from "../componets/modalForm/index";
     import ResponsiveMenu from "../componets/responsiveMenu/index";
 
@@ -26,6 +28,7 @@
 
         components: {
             AppHeader,
+            Overlay,
             AppFooter,
             ModalForm,
             ResponsiveMenu
@@ -39,7 +42,7 @@
 
         methods: {
 
-            responsiveSwitch() {
+            responsiveOpen() {
                 this.responsiveState = !this.responsiveState;
             },
 
@@ -50,12 +53,12 @@
             handleClick(e) {
                 if (e.target.closest('.headerBottom__hambrugerBtn') === null && e.target.closest('.responsiveMenu') === null) {
                     this.hideResponsive();
-                    console.log('privetik andrei')
                 }
             },
         },
 
     }
+
 </script>
 
 <style lang="scss">

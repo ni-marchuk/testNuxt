@@ -1,7 +1,8 @@
 <template>
     <div class="headerTop">
         <div class="headerTop__addressBox">
-            <a class="headerTop__address">
+            <a class="headerTop__address"
+               v-if="settings">
                 {{settings.address}}
             </a>
             <nuxt-link class="headerTop__mapsLink"
@@ -11,7 +12,8 @@
         </div>
         <div class="headerTop__call">
             <a class="headerTop__phoneNumber"
-               type="tel">
+               type="tel"
+               v-if="settings">
                 {{settings.phones[0]}}
             </a>
             <button class="headerTop__requestCall"

@@ -6,7 +6,8 @@
                 <svg-icon class="headerBottom__logo" name="logo"/>
             </nuxt-link>
             <p class="headerBottom__operatingMode"
-               :class="{'open': settings.workTime.status}">
+               :class="{'open': settings.workTime.status}"
+               v-if="settings">
                 {{settings.workTime.text}}
             </p>
         </div>
@@ -44,7 +45,7 @@
         </div>
 
         <button class="headerBottom__hambrugerBtn"
-                @click="$emit('responsiveSwitch')">
+                @click="$emit('responsiveOpen')">
             <svg-icon class="headerBottom__hambruger"
                       name="hamburger"/>
         </button>
