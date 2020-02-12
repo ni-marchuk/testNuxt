@@ -6,15 +6,20 @@
         <p class="modalForm__text">Просто заполните форму ниже. Мы перезвоним, назначим время для собеседования</p>
         <form class="modalForm__form">
             <custom-input class="modalForm__input modalForm__inputName"
+                          :inputType="`text`"
                           :placeholder="'Имя и фамилия'"
+                          @focusout="met()"
+                          :error="`errrrrr`"
             />
-            <custom-input class="modalForm__input modalForm__inputPhone"/>
-
-            <custom-checkbox class="modalForm__checkbox"
-                             :id="'javascript'"
-                             :name="'javascript'"
-                             :value="'3'"
-                             @input="newMeth()"
+            <custom-input class="modalForm__input modalForm__inputPhone"
+                          :inputType="`phone`"
+                          @focusout="met()"
+                          :error="`errrrrr`"
+            />
+            <custom-checkbox :id="'checkName'"
+                             v-model="conditionsCheck"
+                             @change="met()"
+                             :htmlContent="`Я согласен на обработку персональных данных. <a href='/'>С политикой защиты данных</a> ООО «Паритет» ознакомлен.`"
             />
         </form>
     </modal>
@@ -39,14 +44,15 @@
                 time: 0,
                 duration: 5000,
                 status: false,
+                conditionsCheck: true,
             }
         },
 
         methods: {
-            newMeth(){
-                console.log('hello')
+            met() {
+                console.log(this.conditionsCheck);
             },
-        }
+        },
     }
 </script>
 

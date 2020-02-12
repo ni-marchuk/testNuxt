@@ -2,12 +2,10 @@
     <div class="customInput"
          :class="{'is-error': error}"
          @click="$emit('click')">
-
-        <template v-if="type === 'text'">
-            <label class="customInput__wrapper">
+        <template >
+            <label class="customInput__wrapper" v-if="inputType === 'text'">
                 {{ label }}
                 <input class="customInput__input"
-                       :type="type"
                        :name="name"
                        :placeholder="placeholder"
                        :value="value"
@@ -17,20 +15,41 @@
                        @input="$emit('input', $event.target.value)"
                        @focus="focus()"
                        @focusout="$emit('focusout')"
-                       @blur="isFocused = true">
+                       @blur="isFocused = true"
+                />
             </label>
-
+            <label class="customInput__wrapper" v-if="inputType === 'phone'">
+                {{ label }}
+                <input class="customInput__input"
+                       type="number"
+                       :name="name"
+                       :placeholder="'+7 (999) 999 99 99'"
+                       :value="value"
+                       :readonly="readonly"
+                       :disabled="disabled"
+                       autocomplete="off"
+                       @input="$emit('input', $event.target.value)"
+                       @focus="focus()"
+                       @focusout="$emit('focusout')"
+                       @blur="isFocused = true"
+                />
+            </label>
             <template v-if="error">
                 <p class="input__errorMessage">{{ error }}</p>
             </template>
         </template>
-
     </div>
 </template>
 
 <script>
     export default {
         name: "CustomInput",
+
+        data() {
+            return {
+                isFocused: false,
+            }
+        },
 
         props: {
             label: {
@@ -62,7 +81,7 @@
                 }
             },
 
-            type: {
+            inputType: {
                 type: String,
                 default() {
                     return 'text'
