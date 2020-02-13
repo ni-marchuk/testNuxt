@@ -44,6 +44,7 @@ export default {
         { src: '~/plugins/swiper.js', ssr: false },
         { src: '~plugins/vue-modal-js.js', ssr: false},
         "~/plugins/axios",
+        "~/plugins/vueMask",
     ],
 
     axios: {

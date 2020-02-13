@@ -43,7 +43,7 @@
             <div class="responsiveMenu__boxInfo">
                 <div class="responsiveMenu__call">
                     <button class="responsiveMenu__requestCall"
-                            @click="$modal.show('modalForm')">
+                            @click="$modal.show('servicesForm')">
                         Заказать звонок
                     </button>
                     <a class="responsiveMenu__phoneNumber"

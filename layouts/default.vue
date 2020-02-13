@@ -8,14 +8,14 @@
         <overlay :class="{'is-active' : responsiveState}"/>
         <nuxt/>
         <app-footer/>
-        <modal-form/>
+        <services-form/>
     </div>
 </template>
 <script>
     import AppHeader from "../componets/header/header";
     import AppFooter from "../componets/footer/index";
     import Overlay from "../componets/overlay/index";
-    import ModalForm from "../componets/modalForm/index";
+    import ServicesForm from "../componets/servicesForm/index";
     import ResponsiveMenu from "../componets/responsiveMenu/index";
 
     export default {
@@ -30,7 +30,7 @@
             AppHeader,
             Overlay,
             AppFooter,
-            ModalForm,
+            ServicesForm,
             ResponsiveMenu
         },
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="customCheckbox">
+    <label class="customCheckbox">
         <input class="customCheckbox__input"
                type="checkbox"
                :id="id"
@@ -12,9 +12,9 @@
         />
         <label class="customCheckbox__label"
                :for="id">
-            <span v-html="htmlContent + textContent"></span>
         </label>
-    </div>
+        <span v-html="htmlContent + textContent"></span>
+    </label>
 </template>
 
 <script>
@@ -99,12 +99,13 @@
     .customCheckbox {
 
         position: relative;
+        display: flex;
 
         span {
-            position: absolute;
-            top: 0;
-            left: 20px;
+            position: relative;
+            display: inline-block;
             font-size: 12px;
+            cursor: pointer;
 
             a {
                 font-size: 12px;
@@ -118,9 +119,9 @@
 
         input[type="checkbox"] + label {
             display: inline-block;
-            width: 15px;
+            width: 30px;
             height: 15px;
-            margin: 0;
+            margin: 0 5px 0 0;
             vertical-align: middle;
             border: 1px solid black;
             border-radius: 2px;

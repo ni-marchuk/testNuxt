@@ -1,24 +1,45 @@
 <template>
-    <button class="btn">
+    <button class="btn"
+            :class="{'center':textCenter}"
+    >
         {{title}}
-        <svg-icon class='btn__arrow' name="arrow"></svg-icon>
+        <svg-icon class='btn__arrow'
+                  name="arrow"
+        />
     </button>
 </template>
 
 <script>
     export default {
-        name: "btn",
+        name: "Btn",
 
         props: {
             title: {
                 type: String,
                 required: true,
             },
+            textCenter: {
+                type: Boolean,
+                required: false,
+                default: false,
+            }
         }
     }
 </script>
 
 <style lang="scss">
+
+    .btn.center {
+        text-align: center;
+
+        svg {
+            display: none;
+        }
+    }
+
+    .btn:disabled {
+        background-color: $greyLight;
+    }
     .btn {
         position: relative;
 

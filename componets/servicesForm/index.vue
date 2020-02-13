@@ -1,0 +1,166 @@
+<template>
+    <modal name="servicesForm" class="servicesForm"
+           :width="360"
+    >
+        <svg-icon class="servicesForm__close"
+                  name="close"
+                  @click="$modal.hide('servicesForm')"
+        />
+        <form class="servicesForm__wrapper">
+            <p class="servicesForm__title" @click="test()">Закажите консультацию специалиста</p>
+            <p class="servicesForm__text">Просто заполните форму ниже. Мы перезвоним, назначим время для
+                собеседования</p>
+            <div class="servicesForm__controls">
+                <custom-input class="servicesForm__input inputName"
+                              :placeholder="'Имя и фамилия'"
+                              v-model="inputName"
+                              :error="errorName"
+                />
+                <custom-input class="servicesForm__input inputPhone"
+                              :inputType="`phone`"
+                              v-model="inputPhone"
+                              :error="errorPhone"
+                />
+                <custom-checkbox class="servicesForm__checkbox"
+                                 :id="'checkName'"
+                                 v-model="conditionsCheck"
+                                 :htmlContent="`Я согласен на обработку персональных данных. <a href='/'>С политикой защиты данных</a> ООО «Паритет» ознакомлен.`"
+                />
+                <Btn class="servicesForm__btn"
+                     :textCenter="true"
+                     :title="`Отправить`"
+                     :disabled="!validationForm()"
+                     :checked="false"
+                >
+                </Btn>
+            </div>
+        </form>
+    </modal>
+</template>
+
+<script>
+    import CustomInput from "../customInput/index"
+    import CustomCheckbox from "../customCheckbox/index"
+    import Btn from "../btn/index"
+
+    export default {
+        name: "ServicesForm",
+
+        props: {},
+
+        components: {
+            CustomInput,
+            CustomCheckbox,
+            Btn,
+        },
+
+        data() {
+            return {
+                time: 0,
+                duration: 5000,
+                status: false,
+
+                conditionsCheck: false,
+                disabledBtn: true,
+
+                errorName: '',
+                errorPhone: '',
+
+                inputName: '',
+                inputPhone: '',
+            }
+        },
+
+        methods: {
+            validationForm() {
+                if (this.isNameValid && this.isPhoneValid && this.conditionsCheck) {
+                    return true;
+                }
+            },
+
+            //проверить через focusOut
+            errorMessges() {
+                if (!this.isPhoneValid) {
+                    this.errorPhone = 'Номер телефона введен неверно'
+                }
+                if (!this.isNameValid) {
+                    this.errorName = 'Имя введено не верно'
+                }
+            },
+        },
+
+        computed: {
+
+            isNameValid() {
+                return this.inputPhone.length === 23;
+            },
+
+            isPhoneValid() {
+                return this.inputName.length > 5;
+            },
+        },
+
+    }
+</script>
+
+<style lang="scss">
+    .v--modal-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        max-width: 360px !important;
+        width: 100% !important;
+        height: auto !important;
+        padding: 40px;
+
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        -webkit-transform: translate(-50%, -50%) !important;
+        transform: translate(-50%, -50%) !important;
+    }
+
+    .servicesForm {
+        width: 100%;
+
+        &__close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+
+            width: 15px;
+            height: 15px;
+
+            cursor: pointer;
+        }
+
+        &__title {
+            text-align: center;
+            margin-bottom: 15px;
+            font-family: $Bebas;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        &__text {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: $greyLight;
+        }
+
+        &__input {
+            margin-bottom: 15px;
+        }
+
+        &__checkbox {
+            margin-bottom: 15px;
+        }
+
+        &__btn {
+            margin: 0 auto;
+        }
+    }
+</style>

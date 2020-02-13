@@ -17,7 +17,7 @@
                 {{settings.phones[0]}}
             </a>
             <button class="headerTop__requestCall"
-                    @click="$modal.show('modalForm')">
+                    @click="$modal.show('servicesForm')">
                 Заказать звонок
             </button>
         </div>

@@ -2,10 +2,12 @@
     <div class="customInput"
          :class="{'is-error': error}"
          @click="$emit('click')">
-        <template >
-            <label class="customInput__wrapper" v-if="inputType === 'text'">
+        <template>
+            <label class="customInput__wrapper"
+                   v-if="inputType === 'text'"
+            >
                 {{ label }}
-                <input class="customInput__input"
+                <input class="customInput__input text"
                        :name="name"
                        :placeholder="placeholder"
                        :value="value"
@@ -20,10 +22,11 @@
             </label>
             <label class="customInput__wrapper" v-if="inputType === 'phone'">
                 {{ label }}
-                <input class="customInput__input"
-                       type="number"
+                <input class="customInput__input phone"
+                       type="text"
                        :name="name"
                        :placeholder="'+7 (999) 999 99 99'"
+                       v-mask="'+7(###) - ### - ## - ##'"
                        :value="value"
                        :readonly="readonly"
                        :disabled="disabled"
@@ -34,8 +37,8 @@
                        @blur="isFocused = true"
                 />
             </label>
-            <template v-if="error">
-                <p class="input__errorMessage">{{ error }}</p>
+            <template v-if="error.length > 0">
+                <p class="customInput__errorMessage">{{ error }}</p>
             </template>
         </template>
     </div>
@@ -68,11 +71,21 @@
 
             error: {
                 default() {
-                    return null
+                    return ''
                 }
             },
 
-            value: {},
+            value: {
+                type: String,
+            },
+
+            inputName: {
+                type: String,
+            },
+
+            inputPhone: {
+                type: String,
+            },
 
             disabled: {
                 type: Boolean,
@@ -106,9 +119,12 @@
         methods: {
             focus() {
                 this.isFocused = true;
-
                 this.$emit('clearError');
             },
+        },
+
+        computed: {
+//
         },
 
     }
@@ -122,6 +138,10 @@
 
         &__input {
             width: 100%;
+            height: 55px;
+            padding: 0 30px;
+
+            font-size: 14px;
         }
 
         &__errorMessage {
