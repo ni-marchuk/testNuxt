@@ -119,8 +119,9 @@
 
         input[type="checkbox"] + label {
             display: inline-block;
-            width: 30px;
+            width: 100%;
             height: 15px;
+            max-width: 15px;
             margin: 0 5px 0 0;
             vertical-align: middle;
             border: 1px solid black;

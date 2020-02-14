@@ -2,7 +2,9 @@
     <div>
         <!--            <test-component class="container__test"-->
         <!--                            :title="'teeeest'"/>-->
-        <short-info/>
+        <short-info :main="main"
+                    :statistics="statistics"
+        />
         <services/>
         <work-scheme/>
         <advantages/>
@@ -28,8 +30,27 @@
             Advantages,
         },
 
-        async asyncData({app}) {
+        data() {
+            return {
+                main: null,
+                statistics: null,
+                services: null,
+                benefits: null,
+                workSchemes: null,
+            }
+        },
 
+        async asyncData({app}) {
+            const main = await app.$axios.$get("pageInfo?page=index");
+            const statistics = await app.$axios.$get('statistics');
+            const services = await app.$axios.$get('services');
+            const benefits = await app.$axios.$get('benefits');
+            const workSchemes = await app.$axios.$get('workSchemes');
+            if (main && statistics && services && benefits && workSchemes) {
+                return {main: main, statistics: statistics, services: services, benefits: benefits, workSchemes: workSchemes};
+            } else {
+                console.log('statistic, about, services, benefits, workSchemes Error')
+            }
         },
 
         methods: {

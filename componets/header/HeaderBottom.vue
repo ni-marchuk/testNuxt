@@ -55,7 +55,7 @@
 
 <script>
     import ResponsiveMenu from "../../componets/responsiveMenu/index";
-    import Overlay from "../../componets/Overlay/index";
+    import Overlay from "../../componets/overlay/index";
 
 
     export default {

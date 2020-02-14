@@ -15,11 +15,14 @@
                               :placeholder="'Имя и фамилия'"
                               v-model="inputName"
                               :error="errorName"
+                              @focusout="errorMessegeName()"
                 />
                 <custom-input class="servicesForm__input inputPhone"
                               :inputType="`phone`"
                               v-model="inputPhone"
                               :error="errorPhone"
+                              @focusout="errorMessegePhone()"
+
                 />
                 <custom-checkbox class="servicesForm__checkbox"
                                  :id="'checkName'"
@@ -78,25 +81,30 @@
                 }
             },
 
-            //проверить через focusOut
-            errorMessges() {
+            errorMessegeName() {
+                if (!this.isNameValid) {
+                    console.log(this.isNameValid);
+                    this.errorName = 'Некоректный ввод. Имя и фамилия должно быть длинее чем 5 знаков и не должны содержать спец.символы'
+                } else
+                    this.errorName = ''
+            },
+
+            errorMessegePhone() {
                 if (!this.isPhoneValid) {
                     this.errorPhone = 'Номер телефона введен неверно'
-                }
-                if (!this.isNameValid) {
-                    this.errorName = 'Имя введено не верно'
-                }
+                } else
+                    this.errorPhone = ''
             },
         },
 
         computed: {
 
             isNameValid() {
-                return this.inputPhone.length === 23;
+                return this.inputName.length > 5 && /^[a-zA-Zа-яА-ЯёЁ'][a-zA-Z-а-яА-ЯёЁ' ]+[a-zA-Zа-яА-ЯёЁ']?$/.test(this.inputName);
             },
 
             isPhoneValid() {
-                return this.inputName.length > 5;
+                return this.inputPhone.length === 23;
             },
         },
 

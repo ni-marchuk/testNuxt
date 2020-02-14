@@ -10,21 +10,9 @@
                 </div>
                 <img class="shortInfo__hero" src="/img/man.png">
                 <div class="shortInfo__statistics">
-                    <div class="shortInfo__statisticItem">
-                        <p class="shortInfo__itemTitle">50+</p>
-                        <p class="shortInfo__itemText">Профессиональных юристов</p>
-                    </div>
-                    <div class="shortInfo__statisticItem">
-                        <p class="shortInfo__itemTitle">18</p>
-                        <p class="shortInfo__itemText">Лет успешной работы</p>
-                    </div>
-                    <div class="shortInfo__statisticItem">
-                        <p class="shortInfo__itemTitle">41 793</p>
-                        <p class="shortInfo__itemText">Удачно решенных дел</p>
-                    </div>
-                    <div class="shortInfo__statisticItem">
-                        <p class="shortInfo__itemTitle">72.5</p>
-                        <p class="shortInfo__itemText">Млн руб возвращено клиентам</p>
+                    <div class="shortInfo__statisticItem" v-for="(item,index) in statistics">
+                        <p class="shortInfo__itemTitle">{{item.title}}</p>
+                        <p class="shortInfo__itemText">{{item.text}}</p>
                     </div>
                 </div>
             </div>
@@ -38,9 +26,19 @@
 
     export default {
         name: "ShortInfo",
+
         components: {
             Btn,
-        }
+        },
+
+        props: {
+            main: {
+                required: true,
+            },
+            statistics: {
+                required: true,
+            },
+        },
     }
 </script>
 

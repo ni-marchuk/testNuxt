@@ -1,7 +1,7 @@
 <template>
     <div class="about">
         <breadcrumbs class="about__breadсrumbs"
-                      :breadcrumbs="breadcrumbs"
+                     :breadcrumbs="breadcrumbs"
         />
         <company-info class="about__companyInfo"
                       :about="about"/>
@@ -65,13 +65,27 @@
         },
 
         async asyncData({app}) {
-            const about = await app.$axios.$get("pageInfo?page=about");
-            const statistics = await app.$axios.$get('statistics');
-            if (about && statistics) {
-                return {about: about, statistics: statistics};
-            } else {
-                console.log('statistic or about Error')
-            }
+            let about = null;
+            let statistics = null;
+            let promiseList = [];
+
+            const getPageInfo = async () => {
+                await app.$axios.$get("pageInfo?page=about")
+                    .then(response => about = response)
+                    .catch(err => console.log(err));
+            };
+            promiseList.push(getPageInfo());
+
+            const getStatistics = async () => {
+                await app.$axios.$get('statisticss')
+                    .then(response => statistics = response)
+                    .catch(err => console.log(err));
+            };
+            promiseList.push(getStatistics());
+
+            await Promise.all(promiseList);
+
+            return {about, statistics};
         },
 
         methods: {
