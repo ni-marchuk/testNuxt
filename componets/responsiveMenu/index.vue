@@ -123,7 +123,7 @@
         background-color: white;
         box-shadow: 0 0 10px;
 
-        z-index: 3;
+        z-index: 4;
 
         &__top {
             display: flex;

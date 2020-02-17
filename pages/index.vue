@@ -5,7 +5,7 @@
         <short-info :main="main"
                     :statistics="statistics"
         />
-        <services/>
+        <services-box/>
         <work-scheme/>
         <advantages/>
     </div>
@@ -13,7 +13,7 @@
 
 <script>
     import ShortInfo from '../componets/shortInfo/index';
-    import Services from '../componets/servicesBox/index';
+    import ServicesBox from '../componets/servicesBox/index';
     import WorkScheme from '../componets/workScheme/index'
     import Advantages from '../componets/advantages/index'
 
@@ -25,7 +25,7 @@
         components: {
             TestComponent,
             ShortInfo,
-            Services,
+            ServicesBox,
             WorkScheme,
             Advantages,
         },
@@ -41,26 +41,62 @@
         },
 
         async asyncData({app}) {
-            const main = await app.$axios.$get("pageInfo?page=index");
-            const statistics = await app.$axios.$get('statistics');
-            const services = await app.$axios.$get('services');
-            const benefits = await app.$axios.$get('benefits');
-            const workSchemes = await app.$axios.$get('workSchemes');
-            if (main && statistics && services && benefits && workSchemes) {
-                return {main: main, statistics: statistics, services: services, benefits: benefits, workSchemes: workSchemes};
-            } else {
-                console.log('statistic, about, services, benefits, workSchemes Error')
-            }
+            let main = null;
+            let statistics = null;
+            let services = null;
+            let benefits = null;
+            let workSchemes = null;
+
+            let promiseList = [];
+
+            const getMain = async () => {
+                await app.$axios.$get("pageInfo?page=index")
+                    .then(response => main = response)
+                    .catch(err => console.log(err));
+            };
+
+            promiseList.push(getMain());
+
+            const getStatistics = async () => {
+                await app.$axios.$get("statistics")
+                    .then(response => statistics = response)
+                    .catch(err => console.log(err));
+            };
+
+            promiseList.push(getStatistics());
+
+            const getServices = async () => {
+                await app.$axios.$get("services")
+                    .then(response => services = response)
+                    .catch(err => console.log(err));
+            };
+
+            promiseList.push(getServices());
+
+            const getBenefits = async () => {
+                await app.$axios.$get("benefits")
+                    .then(response => benefits = response)
+                    .catch(err => console.log(err));
+            };
+
+            promiseList.push(getBenefits());
+
+            const getWorkSchemes = async () => {
+                await app.$axios.$get("workSchemes")
+                    .then(response => workSchemes = response)
+                    .catch(err => console.log(err));
+            };
+
+            promiseList.push(getWorkSchemes());
+
+            await Promise.all(promiseList);
+
+            return {main, statistics, services, benefits, workSchemes};
+
         },
 
         methods: {
-            createObject() {
-                let object = {};
-                object.property = {};
-                object.property.anotherProperty = 123;
-
-                console.log(object);
-            }
+//
         }
     }
 </script>

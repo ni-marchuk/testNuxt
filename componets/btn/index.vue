@@ -14,32 +14,23 @@
         name: "Btn",
 
         props: {
+
             title: {
                 type: String,
                 required: true,
             },
+
             textCenter: {
                 type: Boolean,
                 required: false,
                 default: false,
             }
-        }
+        },
     }
 </script>
 
 <style lang="scss">
 
-    .btn.center {
-        text-align: center;
-
-        svg {
-            display: none;
-        }
-    }
-
-    .btn:disabled {
-        background-color: $greyLight;
-    }
     .btn {
         position: relative;
 
@@ -68,6 +59,32 @@
             height: 10px;
 
             margin-left: auto;
+
+            fill: white;
+        }
+
+        &:hover {
+            color: $grey;
+            border: 1px solid $red;
+            background-color: white;
+
+
+            svg {
+                fill: $grey;
+            }
         }
     }
+
+    .btn.center {
+        text-align: center;
+
+        svg {
+            display: none;
+        }
+    }
+
+    .btn:disabled {
+        background-color: $greyLight;
+    }
+
 </style>

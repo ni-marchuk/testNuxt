@@ -1,10 +1,10 @@
 <template>
     <div class="services">
-        <bread-crumbs class="services__breadCrumbs"/>
+        <bread-crumbs class="services__breadCrumbs"
+                      :breadcrumbs="breadcrumbs"
+        />
         <services-box class="services__servicesBox"/>
-        <nuxt-link :to="{name: 'services-slug', params: {slug: 'Services-slug'}}">ссылка</nuxt-link>
     </div>
-
 </template>
 
 <script>
@@ -17,7 +17,23 @@
         components: {
             BreadCrumbs,
             ServicesBox,
-        }
+        },
+
+
+        data() {
+            return {
+                breadcrumbs: [
+                    {
+                        name: '/',
+                        text: 'Главная /',
+                    },
+                    {
+                        name: '/services',
+                        text: 'Услуги',
+                    },
+                ],
+            }
+        },
     }
 </script>
 

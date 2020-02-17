@@ -1,7 +1,7 @@
 <template>
     <div class="servicesBox">
         <div class="container">
-            <h2 class="servicesBox__title">{{title}}</h2>
+            <h2 class="servicesBox__title">{{pageInfo}}</h2>
             <div class="servicesBox__container">
                 <div class="servicesBox__item">
                     <div class="servicesBox__itemTitleBox">
@@ -17,8 +17,11 @@
                         представлению
                         интересов в судах
                         и последующего исполнению судебных решений для реализации бизнес задач наших партнеров.</p>
-                    <Btn class="servicesBox__btn"
-                         :title="'Подробнее'"></Btn>
+                    <nuxt-link class="servicesBox__btn"
+                               :to="{name: 'services-judical'}"
+                    >
+                        <Btn :title="'Подробнее'"/>
+                    </nuxt-link>
                 </div>
                 <div class="servicesBox__item">
                     <div class="servicesBox__itemTitleBox">
@@ -34,8 +37,11 @@
                         представлению
                         интересов в судах и
                         последующего исполнению судебных решений для реализации бизнес задач наших партнеров.</p>
-                    <Btn class="servicesBox__btn"
-                         :title="'Подробнее'"></Btn>
+                    <nuxt-link class="servicesBox__btn"
+                               :to="{name: 'services-executive'}"
+                    >
+                        <Btn :title="'Подробнее'"/>
+                    </nuxt-link>
                 </div>
             </div>
         </div>
@@ -52,9 +58,40 @@
             Btn,
         },
 
+        async asyncData({app}) {
+            let pageInfo = null;
+            let services = null;
+
+            let promiseList = [];
+
+            const getPageInfo = async () => {
+                await app.$axios.$get("pageInfo?page=pageInfo")
+                    .then(response => pageInfo = response)
+                    .catch(err => console.log(err));
+            };
+
+            promiseList.push(getPageInfo());
+
+            const getServices = async () => {
+                await app.$axios.$get("services")
+                    .then(response => services = response)
+                    .catch(err => console.log(err));
+            };
+
+            promiseList.push(getServices());
+
+            await Promise.all(promiseList);
+
+            console.log('services', services,'pageInfo', pageInfo);
+
+            return {pageInfo, services};
+
+        },
+
         data: function () {
             return {
-                title: "Наши улуги",
+                pageInfo: null,
+                services: null,
             }
         },
     }
@@ -92,8 +129,9 @@
             width: 50%;
             padding: 50px 20px 50px 70px;
 
+            z-index: 2;
             background-color: white;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 
             &:first-child {
                 width: calc(50% - 30px);
@@ -143,6 +181,10 @@
 
         &__text {
             margin-bottom: 25px;
+        }
+
+        &__btn {
+            text-decoration: none;
         }
     }
 </style>

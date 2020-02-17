@@ -1,20 +1,20 @@
 <template>
-    <div class="servicesSlug">
-        <bread-crumbs class="servicesSlug__breadCrumbs"/>
-        <judical-represintation class="servicesSlug__judicalRepresintation"/>
+    <div class="executiveSlug">
+        <bread-crumbs class="executiveSlug__breadCrumbs"/>
+        <executive-production class="executiveSlug__executiveProduction"/>
     </div>
 </template>
 
 <script>
     import BreadCrumbs from "../../componets/breadcrumbs/breadcrumbs"
-    import JudicalRepresintation from "../../componets/judicalRepresintation/index"
+    import ExecutiveProduction from "../../componets/executiveProduction/index"
 
     export default {
-        name: "Services-slug",
+        name: "Executive",
 
         components: {
             BreadCrumbs,
-            JudicalRepresintation,
+            ExecutiveProduction,
         }
     }
 </script>

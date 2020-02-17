@@ -1,15 +1,15 @@
 <template>
-    <modal name="servicesForm" class="servicesForm"
-           :width="360"
-    >
-        <svg-icon class="servicesForm__close"
-                  name="close"
-                  @click="$modal.hide('servicesForm')"
-        />
+    <div class="servicesForm">
+
         <form class="servicesForm__wrapper">
-            <p class="servicesForm__title" @click="test()">Закажите консультацию специалиста</p>
-            <p class="servicesForm__text">Просто заполните форму ниже. Мы перезвоним, назначим время для
-                собеседования</p>
+            <p class="servicesForm__title"
+               @click="test()">
+                Закажите консультацию специалиста
+            </p>
+            <p class="servicesForm__text">
+                Просто заполните форму ниже. Мы перезвоним, назначим время для
+                собеседования
+            </p>
             <div class="servicesForm__controls">
                 <custom-input class="servicesForm__input inputName"
                               :placeholder="'Имя и фамилия'"
@@ -38,7 +38,7 @@
                 </Btn>
             </div>
         </form>
-    </modal>
+    </div>
 </template>
 
 <script>
@@ -112,37 +112,11 @@
 </script>
 
 <style lang="scss">
-    .v--modal-box {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
 
-        max-width: 360px !important;
-        width: 100% !important;
-        height: auto !important;
-        padding: 40px;
-
-        position: absolute !important;
-        top: 50% !important;
-        left: 50% !important;
-        -webkit-transform: translate(-50%, -50%) !important;
-        transform: translate(-50%, -50%) !important;
-    }
 
     .servicesForm {
         width: 100%;
 
-        &__close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-
-            width: 15px;
-            height: 15px;
-
-            cursor: pointer;
-        }
 
         &__title {
             text-align: center;

@@ -3,7 +3,7 @@
         <div class="container">
             <div class="shortInfo__inner">
                 <div class="shortInfo__sloganBox">
-                    <h1 class="shortInfo__slogan">Берем любую ситуацию под свой контроль</h1>
+                    <h1 class="shortInfo__slogan">{{main.h1}}</h1>
                     <Btn class="shortInfo__btn"
                          :title="'Подробнее'">
                     </Btn>
@@ -107,8 +107,6 @@
 
             max-width: 280px;
             height: auto;
-
-            z-index: 1;
 
             @include below($md-tablet) {
                 left: calc(100% - 230px);

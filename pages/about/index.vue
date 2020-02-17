@@ -51,7 +51,7 @@
                         }
                     },
                     {
-                        name: 'about',
+                        name: '/about',
                         text: 'О компании',
                         params: {
                             // id: 2,
@@ -77,7 +77,7 @@
             promiseList.push(getPageInfo());
 
             const getStatistics = async () => {
-                await app.$axios.$get('statisticss')
+                await app.$axios.$get('statistics')
                     .then(response => statistics = response)
                     .catch(err => console.log(err));
             };
