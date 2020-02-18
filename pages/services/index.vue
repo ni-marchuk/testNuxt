@@ -3,7 +3,10 @@
         <bread-crumbs class="services__breadCrumbs"
                       :breadcrumbs="breadcrumbs"
         />
-        <services-box class="services__servicesBox"/>
+        <services-box class="services__servicesBox"
+                      :pageInfo="pageInfo"
+                      :services="services"
+        />
     </div>
 </template>
 
@@ -19,6 +22,7 @@
             ServicesBox,
         },
 
+        middleware: ['services'],
 
         data() {
             return {
@@ -33,6 +37,20 @@
                     },
                 ],
             }
+        },
+
+        computed: {
+            services() {
+                return this.$store.getters.SERVICES;
+            },
+            pageInfo() {
+                return this.$store.getters.PAGE_INFO;
+            },
+        },
+
+        beforeDetroy() {
+            console.log('destroyeDDDD');
+            this.$store.dispatch('resetCartState');
         },
     }
 </script>

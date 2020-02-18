@@ -1,44 +1,15 @@
 <template>
     <div class="servicesBox">
         <div class="container">
-            <h2 class="servicesBox__title">{{pageInfo}}</h2>
+            <h1 class="servicesBox__title">{{pageInfo.h1}}</h1>
             <div class="servicesBox__container">
-                <div class="servicesBox__item">
-                    <div class="servicesBox__itemTitleBox">
-                        <div class="servicesBox__itemTitle">Судебное представительство</div>
-                        <svg-icon class="servicesBox__itemIcon" name="servicesBoxHammer"></svg-icon>
+                <div class="servicesBox__item" v-for="(servis, index) in services">
+                    <div class="servicesBox__itemContent">
+                        <div class="servicesBox__itemTitle">{{servis.title}}</div>
+                        <div class="servicesBox__itemList" v-html="servis.short"></div>
                     </div>
-                    <ul class="servicesBox__itemList">
-                        <li>Взыскание задолженности</li>
-                        <li>Налоговые споры</li>
-                        <li>Сопровождение банкротства</li>
-                    </ul>
-                    <p class="servicesBox__text">Юридическая фирма «Паритет» предоставляет эффективные решения по
-                        представлению
-                        интересов в судах
-                        и последующего исполнению судебных решений для реализации бизнес задач наших партнеров.</p>
                     <nuxt-link class="servicesBox__btn"
-                               :to="{name: 'services-judical'}"
-                    >
-                        <Btn :title="'Подробнее'"/>
-                    </nuxt-link>
-                </div>
-                <div class="servicesBox__item">
-                    <div class="servicesBox__itemTitleBox">
-                        <div class="servicesBox__itemTitle">Исполнительное производство</div>
-                        <svg-icon class="servicesBox__itemIcon" name="servicesBoxLibra"></svg-icon>
-                    </div>
-                    <ul class="servicesBox__itemList">
-                        <li>Взыскание задолженности</li>
-                        <li>Налоговые споры</li>
-                        <li>Сопровождение банкротства</li>
-                    </ul>
-                    <p class="servicesBox__text">Юридическая фирма «Паритет» предоставляет эффективные решения по
-                        представлению
-                        интересов в судах и
-                        последующего исполнению судебных решений для реализации бизнес задач наших партнеров.</p>
-                    <nuxt-link class="servicesBox__btn"
-                               :to="{name: 'services-executive'}"
+                               :to="{name: ''}"
                     >
                         <Btn :title="'Подробнее'"/>
                     </nuxt-link>
@@ -50,50 +21,27 @@
 
 <script>
     import Btn from "../btn/index";
-
     export default {
         name: "servicesBox",
+
+        middleware: ['services'],
 
         components: {
             Btn,
         },
 
-        async asyncData({app}) {
-            let pageInfo = null;
-            let services = null;
+        props: {
 
-            let promiseList = [];
+            pageInfo: {
+                required: true,
+            },
 
-            const getPageInfo = async () => {
-                await app.$axios.$get("pageInfo?page=pageInfo")
-                    .then(response => pageInfo = response)
-                    .catch(err => console.log(err));
-            };
-
-            promiseList.push(getPageInfo());
-
-            const getServices = async () => {
-                await app.$axios.$get("services")
-                    .then(response => services = response)
-                    .catch(err => console.log(err));
-            };
-
-            promiseList.push(getServices());
-
-            await Promise.all(promiseList);
-
-            console.log('services', services,'pageInfo', pageInfo);
-
-            return {pageInfo, services};
+            services: {
+                required: true,
+            },
 
         },
 
-        data: function () {
-            return {
-                pageInfo: null,
-                services: null,
-            }
-        },
     }
 </script>
 
@@ -124,6 +72,7 @@
         &__item {
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             align-items: flex-start;
 
             width: 50%;
@@ -153,30 +102,31 @@
             }
         }
 
-        &__itemTitleBox {
+        &__itemContent {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
 
-            margin-bottom: 10px;
 
             width: 100%;
         }
 
         &__itemTitle {
+            margin-bottom: 20px;
+
             font-family: $Bebas;
             font-weight: 400;
             font-size: 24px;
         }
 
-        &__itemIcon {
-            max-width: 60px;
-            max-height: 60px;
-            min-width: 60px;
-        }
-
         &__itemList {
             margin-bottom: 25px;
+
+            p {
+                &:not(:last-child) {
+                    margin-bottom: 20px;
+                }
+            }
         }
 
         &__text {

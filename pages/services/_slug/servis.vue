@@ -1,18 +1,18 @@
 <template>
-    <div class="servicesSlug">
-        <bread-crumbs class="servicesSlug__breadCrumbs"
+    <div class="servisSlug">
+        <bread-crumbs class="servisSlug__breadCrumbs"
                       :breadcrumbs="breadcrumbs"
         />
-        <judical-represintation class="servicesSlug__judicalRepresintation"/>
+        <judical-represintation class="servisSlug__judicalRepresintation"/>
     </div>
 </template>
 
 <script>
-    import BreadCrumbs from "../../componets/breadcrumbs/breadcrumbs"
-    import JudicalRepresintation from "../../componets/judicalRepresintation/index"
+    import BreadCrumbs from "../../../componets/breadcrumbs/breadcrumbs"
+    import JudicalRepresintation from "../../../componets/judicalRepresintation/index"
 
     export default {
-        name: "Judical",
+        name: "Servis",
 
         components: {
             BreadCrumbs,
