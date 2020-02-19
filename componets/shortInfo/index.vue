@@ -85,7 +85,6 @@
             @include below($md-tablet) {
                 max-width: 50%;
 
-                margin-top: 50px;
                 margin-bottom: 20px;
             }
         }

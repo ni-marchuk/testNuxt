@@ -67,20 +67,18 @@
                         </ul>
                     </div>
                 </div>
-                <feedback-form class="judicalRepresintation__feedbackForm"/>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import FeedbackForm from "../../componets/feedbackForm/index"
 
     export default {
         name: "JudicalRepresintation",
 
         components: {
-            FeedbackForm,
+            //
         }
     }
 </script>

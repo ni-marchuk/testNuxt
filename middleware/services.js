@@ -21,8 +21,7 @@ export default async function ({store, app}) {
 
     await Promise.all(promiseList);
 
-    store.commit('GET_PAGE_INFO', pageInfo);
-    store.commit('GET_SERVICES', services);
+    store.commit('services/GET_PAGE_INFO', pageInfo);
+    store.commit('services/GET_SERVICES', services);
 
-    return {pageInfo, services};
 }

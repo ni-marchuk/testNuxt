@@ -39,28 +39,36 @@
             }
         },
 
+        mounted() {
+            //
+            // console.log(this.services);
+            // console.log(this.pageInfo);
+        },
+
         computed: {
             services() {
-                return this.$store.getters.SERVICES;
+                return this.$store.getters['services/SERVICES'];
             },
+
             pageInfo() {
-                return this.$store.getters.PAGE_INFO;
+                return this.$store.getters['services/PAGE_INFO'];
             },
         },
 
-        beforeDetroy() {
-            console.log('destroyeDDDD');
-            this.$store.dispatch('resetCartState');
-        },
+        // beforeDestroy() {
+        //     console.log('destroyeDDDD');
+        //     this.$store.dispatch('services/resetServicesState');
+        // },
+
     }
 </script>
 
 <style lang="scss">
 
-    .servicesPage {
+    .services {
 
         &__servicesBox {
-
+            margin-bottom: 150px;
         }
     }
 </style>

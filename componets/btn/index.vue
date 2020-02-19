@@ -1,6 +1,7 @@
 <template>
     <button class="btn"
             :class="{'center':textCenter}"
+            @click="$emit('btnClick')"
     >
         {{title}}
         <svg-icon class='btn__arrow'

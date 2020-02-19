@@ -5,14 +5,17 @@
             <div class="servicesBox__container">
                 <div class="servicesBox__item" v-for="(servis, index) in services">
                     <div class="servicesBox__itemContent">
-                        <div class="servicesBox__itemTitle">{{servis.title}}</div>
+                        <div class="servicesBox__itemTitle">
+                            <svg-icon class="servicesBox__itemTitleIcn"
+                                      name="rectangleWhite"
+                            />
+                            {{servis.title}}
+                        </div>
                         <div class="servicesBox__itemList" v-html="servis.short"></div>
                     </div>
-                    <nuxt-link class="servicesBox__btn"
-                               :to="{name: ''}"
-                    >
-                        <Btn :title="'Подробнее'"/>
-                    </nuxt-link>
+                    <Btn :title="'Подробнее'"
+                         @btnClick="goToPage(servis.link)"
+                    />
                 </div>
             </div>
         </div>
@@ -21,6 +24,7 @@
 
 <script>
     import Btn from "../btn/index";
+
     export default {
         name: "servicesBox",
 
@@ -40,6 +44,12 @@
                 required: true,
             },
 
+        },
+
+        methods: {
+            goToPage(link) {
+                this.$router.push(link);
+            }
         },
 
     }
@@ -107,16 +117,33 @@
             justify-content: space-between;
             flex-direction: column;
 
-
             width: 100%;
+
+
         }
 
         &__itemTitle {
+            position: relative;
+            display: flex;
+            align-items: center;
+
             margin-bottom: 20px;
 
-            font-family: $Bebas;
-            font-weight: 400;
+            font-family: $Roboto;
+            font-weight: 700;
             font-size: 24px;
+
+            color: $grey;
+        }
+
+        &__itemTitleIcn {
+            position:absolute;
+            left: -20px;
+
+            width: 12px;
+            height: 12px;
+
+            fill: $red;
         }
 
         &__itemList {

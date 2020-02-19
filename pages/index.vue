@@ -1,13 +1,15 @@
 <template>
-    <div>
-        <!--            <test-component class="container__test"-->
-        <!--                            :title="'teeeest'"/>-->
-        <short-info :main="main"
+    <div class="main">
+        <short-info class="main__shortInfo"
+                    :main="main"
                     :statistics="statistics"
         />
-        <services-box/>
-        <work-scheme/>
-        <advantages/>
+        <services-box class="main__servicesBox"
+                      :services="services"
+                      :pageInfo="pageInfo"
+        />
+        <work-scheme class="main__workScheme"/>
+        <advantages class="main__advantages"/>
     </div>
 </template>
 
@@ -17,24 +19,22 @@
     import WorkScheme from '../componets/workScheme/index'
     import Advantages from '../componets/advantages/index'
 
-    import TestComponent from '../componets/test/index';
-
     export default {
         name: 'Index',
 
         components: {
-            TestComponent,
             ShortInfo,
             ServicesBox,
             WorkScheme,
             Advantages,
         },
 
+        middleware: ['services'],
+
         data() {
             return {
                 main: null,
                 statistics: null,
-                services: null,
                 benefits: null,
                 workSchemes: null,
             }
@@ -43,7 +43,6 @@
         async asyncData({app}) {
             let main = null;
             let statistics = null;
-            let services = null;
             let benefits = null;
             let workSchemes = null;
 
@@ -65,14 +64,6 @@
 
             promiseList.push(getStatistics());
 
-            const getServices = async () => {
-                await app.$axios.$get("services")
-                    .then(response => services = response)
-                    .catch(err => console.log(err));
-            };
-
-            promiseList.push(getServices());
-
             const getBenefits = async () => {
                 await app.$axios.$get("benefits")
                     .then(response => benefits = response)
@@ -91,46 +82,65 @@
 
             await Promise.all(promiseList);
 
-            return {main, statistics, services, benefits, workSchemes};
+            console.log(workSchemes);
+            return {main, statistics, benefits, workSchemes};
 
         },
 
-        methods: {
-//
-        }
+        computed: {
+
+            services() {
+                return this.$store.getters['services/SERVICES'];
+            },
+
+            pageInfo() {
+                return this.$store.getters['services/PAGE_INFO'];
+            },
+        },
+
+        // beforeDestroy() {
+        //     console.log('destroy page экшн для очистки стейта с сервисами');
+        //     this.$store.dispatch('services/resetServicesState');
+        // },
     }
 </script>
 
 <style lang="scss">
 
-    .services {
-        margin-bottom: 100px;
-        padding-top: 30px;
-        padding-bottom: 50px;
-        background-color: #EEEEEE;
+    .main {
 
-        @include below($lg-desktop) {
-            margin-bottom: 80px;
+        &__shortInfo {
+
         }
-        @include below($lg-tablet) {
-            margin-bottom: 50px;
+
+        &__servicesBox {
+            padding-top: 50px;
+            padding-bottom: 100px;
+            background-color: #F8F8F8;
+
+            @include below($md-tablet) {
+                padding-top: 20px;
+                padding-bottom: 50px;
+            }
         }
-    }
 
-    .workScheme {
-        margin-bottom: 50px;
-    }
-
-    .advantages {
-        margin-bottom: 100px;
-
-        @include below($lg-desktop) {
-            margin-bottom: 80px;
-        }
-        @include below($lg-tablet) {
+        &__workScheme {
+            padding-top: 50px;
             margin-bottom: 50px;
         }
 
+        &__advantages {
+            margin-bottom: 100px;
+
+            @include below($lg-desktop) {
+                margin-bottom: 80px;
+            }
+            @include below($lg-tablet) {
+                margin-bottom: 50px;
+            }
+
+        }
     }
+
 
 </style>
