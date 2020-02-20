@@ -8,7 +8,9 @@
                       :services="services"
                       :pageInfo="pageInfo"
         />
-        <work-scheme class="main__workScheme"/>
+        <work-scheme class="main__workScheme"
+                     :workSchemes="workSchemes"
+        />
         <advantages class="main__advantages"/>
     </div>
 </template>

@@ -5,52 +5,30 @@
             <div class="workScheme__stage">
                 <h2 class="workScheme__titleStage">Схема работы</h2>
                 <div class="workScheme__stageBox">
-                    <div class="workScheme__stageItem">
-                        <div class="workScheme__stageItemTitle">Этап 1</div>
+                    <div class="workScheme__stageItem"
+                         v-for="(step,index) in workSchemes.steps"
+                         @click="goToSlide(index)"
+                    >
+                        <div class="workScheme__stageItemTitle">{{step.step}}</div>
                         <div class="workScheme__stageItemState">
                             <svg-icon class="workScheme__stageItemIcn" name="check"></svg-icon>
                         </div>
-                        <div class="workScheme__stageItemText">Заявка или звонок</div>
-                    </div>
-                    <div class="workScheme__stageItem">
-                        <div class="workScheme__stageItemTitle">Этап 2</div>
-                        <div class="workScheme__stageItemState">
-                            <svg-icon class="workScheme__stageItemIcn" name="check"></svg-icon>
-                        </div>
-                        <div class="workScheme__stageItemText">Анализ документов</div>
-                    </div>
-                    <div class="workScheme__stageItem">
-                        <div class="workScheme__stageItemTitle">Этап 3</div>
-                        <div class="workScheme__stageItemState">
-                            <svg-icon class="workScheme__stageItemIcn" name="check"></svg-icon>
-                        </div>
-                        <div class="workScheme__stageItemText">Заключение договора</div>
-                    </div>
-                    <div class="workScheme__stageItem">
-                        <div class="workScheme__stageItemTitle">Этап 4</div>
-                        <div class="workScheme__stageItemState">
-                            <svg-icon class="workScheme__stageItemIcn" name="check"></svg-icon>
-                        </div>
-                        <div class="workScheme__stageItemText">Оказание услуги</div>
-                    </div>
-                    <div class="workScheme__stageItem">
-                        <div class="workScheme__stageItemTitle">Этап 5</div>
-                        <div class="workScheme__stageItemState">
-                            <svg-icon class="workScheme__stageItemIcn" name="check"></svg-icon>
-                        </div>
-                        <div class="workScheme__stageItemText">Получение денег</div>
+                        <div class="workScheme__stageItemText">{{step.description}}</div>
                     </div>
                 </div>
             </div>
-            <div class="workScheme__slider" v-swiper:mySwiper="swiperOption">
+            <div class="workScheme__slider"
+                 v-swiper:mySwiper="swiperOption"
+            >
                 <div class="workScheme__sliderWrapper swiper-wrapper">
-                    <div class="workScheme__sliderSlide swiper-slide" v-for="banner in banners">
+                    <div class="workScheme__sliderSlide swiper-slide"
+                         v-for="step in workSchemes.steps">
                         <div class="workScheme__slideContent">
-                            <img class="workScheme__sliderImg" :src="banner.img">
+                            <img class="workScheme__sliderImg" :src="step.thumb">
                             <div class="workScheme__sliderTextContent">
-                                <p class="workScheme__sliderStep">{{banner.step}}</p>
-                                <h2 class="workScheme__sliderTitle">{{banner.title}}</h2>
-                                <p class="workScheme__sliderText">{{banner.text}}</p>
+                                <p class="workScheme__sliderStep">{{step.step}}</p>
+                                <h2 class="workScheme__sliderTitle">{{step.description}}</h2>
+                                <p class="workScheme__sliderText">{{step.text}}</p>
                             </div>
                         </div>
                     </div>
@@ -73,44 +51,14 @@
     export default {
         name: "workScheme",
 
-        mounted() {
-            // console.log('app init', this)
-            // setTimeout(() => {
-            //     this.banners.push('/5.jpg')
-            //     console.log('banners update')
-            // }, 3000)
-            // console.log(
-            //     'This is current swiper instance object', this.mySwiper,
-            //     'I will slideTo banners 3');
-            // this.mySwiper.slideTo(3)
+        props: {
+            workSchemes: {
+                required: true,
+            },
         },
 
         data() {
             return {
-                banners: [
-                    {
-                        step: 'Этап 1',
-                        title: 'Анализ документов',
-                        text: `Вы излагаете суть проблемы, после чего мы уточняем нюансы, важные для дела и сообщаем о документах, необходимых для проведения полного анализа ситуации.
-                               Первичная консультация может быть проведена как при личной встрече, так и онлайн по Skype. Конкретное время первичной консультации, согласовывается заранее (возможно после окончания рабочего дня).`,
-                        img: '/img/banners/doc.png',
-                    },
-                    {
-                        step: 'Этап 1',
-                        title: 'Анализ документов',
-                        text: `Вы излагаете суть проблемы, после чего мы уточняем нюансы, важные для дела и сообщаем о документах, необходимых для проведения полного анализа ситуации.
-                               Первичная консультация может быть проведена как при личной встрече, так и онлайн по Skype. Конкретное время первичной консультации, согласовывается заранее (возможно после окончания рабочего дня).`,
-                        img: '/img/banners/port.png',
-                    },
-                    {
-                        step: 'Этап 1',
-                        title: 'Анализ документов',
-                        text: `Вы излагаете суть проблемы, после чего мы уточняем нюансы, важные для дела и сообщаем о документах, необходимых для проведения полного анализа ситуации.
-                               Первичная консультация может быть проведена как при личной встрече, так и онлайн по Skype. Конкретное время первичной консультации, согласовывается заранее (возможно после окончания рабочего дня).`,
-                        img: '/img/banners/port.png',
-                    },
-                ],
-
                 swiperOption: {
                     loop: true,
                     slidesPerView: 'auto',
@@ -136,6 +84,14 @@
                     },
                 }
             }
+        },
+
+        methods: {
+            goToSlide(slide) {
+
+                event.target.closest('.workScheme__stageItem').classList.toggle('isActive');
+                this.mySwiper.slideTo(slide);
+            },
         }
     }
 
@@ -172,6 +128,10 @@
             justify-content: space-between;
 
             margin-bottom: 50px;
+
+            @include below($md-tablet) {
+                display: none;
+            }
         }
 
         &__stageItem {
@@ -183,7 +143,7 @@
             width: 100%;
 
             cursor: pointer;
-
+            //grey
             &:not(:last-child):before {
                 position: absolute;
                 top: 50%;
@@ -217,10 +177,11 @@
                     background-size: 5%;
                 }
 
-                /*&:not(:first-child):after {*/
-                /*    background: linear-gradient(to right, red 50%, white 50%);*/
-                /*    background-size: 5%;*/
-                /*}*/
+                &:not(:first-child):before {
+                    background: linear-gradient(to right, red 50%, white 50%);
+                    background-size: 5%;
+                }
+
                 .workScheme__stageItemIcn {
                     display: flex;
                 }
@@ -297,7 +258,7 @@
 
         &__slider {
             width: 100%;
-            height: 400px;
+            /*height: 400px;*/
         }
 
         &__sliderSlide {
@@ -315,17 +276,27 @@
             align-content: flex-start;
 
             width: 80%;
+
         }
 
         &__sliderImg {
             width: 40%;
             max-height: 300px;
             object-fit: contain;
+
+            @include below($md-tablet) {
+                display: none;
+            }
         }
 
         &__sliderTextContent {
-            max-width: 50%;
-            max-height: 300px;
+            width: 50%;
+            /*max-height: 300px;*/
+
+            @include below($md-tablet) {
+                margin: 0 auto;
+                width: 90%;
+            }
         }
 
         &__sliderStep {
@@ -338,6 +309,10 @@
 
         &__sliderTitle {
             margin-bottom: 15px;
+        }
+
+        &__sliderText {
+            margin-bottom: 20px;
         }
 
         &__sliderNavigation {
@@ -354,6 +329,10 @@
             background-color: $red;
             background-image: url("/img/sprite/prev.svg");
             background-size: 10px;
+
+            @include below($md-tablet) {
+                display: none;
+            }
         }
 
         &__sliderNext {
@@ -365,6 +344,10 @@
             background-color: $red;
             background-image: url("/img/sprite/next.svg");
             background-size: 10px;
+
+            @include below($md-tablet) {
+                display: none;
+            }
         }
 
     }
