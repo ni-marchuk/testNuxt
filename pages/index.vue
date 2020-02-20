@@ -84,7 +84,6 @@
 
             await Promise.all(promiseList);
 
-            console.log(workSchemes);
             return {main, statistics, benefits, workSchemes};
 
         },

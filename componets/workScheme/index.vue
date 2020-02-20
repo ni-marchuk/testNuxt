@@ -7,7 +7,8 @@
                 <div class="workScheme__stageBox">
                     <div class="workScheme__stageItem"
                          v-for="(step,index) in workSchemes.steps"
-                         @click="goToSlide(index)"
+                         @click="goToSlide(index,'step')"
+                         :class="{isActive:index === 0}"
                     >
                         <div class="workScheme__stageItemTitle">{{step.step}}</div>
                         <div class="workScheme__stageItemState">
@@ -34,12 +35,16 @@
                     </div>
                 </div>
                 <div class="workScheme__sliderNavigation">
-                    <button class="workScheme__sliderNext swiper-button-next"></button>
-                    <button class="workScheme__sliderPrev swiper-button-prev"></button>
+                    <button class="workScheme__sliderNext swiper-button-next"
+                            @click="goToSlide(index,'next')"
+                    >
+                    </button>
+                    <button class="workScheme__sliderPrev swiper-button-prev"
+                            @click="goToSlide(index,'prev')"
+                    >
+                    </button>
                 </div>
-                <div class="swiper-pagination swiper-pagination-bullets">
-
-                </div>
+                <div class="swiper-pagination swiper-pagination-bullets"></div>
             </div>
         </div>
 
@@ -60,7 +65,7 @@
         data() {
             return {
                 swiperOption: {
-                    loop: true,
+                    loop: false,
                     slidesPerView: 'auto',
                     centeredSlides: true,
                     spaceBetween: 30,
@@ -87,10 +92,45 @@
         },
 
         methods: {
-            goToSlide(slide) {
+            goToSlide(slide, type) {
+                console.log(this.mySwiper);
+                if (type === 'step') {
+                    if (event.target.classList.contains('isFullActive')) {
+                        event.target.closest('.workScheme__stageBox').childNodes.forEach((item, index) => {
+                            if (index >= slide) {
+                                console.log(item);
+                                if (index === slide) {
+                                    if (index === 0) {
+                                        item.classList.remove('isFullActive');
+                                    } else {
+                                        item.classList.remove('isActive');
+                                    }
+                                } else {
+                                    item.classList.remove('isActive');
+                                    item.classList.remove('isFullActive');
+                                }
+                            }
+                        })
+                    } else {
+                        for (let i = slide; i >= 0; i--) {
+                            if (i === slide) {
+                                event.target.closest('.workScheme__stageBox').childNodes[i].classList.add('isFullActive');
+                            } else {
+                                event.target.closest('.workScheme__stageBox').childNodes[i].classList.add('isActive');
+                                event.target.closest('.workScheme__stageBox').childNodes[i].classList.add('isFullActive');
+                            }
+                        }
+                    }
+                    this.mySwiper.slideTo(slide);
+                }
 
-                event.target.closest('.workScheme__stageItem').classList.toggle('isActive');
-                this.mySwiper.slideTo(slide);
+                if (type === 'next') {
+
+                }
+
+                if (type === 'prev') {
+
+                }
             },
         }
     }
@@ -169,17 +209,8 @@
             &.isActive {
 
                 .workScheme__stageItemState {
+                    pointer-events: none;
                     border: 5px solid $red;
-                }
-
-                &:not(:last-child):before {
-                    background: linear-gradient(to right, red 50%, white 50%);
-                    background-size: 5%;
-                }
-
-                &:not(:first-child):before {
-                    background: linear-gradient(to right, red 50%, white 50%);
-                    background-size: 5%;
                 }
 
                 .workScheme__stageItemIcn {
@@ -187,10 +218,12 @@
                 }
 
                 .workScheme__stageItemTitle {
+                    pointer-events: none;
                     color: $red;
                 }
 
                 .workScheme__stageItemText {
+                    pointer-events: none;
                     color: $red;
                 }
 
@@ -210,16 +243,26 @@
                     color: $red;
                 }
 
-                &:after {
-                    background: linear-gradient(to right, red 50%, white 50%);
-                    background-size: 5%;
-                }
-
                 .workScheme__stageItemIcn {
                     display: flex;
                 }
             }
 
+        }
+
+        &__stageItem.isActive:not(:first-child):before {
+            background: linear-gradient(to right, red 50%, white 50%);
+            background-size: 5%;
+        }
+
+        &__stageItem.isFullActive:first-child:before {
+            background: linear-gradient(to right, red 50%, white 50%);
+            background-size: 5%;
+        }
+
+        &__stageItem.isFullActive:after {
+            background: linear-gradient(to right, red 50%, white 50%);
+            background-size: 5%;
         }
 
         &__stageItemTitle {
