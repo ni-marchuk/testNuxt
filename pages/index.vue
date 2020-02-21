@@ -76,14 +76,23 @@
 
             const getWorkSchemes = async () => {
                 await app.$axios.$get("workSchemes")
-                    .then(response => workSchemes = response)
+                    .then((response) => {
+                        console.log(response);
+                        workSchemes = Object.assign({}, response);
+                        workSchemes.steps = response.steps.map((item, index) => {
+                            return Object.assign({
+                                isActive: null,
+                                isFullActive: null,
+                            }, item)
+                        })
+                    })
                     .catch(err => console.log(err));
             };
 
             promiseList.push(getWorkSchemes());
 
             await Promise.all(promiseList);
-
+            console.log(workSchemes);
             return {main, statistics, benefits, workSchemes};
 
         },

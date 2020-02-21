@@ -7,8 +7,8 @@
                 <div class="workScheme__stageBox">
                     <div class="workScheme__stageItem"
                          v-for="(step,index) in workSchemes.steps"
-                         @click="goToSlide(index,'step')"
-                         :class="{isActive:index === 0}"
+                         @click="goToSlide(index)"
+                         :class="{isActive:index === 0 || step.isActive, isFullActive: step.isFullActive}"
                     >
                         <div class="workScheme__stageItemTitle">{{step.step}}</div>
                         <div class="workScheme__stageItemState">
@@ -20,6 +20,8 @@
             </div>
             <div class="workScheme__slider"
                  v-swiper:mySwiper="swiperOption"
+                 v-swiper:slides="workSchemes.steps"
+                 v-swiper:realIndex="currentSlide"
             >
                 <div class="workScheme__sliderWrapper swiper-wrapper">
                     <div class="workScheme__sliderSlide swiper-slide"
@@ -36,11 +38,11 @@
                 </div>
                 <div class="workScheme__sliderNavigation">
                     <button class="workScheme__sliderNext swiper-button-next"
-                            @click="goToSlide(index,'next')"
+                            @click=""
                     >
                     </button>
                     <button class="workScheme__sliderPrev swiper-button-prev"
-                            @click="goToSlide(index,'prev')"
+                            @click=""
                     >
                     </button>
                 </div>
@@ -64,6 +66,8 @@
 
         data() {
             return {
+                currentSlide: Number,
+
                 swiperOption: {
                     loop: false,
                     slidesPerView: 'auto',
@@ -76,63 +80,80 @@
                     },
                     on: {
                         slideChange() {
-                            console.log('onSlideChangeEnd', this);
+                            this.realIndex = this.currentSlide;
                         },
+
                         tap() {
-                            console.log('onTap', this);
-                        }
+
+                        },
                     },
 
                     navigation: {
                         nextEl: '.swiper-button-next',
                         prevEl: '.swiper-button-prev',
                     },
+
                 }
             }
         },
 
         methods: {
-            goToSlide(slide, type) {
-                console.log(this.mySwiper);
-                if (type === 'step') {
-                    if (event.target.classList.contains('isFullActive')) {
-                        event.target.closest('.workScheme__stageBox').childNodes.forEach((item, index) => {
-                            if (index >= slide) {
-                                console.log(item);
-                                if (index === slide) {
-                                    if (index === 0) {
-                                        item.classList.remove('isFullActive');
-                                    } else {
-                                        item.classList.remove('isActive');
-                                    }
-                                } else {
-                                    item.classList.remove('isActive');
-                                    item.classList.remove('isFullActive');
-                                }
-                            }
-                        })
-                    } else {
-                        for (let i = slide; i >= 0; i--) {
-                            if (i === slide) {
-                                event.target.closest('.workScheme__stageBox').childNodes[i].classList.add('isFullActive');
-                            } else {
-                                event.target.closest('.workScheme__stageBox').childNodes[i].classList.add('isActive');
-                                event.target.closest('.workScheme__stageBox').childNodes[i].classList.add('isFullActive');
-                            }
-                        }
-                    }
-                    this.mySwiper.slideTo(slide);
-                }
+            // goToSlide(slide, type) {
+            //     if (type === 'step') {
+            //         if (event.target.classList.contains('isFullActive')) {
+            //             event.target.closest('.workScheme__stageBox').childNodes.forEach((item, index) => {
+            //                 if (index >= slide) {
+            //                     if (index === slide) {
+            //                         if (index === 0) {
+            //                             item.classList.remove('isFullActive');
+            //                         } else {
+            //                             item.classList.remove('isActive');
+            //                         }
+            //                     } else {
+            //                         item.classList.remove('isActive');
+            //                         item.classList.remove('isFullActive');
+            //                     }
+            //                 }
+            //             })
+            //         } else {
+            //             for (let i = slide; i >= 0; i--) {
+            //                 if (i === slide) {
+            //                     event.target.closest('.workScheme__stageBox').childNodes[i].classList.add('isFullActive');
+            //                 } else {
+            //                     event.target.closest('.workScheme__stageBox').childNodes[i].classList.add('isActive');
+            //                     event.target.closest('.workScheme__stageBox').childNodes[i].classList.add('isFullActive');
+            //                 }
+            //             }
+            //         }
+            //         this.mySwiper.slideTo(slide);
+            //     }
+            //
+            //     if (type === 'next') {
+            //
+            //     }
+            //
+            //     if (type === 'prev') {
+            //
+            //     }
+            // },
 
-                if (type === 'next') {
-
-                }
-
-                if (type === 'prev') {
-
-                }
+            progress(realIndex) {
+                let steps = [].concat(this.workSchemes.steps);
+                steps.forEach((item, index) => {
+                    item.isFullActive = (index < realIndex);
+                    item.isActive = (index === realIndex);
+                });
+                this.$set(this.workSchemes, 'steps', steps);
+                console.log(this.workSchemes.steps);
+                this.goToSlide(realIndex);
             },
+
+            goToSlide(index) {
+                this.currentSlide = index;
+            },
+
         }
+
     }
 
 </script>
