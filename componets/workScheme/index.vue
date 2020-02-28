@@ -38,11 +38,11 @@
                 </div>
                 <div class="workScheme__sliderNavigation">
                     <button class="workScheme__sliderNext swiper-button-next"
-                            @click=""
+                            @click="nextPrev(currentSlide)"
                     >
                     </button>
                     <button class="workScheme__sliderPrev swiper-button-prev"
-                            @click=""
+                            @click="nextPrev(currentSlide)"
                     >
                     </button>
                 </div>
@@ -79,8 +79,8 @@
                         clickable: true
                     },
                     on: {
-                        slideChange() {
-                            this.realIndex = this.currentSlide;
+                        slideChange: () => {
+                            this.progress(this.currentSlide);
                         },
 
                         tap() {
@@ -139,20 +139,21 @@
 
             progress(realIndex) {
                 let steps = [].concat(this.workSchemes.steps);
+                console.log(steps);
                 steps.forEach((item, index) => {
                     item.isFullActive = (index < realIndex);
                     item.isActive = (index === realIndex);
                 });
                 this.$set(this.workSchemes, 'steps', steps);
-                console.log(this.workSchemes.steps);
                 this.goToSlide(realIndex);
             },
 
             goToSlide(index) {
                 this.currentSlide = index;
+                this.mySwiper.on('slideChange',this.currentSlide);
             },
 
-        }
+        },
 
     }
 

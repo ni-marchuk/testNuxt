@@ -77,7 +77,6 @@
             const getWorkSchemes = async () => {
                 await app.$axios.$get("workSchemes")
                     .then((response) => {
-                        console.log(response);
                         workSchemes = Object.assign({}, response);
                         workSchemes.steps = response.steps.map((item, index) => {
                             return Object.assign({
@@ -92,7 +91,6 @@
             promiseList.push(getWorkSchemes());
 
             await Promise.all(promiseList);
-            console.log(workSchemes);
             return {main, statistics, benefits, workSchemes};
 
         },
