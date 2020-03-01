@@ -20,7 +20,6 @@
             </div>
             <div class="workScheme__slider"
                  v-swiper:mySwiper="swiperOption"
-                 v-swiper:slides="workSchemes.steps"
                  v-swiper:realIndex="currentSlide"
             >
                 <div class="workScheme__sliderWrapper swiper-wrapper">
@@ -36,15 +35,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="workScheme__sliderNavigation">
-                    <button class="workScheme__sliderNext swiper-button-next"
-                            @click="nextPrev(currentSlide)"
-                    >
-                    </button>
-                    <button class="workScheme__sliderPrev swiper-button-prev"
-                            @click="nextPrev(currentSlide)"
-                    >
-                    </button>
+                <div class="workScheme__sliderNavigation sliderNavigation">
+                    <button class="workScheme__sliderNext swiper-button-next"></button>
+                    <button class="workScheme__sliderPrev swiper-button-prev"></button>
                 </div>
                 <div class="swiper-pagination swiper-pagination-bullets"></div>
             </div>
@@ -71,7 +64,7 @@
                 swiperOption: {
                     loop: false,
                     slidesPerView: 'auto',
-                    centeredSlides: true,
+                    autoHeight: false,
                     spaceBetween: 30,
                     pagination: {
                         el: '.swiper-pagination',
@@ -80,7 +73,8 @@
                     },
                     on: {
                         slideChange: () => {
-                            this.progress(this.currentSlide);
+                            this.progress(this.mySwiper.realIndex);
+                            console.log(this.mySwiper);
                         },
 
                         tap() {
@@ -139,7 +133,6 @@
 
             progress(realIndex) {
                 let steps = [].concat(this.workSchemes.steps);
-                console.log(steps);
                 steps.forEach((item, index) => {
                     item.isFullActive = (index < realIndex);
                     item.isActive = (index === realIndex);
@@ -150,7 +143,7 @@
 
             goToSlide(index) {
                 this.currentSlide = index;
-                this.mySwiper.on('slideChange',this.currentSlide);
+                this.mySwiper.slideTo(this.currentSlide);
             },
 
         },
