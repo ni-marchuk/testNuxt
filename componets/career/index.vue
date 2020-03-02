@@ -4,47 +4,18 @@
             <div class="career__wrapper">
                 <div class="career__inner">
                     <div class="career__content">
-                        <h1 class="career__title">Карьера</h1>
-                        <p class="career__slogan">Вы можете стать частью нашей постоянно растущей и развивающейся
-                            команды
-                            Юридической фирмы «Паритет»</p>
-                        <p class="career__text">Поставьте перед собой амбициозную задачу стать частью нашей команды.</p>
-                        <br>
-                        <p class="career__text">Если вы разделяете наши ценности и принципы и стремитесь ставить перед
-                            собой
-                            новые цели, наша
-                            компания может стать новым местом вашей работы.</p>
+                        <h1 class="career__title">{{pageInfo.h1}}</h1>
+                        <p class="career__slogan">{{pageInfo.preview_description}}</p>
+                        <p class="career__text">{{pageInfo.description}}</p>
                     </div>
                     <img class="career__img" src="/img/career.png">
                 </div>
                 <div class="career__items">
-                    <div class="career__item">
-                        <svg-icon class="career__itemImg" name="ratingSvg"/>
-                        <p class="career__itemTitle">Возможность построить карьеру</p>
-                        <p class="career__itemText">Профессиональный и карьерный рост каждого сотрудника вместе с
-                            компанией. Большинство действующих руководителей пришли к нам на позиции линейных
-                            специалистов.</p>
-                    </div>
-
-                    <div class="career__item">
-                        <svg-icon class="career__itemImg" name="money"/>
-                        <p class="career__itemTitle">Достойный заработок</p>
-                        <p class="career__itemText">Официальная заработная плата, формирующаяся из окладной
-                            фиксированной части и премии, на размер которой вы влияете личным результатом работы.</p>
-                    </div>
-
-                    <div class="career__item">
-                        <svg-icon class="career__itemImg" name="comand"/>
-                        <p class="career__itemTitle">Команда</p>
-                        <p class="career__itemText">Успех компании зависит от каждого члена команды. Нашими ценностями
-                            являются проактивность, нацеленность на результат и желание улучшить свою жизнь.</p>
-                    </div>
-
-                    <div class="career__item">
-                        <svg-icon class="career__itemImg" name="ostrov"/>
-                        <p class="career__itemTitle">Кто хорошо работает, тот отлично отдыхает!</p>
-                        <p class="career__itemText">Мы регулярно устраиваем корпоративные праздники, выезды на природу,
-                            празднование дней рождений – все это и многое другое ждет вас в нашей компании.</p>
+                    <div class="career__item" v-for="(item, index) in career">
+                        <!--svg?-->
+                        <img class="career__itemImg" :src="item.icon"/>
+                        <p class="career__itemTitle">{{item.title}}</p>
+                        <p class="career__itemText">{{item.text}}</p>
                     </div>
                 </div>
             </div>
@@ -54,7 +25,17 @@
 
 <script>
     export default {
-        name: "Career"
+        name: "Career",
+
+        props: {
+            pageInfo: {
+                required: true,
+            },
+            career: {
+                required: true,
+            },
+        },
+
     }
 </script>
 
@@ -151,15 +132,11 @@
         }
 
         &__title {
-            margin-bottom: 40px;
-
-            @include below($lg-tablet) {
-                margin-bottom: 20px;
-            }
+            margin-bottom: 20px;
         }
 
         &__slogan {
-            margin-bottom: 45px;
+            margin-bottom: 25px;
 
             font-size: 18px;
             font-weight: 700;

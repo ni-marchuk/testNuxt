@@ -1,12 +1,16 @@
 <template>
     <div class="servis">
         <bread-crumbs class="servis__breadCrumbs"
-                      :breadcrumbs="breadcrumbs"
-        />
+                      :breadcrumbs="breadcrumbs"/>
         <div class="container">
-            <h1 class="servis__title">{{getServisContent.title}}</h1>
-            <div class="servis__content"
-                 v-html="getServisContent.text">
+            <div class="servis__wrapper">
+                <div class="servis__inner">
+                    <h1 class="servis__title">{{getServisContent.title}}</h1>
+                    <div class="servis__content"
+                         v-html="getServisContent.text">
+                    </div>
+                </div>
+                <services-form class="servis__servicesForm"/>
             </div>
         </div>
     </div>
@@ -14,12 +18,14 @@
 
 <script>
     import BreadCrumbs from "../../componets/breadcrumbs/breadcrumbs"
+    import ServicesForm from "../../componets/servicesForm/index"
 
     export default {
         name: "Servis",
 
         components: {
             BreadCrumbs,
+            ServicesForm,
         },
 
         middleware: ['services'],
@@ -36,7 +42,7 @@
                         text: 'Услуги /',
                     },
                     {
-                        name: '/services/judical',
+                        name: this.$route.path,
                         text: 'Судебное представительство',
                     },
                 ],
@@ -61,25 +67,51 @@
 
         &__wrapper {
             display: flex;
+            @include below($md-tablet) {
+                flex-direction: column;
+            }
         }
 
         &__inner {
-            padding: 0 5%;
             width: 70%;
+            padding: 0 5% 0 3%;
+            margin-bottom: 50px;
+
+            @include below($md-tablet) {
+                width: 60%;
+                margin-bottom: 25px;
+
+            }
+
+            @include below($lg-tablet) {
+                width: 100%;
+
+            }
         }
 
+        &__servicesForm {
+            padding: 40px;
+            width: 30%;
+            max-width: 320px;
+            height: 100%;
+            max-height: 700px;
+            box-shadow: 0 10px 20px -2px rgba(27, 33, 58, 0.4);
 
-        &__subTitle {
-            margin-bottom: 20px;
+            @include below($lg-tablet) {
+                width: 100%;
+                max-width: 320px;
+            }
 
-            font-size: 24px;
-            font-weight: 700;
-            color: $grey;
+            @include below($md-tablet) {
+                width: 100%;
+                margin: 0 auto;
+                margin-bottom: 50px;
+            }
+
         }
 
-        &__text {
-            margin-bottom: 20px;
-            padding-left: 5%;
+        &__content {
+
         }
 
         &__schemeBox {
@@ -95,33 +127,43 @@
 
             color: $grey;
         }
-////
+
+        ////
         &__title {
             margin-bottom: 40px;
 
-            @include below($md-tablet) {
+            @include below($lg-tablet) {
                 margin-bottom: 20px;
             }
         }
 
         h3 {
+            position: relative;
+            margin-bottom: 20px;
+
             &:before {
                 position: absolute;
-                top: 50%;
-                left: -15px;
+                top: 10px;
+                left: -23px;
                 content: '';
-                width: 4px;
-                height: 4px;
+                width: 20px;
+                height: 7px;
                 background-image: url("../../assets/sprite/svg/rectangle.svg");
+                background-repeat: no-repeat;
+            }
 
-                strong {
-
-                }
+            strong {
+                font-size: 24px;
+                font-weight: 700;
+                color: $grey;
             }
         }
 
+        p {
+            margin-bottom: 20px;
+        }
+
         ul {
-            padding: 20px 40px;
 
             background-color: #F8F8F8;
         }
@@ -131,7 +173,6 @@
 
             margin-bottom: 10px;
 
-            font-size: 16px;
             color: $greyLight;
             list-style: none;
 

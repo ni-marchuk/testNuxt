@@ -29,12 +29,14 @@ export const getters = {
             });
         }
     })
+
 };
 
 export const mutations = {
     GET_PAGE_INFO(state, pageInfo) {
         state.PAGE_INFO = pageInfo;
     },
+
     GET_SERVICES(state, services) {
         state.SERVICES = services;
     },

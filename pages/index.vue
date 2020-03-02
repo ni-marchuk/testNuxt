@@ -2,16 +2,14 @@
     <div class="main">
         <short-info class="main__shortInfo"
                     :main="main"
-                    :statistics="statistics"
-        />
+                    :statistics="statistics"/>
         <services-box class="main__servicesBox"
                       :services="services"
-                      :pageInfo="pageInfo"
-        />
+                      :pageInfo="pageInfo"/>
         <work-scheme class="main__workScheme"
-                     :workSchemes="workSchemes"
-        />
-        <advantages class="main__advantages"/>
+                     :workSchemes="workSchemes"/>
+        <advantages class="main__advantages"
+                    :benefits="benefits"/>
     </div>
 </template>
 
@@ -91,8 +89,8 @@
             promiseList.push(getWorkSchemes());
 
             await Promise.all(promiseList);
-            return {main, statistics, benefits, workSchemes};
 
+            return {main, statistics, benefits, workSchemes};
         },
 
         computed: {

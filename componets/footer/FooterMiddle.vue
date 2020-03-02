@@ -6,16 +6,34 @@
                     <svg-icon class="footerMiddle__logo" name="logo"/>
                 </a>
                 <div class="footerMiddle__menu">
-                    <a class="footerMiddle__menuItem">О компании</a>
-                    <a class="footerMiddle__menuItem">Отзывы клиентов</a>
-                    <a class="footerMiddle__menuItem">Вакансии</a>
-                    <a class="footerMiddle__menuItem">Наши услуги</a>
-                    <a class="footerMiddle__menuItem">Защита данных</a>
-                    <a class="footerMiddle__menuItem">Контакты</a>
+                    <nuxt-link class="footerMiddle__menuItem"
+                               :to="{name: 'about'}">
+                        О компании
+                    </nuxt-link>
+                    <nuxt-link class="footerMiddle__menuItem"
+                               :to="{name: 'services'}">
+                        Услуги
+                    </nuxt-link>
+                    <nuxt-link class="footerMiddle__menuItem"
+                               :to="{name: 'vacancies'}">
+                        Вакансии
+                    </nuxt-link>
+                    <nuxt-link class="footerMiddle__menuItem"
+                               :to="{name: 'contacts'}">
+                        Контакты
+                    </nuxt-link>
+                    <nuxt-link class="footerMiddle__menuItem"
+                               :to="{name: 'about'}">
+                        О компании
+                    </nuxt-link>
                 </div>
                 <div class="footerMiddle__social">
-                    <svg-icon class="footerMiddle__socialItem" name="vk"></svg-icon>
-                    <svg-icon class="footerMiddle__socialItem" name="inst"></svg-icon>
+                    <a class="footerMiddle__socialItem" :href="settings.vk">
+                        <svg-icon class="footerMiddle__socialItem" name="vk"></svg-icon>
+                    </a>
+                    <a class="footerMiddle__socialItem" :href="settings.instagram">
+                        <svg-icon class="footerMiddle__socialItem" name="inst"></svg-icon>
+                    </a>
                 </div>
             </div>
         </div>
@@ -24,7 +42,13 @@
 
 <script>
     export default {
-        name: "FooterMiddle"
+        name: "FooterMiddle",
+
+        props: {
+            settings: {
+                required: true,
+            },
+        },
     }
 </script>
 
@@ -61,39 +85,31 @@
 
         &__menu {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             flex-wrap: wrap;
 
             width: 50%;
 
             @include below($lg-tablet) {
-                justify-content: center;
-
                 width: 65%;
             }
 
             @include below($md-tablet) {
-                justify-content: flex-start;
-                order: 1;
-
-                width: 100%;
-
-                padding-top: 35px;
+                display: none;
             }
         }
 
         &__menuItem {
             width: 33%;
 
+            cursor: pointer;
+            text-decoration: none;
+            color: $grey;
+
             &:nth-child(-n+3) {
                 margin-bottom: 20px;
             }
 
-            @include below($md-tablet) {
-                width: auto;
-                margin-right: 20px;
-                margin-bottom: 20px;
-            }
         }
 
         &__social {

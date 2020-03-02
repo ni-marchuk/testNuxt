@@ -1,8 +1,10 @@
 <template>
     <div class="footer">
-            <footer-top class="footer__top"/>
-            <footer-middle class="footer__middle"/>
-            <footer-bottom class="footer__bottom"/>
+        <footer-top class="footer__top"
+                    :settings="settings"/>
+        <footer-middle class="footer__middle"
+                       :settings="settings"/>
+        <footer-bottom class="footer__bottom"/>
     </div>
 </template>
 
@@ -18,6 +20,12 @@
             FooterTop,
             FooterMiddle,
             FooterBottom,
+        },
+
+        props: {
+            settings: {
+                required: true,
+            },
         },
     }
 </script>

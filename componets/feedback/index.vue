@@ -2,12 +2,12 @@
     <div class="feedback">
         <div class="container">
             <div class="feedback__box">
-                <p class="feedback__text">Хочешь в нашу растущую команду?</p>
+                <p class="feedback__text">{{pageInfo.ask}}</p>
                 <div class="feedback__contacts">
                     <p class="feedback__text">Звони&nbsp</p>
-                    <a class="feedback__phone" href="tel:+353278-13-37">8 (3532) 78-13-37&nbsp</a>
+                    <a class="feedback__phone" href="tel:">{{getSettings.phones[0]}}&nbsp</a>
                     <p class="feedback__text">или напиши&nbsp</p>
-                    <a class="feedback__mail">hr@ufparitet.ru</a>
+                    <a class="feedback__mail">{{getSettings.email}}</a>
                 </div>
             </div>
         </div>
@@ -16,7 +16,17 @@
 
 <script>
     export default {
-        name: "Feedback"
+        name: "Feedback",
+        props: {
+            pageInfo: {
+                required: true,
+            },
+        },
+        computed: {
+            getSettings() {
+                return this.$store.getters.SETTINGS;
+            },
+        },
     }
 </script>
 

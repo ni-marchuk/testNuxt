@@ -7,15 +7,13 @@
                     <div class="servicesBox__itemContent">
                         <div class="servicesBox__itemTitle">
                             <svg-icon class="servicesBox__itemTitleIcn"
-                                      name="rectangleWhite"
-                            />
+                                      name="rectangleWhite"/>
                             {{servis.title}}
                         </div>
                         <div class="servicesBox__itemList" v-html="servis.short"></div>
                     </div>
                     <Btn :title="'Подробнее'"
-                         @btnClick="goToPage(servis.link)"
-                    />
+                         @btnClick="goToPage(servis.link)"/>
                 </div>
             </div>
         </div>

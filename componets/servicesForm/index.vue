@@ -2,8 +2,7 @@
     <div class="servicesForm">
 
         <form class="servicesForm__wrapper">
-            <p class="servicesForm__title"
-               @click="test()">
+            <p class="servicesForm__title">
                 Закажите консультацию специалиста
             </p>
             <p class="servicesForm__text">
@@ -15,20 +14,16 @@
                               :placeholder="'Имя и фамилия'"
                               v-model="inputName"
                               :error="errorName"
-                              @focusout="errorMessegeName()"
-                />
+                              @focusout="errorMessegeName()"/>
                 <custom-input class="servicesForm__input inputPhone"
                               :inputType="`phone`"
                               v-model="inputPhone"
                               :error="errorPhone"
-                              @focusout="errorMessegePhone()"
-
-                />
+                              @focusout="errorMessegePhone()"/>
                 <custom-checkbox class="servicesForm__checkbox"
                                  :id="'checkName'"
                                  v-model="conditionsCheck"
-                                 :htmlContent="`Я согласен на обработку персональных данных. <a href='/'>С политикой защиты данных</a> ООО «Паритет» ознакомлен.`"
-                />
+                                 :htmlContent="`Я согласен на обработку персональных данных. <a href='/'>С политикой защиты данных</a> ООО «Паритет» ознакомлен.`"/>
                 <Btn class="servicesForm__btn"
                      :textCenter="true"
                      :title="`Отправить`"
@@ -98,7 +93,6 @@
         },
 
         computed: {
-
             isNameValid() {
                 return this.inputName.length > 5 && /^[a-zA-Zа-яА-ЯёЁ'][a-zA-Z-а-яА-ЯёЁ' ]+[a-zA-Zа-яА-ЯёЁ']?$/.test(this.inputName);
             },
@@ -107,7 +101,6 @@
                 return this.inputPhone.length === 23;
             },
         },
-
     }
 </script>
 

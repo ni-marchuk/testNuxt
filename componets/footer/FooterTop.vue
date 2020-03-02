@@ -5,9 +5,14 @@
                 <div class="footerTop__services">
                     <p class="footerTop__title">Юридические услуги</p>
                     <div class="footerTop__servicesItemBox">
-                        <p class="footerTop__servicesItem">Массовое судебное взыскание</p>
-                        <p class="footerTop__servicesItem">Исполнительное производство</p>
-                        <p class="footerTop__servicesItem">Представительство в суде по гражданским спорам</p>
+                        <nuxt-link class="footerTop__servicesLink"
+                                   v-for="(item,index) in servicesInfo"
+                                   :key="item.id"
+                                   :to="{path: '/' + item.link}">
+                            <p class="footerTop__servicesItem">
+                                {{item.title}}
+                            </p>
+                        </nuxt-link>
                     </div>
                 </div>
                 <div class="footerTop__contacts">
@@ -15,13 +20,19 @@
                     <div class="footerTop__contactsBox">
                         <div class="footerTop__contactsItem">
                             <p class="footerTop__contactsTitle">Фактический адрес</p>
-                            <p class="footerTop__contactsStreet">460000, Оренбург, ул. Хабаровская, 53</p>
-                            <a class="footerTop__contactsLink">Схема проезда</a>
+                            <p class="footerTop__contactsStreet">{{settings.address}}</p>
+                            <nuxt-link class="footerTop__contactsLink"
+                                       :to="{name: 'contacts'}">
+                                Схема проезда
+                            </nuxt-link>
                         </div>
                         <div class="footerTop__contactsItem">
                             <p class="footerTop__contactsTitle">Телефон</p>
-                            <p class="footerTop__contactsNumber">+7 (3532) 78-13-37</p>
-                            <a class="footerTop__contactsLink">Заказать звонок</a>
+                            <p class="footerTop__contactsNumber" v-for="(item,index) in settings.phones">{{item}}</p>
+                            <button class="footerTop__contactsLink"
+                                    @click="$modal.show('servicesForm')">
+                                Заказать звонок
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -32,7 +43,19 @@
 
 <script>
     export default {
-        name: "footerTop"
+        name: "footerTop",
+
+        props: {
+            settings: {
+                required: true,
+            },
+        },
+
+        computed: {
+            servicesInfo() {
+                return this.$store.getters['services/SERVICES'];
+            },
+        },
     }
 </script>
 
@@ -64,35 +87,31 @@
         &__services {
             display: flex;
             flex-direction: column;
-            width: 50%;
-
-            margin-right: 100px;
-
-            @include below($md-desktop) {
-                margin-right: 50px;
-            }
-
-            @include below($lg-mobile) {
-                width: 100%;
-
-                margin-right: 0;
-                margin-bottom: 20px;
-            }
+            width: 100%;
         }
 
         &__servicesItemBox {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             flex-wrap: wrap;
 
-            padding-left: 25px;
+            padding: 0 25px;
         }
 
-        &__servicesItem {
+        &__servicesLink {
             position: relative;
             width: auto;
 
             margin-bottom: 20px;
+            color: $grey;
+            text-decoration: none;
+
+            &:not(:last-child) {
+                margin-right: 45px;
+            }
+        }
+
+        &__servicesItem {
 
             &:after {
                 position: absolute;
@@ -114,11 +133,7 @@
             display: flex;
             flex-direction: column;
 
-            width: 50%;
-
-            @include below($lg-mobile) {
-                width: 100%;
-            }
+            width: 100%;
         }
 
         &__contactsBox {
@@ -166,7 +181,12 @@
         }
 
         &__contactsLink {
+            font-size: 14px;
+            text-decoration: underline;
+            text-align: left;
             color: $red;
         }
+
     }
+
 </style>

@@ -3,25 +3,32 @@
         <div class="container">
             <h2 class="openVacancies__title">Открытые вакансии</h2>
             <div class="openVacancies__wrapper">
-                <div class="openVacancies__item">
-                    <p class="openVacancies__itemTitle">Бухгалтер по расчету заработной платы</p>
-                    <p class="openVacancies__itemPriceInterval">17 000 — 35 000 ₽</p>
-                </div>
-                <div class="openVacancies__item">
-                    <p class="openVacancies__itemTitle">Бухгалтер по расчету заработной платы</p>
-                    <p class="openVacancies__itemPriceInterval">17 000 — 35 000 ₽</p>
-                </div>
-                <div class="openVacancies__item">
-                    <p class="openVacancies__itemTitle">Бухгалтер по расчету заработной платы</p>
-                    <p class="openVacancies__itemPriceInterval">17 000 — 35 000 ₽</p>
-                </div>
-                <div class="openVacancies__item">
-                    <p class="openVacancies__itemTitle">Бухгалтер по расчету заработной платы</p>
-                    <p class="openVacancies__itemPriceInterval">17 000 — 35 000 ₽</p>
-                </div>
-                <div class="openVacancies__item">
-                    <p class="openVacancies__itemTitle">Бухгалтер по расчету заработной платы</p>
-                    <p class="openVacancies__itemPriceInterval">17 000 — 35 000 ₽</p>
+                <p class="openVacancies__noVacansies"
+                   v-if="vacancies.noVacancy">
+                    {{vacancies.noVacancy}}
+                </p>
+                <div class="openVacancies__vacanciesList"
+                     v-else>
+                    <div class="openVacancies__item" v-for="(item,index) in vacancies.item">
+                        <p class="openVacancies__itemTitle">{{item.title}}</p>
+                        <p class="openVacancies__itemPriceInterval">{{item.price}}</p>
+                    </div>
+                    <div class="openVacancies__item">
+                        <p class="openVacancies__itemTitle">Бухгалтер по расчету заработной платы</p>
+                        <p class="openVacancies__itemPriceInterval">17 000 — 35 000 ₽</p>
+                    </div>
+                    <div class="openVacancies__item">
+                        <p class="openVacancies__itemTitle">Бухгалтер по расчету заработной платы</p>
+                        <p class="openVacancies__itemPriceInterval">17 000 — 35 000 ₽</p>
+                    </div>
+                    <div class="openVacancies__item">
+                        <p class="openVacancies__itemTitle">Бухгалтер по расчету заработной платы</p>
+                        <p class="openVacancies__itemPriceInterval">17 000 — 35 000 ₽</p>
+                    </div>
+                    <div class="openVacancies__item">
+                        <p class="openVacancies__itemTitle">Бухгалтер по расчету заработной платы</p>
+                        <p class="openVacancies__itemPriceInterval">17 000 — 35 000 ₽</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -31,6 +38,11 @@
 <script>
     export default {
         name: "OpenVacancies",
+        props: {
+            vacancies: {
+                required: true,
+            }
+        }
     }
 </script>
 
@@ -43,7 +55,7 @@
         }
 
         &__title {
-            margin-bottom: 40px;
+            margin-bottom: 20px;
 
             text-align: center;
         }
@@ -53,6 +65,10 @@
             flex-direction: column;
             justify-content: center;
             padding: 0 5%;
+        }
+
+        &__noVacansies {
+            text-align: center;
         }
 
         &__item {

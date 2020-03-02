@@ -20,7 +20,6 @@
             </div>
             <div class="workScheme__slider"
                  v-swiper:mySwiper="swiperOption"
-                 v-swiper:realIndex="currentSlide"
             >
                 <div class="workScheme__sliderWrapper swiper-wrapper">
                     <div class="workScheme__sliderSlide swiper-slide"
@@ -74,7 +73,6 @@
                     on: {
                         slideChange: () => {
                             this.progress(this.mySwiper.realIndex);
-                            console.log(this.mySwiper);
                         },
 
                         tap() {
@@ -133,11 +131,16 @@
 
             progress(realIndex) {
                 let steps = [].concat(this.workSchemes.steps);
+
                 steps.forEach((item, index) => {
-                    item.isFullActive = (index < realIndex);
-                    item.isActive = (index === realIndex);
+                    if(realIndex > 0) {
+                        item.isActive = (index < realIndex);
+                        item.isFullActive = (index <= realIndex);
+                    } else if(realIndex === 0){
+                        item.isFullActive = null;
+                        item.isActive = null;
+                    }
                 });
-                this.$set(this.workSchemes, 'steps', steps);
                 this.goToSlide(realIndex);
             },
 

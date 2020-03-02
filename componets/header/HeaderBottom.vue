@@ -41,7 +41,10 @@
         </div>
         <div class="headerBottom__phone">
             <p class="headerBottom__phoneNumber" type="tel">+7 (3532) 78-13-37</p>
-            <a class="headerBottom__requestCall">Заказать звонок</a>
+            <a class="headerBottom__requestCall"
+               @click="$modal.show('servicesForm')">
+                Заказать звонок
+            </a>
         </div>
 
         <button class="headerBottom__hambrugerBtn"

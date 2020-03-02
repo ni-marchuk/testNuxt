@@ -3,31 +3,12 @@
         <div class="container">
             <h2 class="advantages__title">Преимущества сотрудничества</h2>
             <div class="advantages__itemBox">
-                <div class="advantages__item">
-                    <img class="advantages__itemImg" src="/img/item1.png">
-                    <p class="advantages__itemTitle">Без предоплаты</p>
-                    <p class="advantages__itemText">Оплата услуг по факту, согласно заключенного договора, сначала Вы
-                        получаете деньги от должника и потом оплачиваете нашу работу</p>
-                </div>
-                <div class="advantages__item">
-                    <img class="advantages__itemImg" src="/img/item2.png">
-                    <p class="advantages__itemTitle">Более 18 лет опыта</p>
-                    <p class="advantages__itemText">Мы специализируемся на представлении в судах и сопровождении
-                        исполнения
-                        решений</p>
-                </div>
-                <div class="advantages__item">
-                    <img class="advantages__itemImg" src="/img/item3.png">
-                    <p class="advantages__itemTitle">Экономия времени</p>
-                    <p class="advantages__itemText">Обеспечиваем быструю подготовку документов у нотариуса, представляем
-                        интересы на всех этапах дела без Вашего участия</p>
-                </div>
-                <div class="advantages__item">
-                    <img class="advantages__itemImg" src="/img/item4.png">
-                    <p class="advantages__itemTitle">Отчет о ходе дела</p>
-                    <p class="advantages__itemText">Предоставляем отчет обо всех движениях по делу, в том числе о
-                        поданных
-                        процессуальных документах</p>
+                <div class="advantages__item"
+                     v-for="(item,index) in benefits"
+                     :key="item.id">
+                    <img class="advantages__itemImg" :src="item.thumb">
+                    <p class="advantages__itemTitle">{{item.title}}</p>
+                    <p class="advantages__itemText">{{item.text}}</p>
                 </div>
             </div>
         </div>
@@ -36,7 +17,12 @@
 
 <script>
     export default {
-        name: "index"
+        name: "index",
+        props: {
+            benefits: {
+                required: true,
+            }
+        }
     }
 </script>
 

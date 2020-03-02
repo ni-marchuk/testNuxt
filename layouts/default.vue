@@ -7,7 +7,7 @@
                          :settings="getSettings"/>
         <overlay :class="{'is-active' : responsiveState}"/>
         <nuxt/>
-        <app-footer/>
+        <app-footer :settings="getSettings"/>
         <user-modal :name="'servicesForm'">
             <template>
                 <services-form/>
