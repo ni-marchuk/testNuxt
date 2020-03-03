@@ -5,7 +5,8 @@
                 <div class="shortInfo__sloganBox">
                     <h1 class="shortInfo__slogan">{{main.h1}}</h1>
                     <Btn class="shortInfo__btn"
-                         :title="'Подробнее'">
+                         :title="'Подробнее'"
+                         @btnClick="$modal.show('servicesForm')">
                     </Btn>
                 </div>
                 <img class="shortInfo__hero" src="/img/man.png">
@@ -47,15 +48,15 @@
 
         padding-bottom: 200px;
 
-        @include below ($lg-tablet) {
+        @include below($lg-tablet) {
             padding-bottom: 270px;
         }
 
-        @include below ($md-tablet) {
+        @include below($md-tablet) {
             padding-bottom: 120px;
         }
 
-        @include below ($lg-mobile) {
+        @include below($lg-mobile) {
             padding-bottom: 30px;
         }
 

@@ -5,9 +5,9 @@
                 <p class="feedback__text">{{pageInfo.ask}}</p>
                 <div class="feedback__contacts">
                     <p class="feedback__text">Звони&nbsp</p>
-                    <a class="feedback__phone" href="tel:">{{getSettings.phones[0]}}&nbsp</a>
+                    <a class="feedback__phone" :href="'tel:' + getSettings.phones[0]">{{getSettings.phones[0]}}&nbsp</a>
                     <p class="feedback__text">или напиши&nbsp</p>
-                    <a class="feedback__mail">{{getSettings.email}}</a>
+                    <a class="feedback__mail" :href="'mailto:' + getSettings.email">{{getSettings.email}}</a>
                 </div>
             </div>
         </div>
@@ -16,12 +16,15 @@
 
 <script>
     export default {
+
         name: "Feedback",
+
         props: {
             pageInfo: {
                 required: true,
             },
         },
+
         computed: {
             getSettings() {
                 return this.$store.getters.SETTINGS;

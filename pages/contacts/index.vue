@@ -18,8 +18,7 @@
             BreadCrumbs,
             ContactsBox,
             DrivingDirections,
-        }
-
+        },
     }
 </script>
 

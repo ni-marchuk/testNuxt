@@ -28,10 +28,10 @@
                     </nuxt-link>
                 </div>
                 <div class="footerMiddle__social">
-                    <a class="footerMiddle__socialItem" :href="settings.vk">
+                    <a class="footerMiddle__socialItem" target="_blank" :href="settings.vk">
                         <svg-icon class="footerMiddle__socialItem" name="vk"></svg-icon>
                     </a>
-                    <a class="footerMiddle__socialItem" :href="settings.instagram">
+                    <a class="footerMiddle__socialItem" target="_blank" :href="settings.instagram">
                         <svg-icon class="footerMiddle__socialItem" name="inst"></svg-icon>
                     </a>
                 </div>

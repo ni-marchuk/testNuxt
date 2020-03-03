@@ -14,25 +14,29 @@
         <div class="responsiveMenu__bottom">
             <div class="responsiveMenu__menuBox">
                 <ul class="responsiveMenu__menuList">
-                    <li class="responsiveMenu__menuItem">
+                    <li class="responsiveMenu__menuItem"
+                        @click="$emit('responsiveClose')">
                         <nuxt-link class="responsiveMenu__itemLink"
                                    :to="{name: 'about'}">
                             О компании
                         </nuxt-link>
                     </li>
-                    <li class="responsiveMenu__menuItem">
+                    <li class="responsiveMenu__menuItem"
+                        @click="$emit('responsiveClose')">
                         <nuxt-link class="responsiveMenu__itemLink"
                                    :to="{name: 'services'}">
                             Услуги
                         </nuxt-link>
                     </li>
-                    <li class="responsiveMenu__menuItem">
+                    <li class="responsiveMenu__menuItem"
+                        @click="$emit('responsiveClose')">
                         <nuxt-link class="responsiveMenu__itemLink"
                                    :to="{name: 'vacancies'}">
                             Вакансии
                         </nuxt-link>
                     </li>
-                    <li class="responsiveMenu__menuItem">
+                    <li class="responsiveMenu__menuItem"
+                        @click="$emit('responsiveClose')">
                         <nuxt-link class="responsiveMenu__itemLink"
                                    :to="{name: 'contacts'}">
                             Контакты
@@ -43,7 +47,7 @@
             <div class="responsiveMenu__boxInfo">
                 <div class="responsiveMenu__call">
                     <button class="responsiveMenu__requestCall"
-                            @click="$modal.show('servicesForm')">
+                            @click= "$emit('responsiveClose') && $modal.show('servicesForm')">
                         Заказать звонок
                     </button>
                     <a class="responsiveMenu__phoneNumber"
@@ -54,6 +58,7 @@
                 </div>
                 <div class="responsiveMenu__addressBox">
                     <nuxt-link class="responsiveMenu__mapsLink"
+                               @click.native="$emit('responsiveClose')"
                                :to="{name: 'contacts'}">
                         Схема проезда
                     </nuxt-link>

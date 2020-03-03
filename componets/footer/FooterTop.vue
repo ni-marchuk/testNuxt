@@ -112,10 +112,9 @@
         }
 
         &__servicesItem {
-
             &:after {
                 position: absolute;
-                top: 5px;
+                top: 10%;
                 left: -25px;
 
                 display: block;

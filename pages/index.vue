@@ -18,9 +18,11 @@
     import ServicesBox from '../componets/servicesBox/index';
     import WorkScheme from '../componets/workScheme/index'
     import Advantages from '../componets/advantages/index'
+    import Meta from '../mixins/meta'
 
     export default {
         name: 'Index',
+        mixins: [Meta],
 
         components: {
             ShortInfo,
@@ -37,6 +39,7 @@
                 statistics: null,
                 benefits: null,
                 workSchemes: null,
+                metaInformation: {},
             }
         },
 
@@ -45,12 +48,25 @@
             let statistics = null;
             let benefits = null;
             let workSchemes = null;
+            let metaInformation = {};
 
             let promiseList = [];
 
             const getMain = async () => {
                 await app.$axios.$get("pageInfo?page=index")
-                    .then(response => main = response)
+                    .then((response) => {
+                        //записать в metaInformation props кроме перечисленныех
+                        // let {h1,slider_mini_title,slider_text,slider_title,name,title, ...metaInformation} = response;
+                        metaInformation = {
+                            ogDescription: response.ogDescription || null,
+                            ogThumb: response.ogThumb,
+                            ogThumb2x: response.ogThumb2x,
+                            ogTitle: response.ogTitle,
+                            metaKeyword: response.metaKeyword,
+                            metaDescription: response.metaDescription,
+                        };
+                        main = response;
+                    })
                     .catch(err => console.log(err));
             };
 
@@ -89,8 +105,8 @@
             promiseList.push(getWorkSchemes());
 
             await Promise.all(promiseList);
-
-            return {main, statistics, benefits, workSchemes};
+            console.log(metaInformation);
+            return {main, statistics, benefits, workSchemes, metaInformation};
         },
 
         computed: {
@@ -144,7 +160,6 @@
             @include below($lg-tablet) {
                 margin-bottom: 50px;
             }
-
         }
     }
 
