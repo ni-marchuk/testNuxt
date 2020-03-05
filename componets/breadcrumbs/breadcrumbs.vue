@@ -1,5 +1,5 @@
 <template>
-    <div class="breadcrumbs">
+    <div class="breadcrumbs" v-if="breadcrumbs">
         <div class="container">
             <ul class="breadcrumbs__list">
                 <nuxt-link v-for="(item, index) in breadcrumbs"

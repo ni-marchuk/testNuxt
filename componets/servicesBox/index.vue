@@ -1,18 +1,24 @@
 <template>
     <div class="servicesBox">
         <div class="container">
-            <h1 class="servicesBox__title">{{pageInfo.h1}}</h1>
+            <h1 class="servicesBox__title"
+                v-if="pageInfo">{{pageInfo.h1}}</h1>
             <div class="servicesBox__container">
-                <div class="servicesBox__item" v-for="(servis, index) in services">
+                <div class="servicesBox__item"
+                     v-if="services"
+                     v-for="(servis, index) in services">
                     <div class="servicesBox__itemContent">
                         <div class="servicesBox__itemTitle">
                             <svg-icon class="servicesBox__itemTitleIcn"
                                       name="rectangleWhite"/>
                             {{servis.title}}
                         </div>
-                        <div class="servicesBox__itemList" v-html="servis.short"></div>
+                        <div class="servicesBox__itemList"
+                             v-if="services"
+                             v-html="servis.short"></div>
                     </div>
-                    <Btn :title="'Подробнее'"
+                    <Btn v-if="services"
+                         :title="'Подробнее'"
                          @btnClick="goToPage(servis.link)"/>
                 </div>
             </div>
@@ -135,7 +141,7 @@
         }
 
         &__itemTitleIcn {
-            position:absolute;
+            position: absolute;
             left: -20px;
 
             width: 12px;

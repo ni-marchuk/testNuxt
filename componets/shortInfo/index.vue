@@ -3,7 +3,8 @@
         <div class="container">
             <div class="shortInfo__inner">
                 <div class="shortInfo__sloganBox">
-                    <h1 class="shortInfo__slogan">{{main.h1}}</h1>
+                    <h1 class="shortInfo__slogan"
+                        v-if="pageInfo">{{pageInfo.h1}}</h1>
                     <Btn class="shortInfo__btn"
                          :title="'Подробнее'"
                          @btnClick="$modal.show('servicesForm')">
@@ -11,7 +12,9 @@
                 </div>
                 <img class="shortInfo__hero" src="/img/man.png">
                 <div class="shortInfo__statistics">
-                    <div class="shortInfo__statisticItem" v-for="(item,index) in statistics">
+                    <div class="shortInfo__statisticItem"
+                         v-if="statistics"
+                         v-for="(item,index) in statistics">
                         <p class="shortInfo__itemTitle">{{item.title}}</p>
                         <p class="shortInfo__itemText">{{item.text}}</p>
                     </div>
@@ -33,7 +36,7 @@
         },
 
         props: {
-            main: {
+            pageInfo: {
                 required: true,
             },
             statistics: {
@@ -84,9 +87,9 @@
             }
 
             @include below($md-tablet) {
-                max-width: 50%;
-
+                margin-top: 50px;
                 margin-bottom: 20px;
+                max-width: 50%;
             }
         }
 
@@ -96,6 +99,9 @@
             font-family: $Bebas;
             font-weight: 400;
 
+            @include below($lg-tablet) {
+                margin-bottom: 20px;
+            }
             @include below($lg-mobile) {
                 margin-bottom: 15px;
             }
@@ -162,7 +168,7 @@
             }
 
             @include below($md-tablet) {
-                font-size: 28px;
+                font-size: 24px;
             }
 
         }

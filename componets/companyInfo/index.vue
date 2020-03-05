@@ -1,8 +1,9 @@
 <template>
-    <div class="companyInfo">
+    <div class="companyInfo"
+         v-if="pageInfo">
         <div class="container">
-            <h1 class="companyInfo__title">{{about.h1}}</h1>
-            <div class="companyInfo__textContent" v-html="about.text">
+            <h1 class="companyInfo__title">{{pageInfo.h1}}</h1>
+            <div class="companyInfo__textContent" v-html="pageInfo.text">
             </div>
         </div>
     </div>
@@ -13,7 +14,7 @@
         name: "CompanyInfo",
 
         props: {
-            about: {
+            pageInfo: {
                 required: true,
             },
         },

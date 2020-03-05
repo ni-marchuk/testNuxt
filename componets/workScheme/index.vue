@@ -1,5 +1,5 @@
 <template>
-    <div class="workScheme">
+    <div class="workScheme" v-if="workSchemes">
         <div class="workScheme__background"></div>
         <div class="container">
             <div class="workScheme__stage">
@@ -41,7 +41,6 @@
                 <div class="swiper-pagination swiper-pagination-bullets"></div>
             </div>
         </div>
-
     </div>
 
 </template>

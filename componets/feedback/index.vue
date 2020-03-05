@@ -2,12 +2,19 @@
     <div class="feedback">
         <div class="container">
             <div class="feedback__box">
-                <p class="feedback__text">{{pageInfo.ask}}</p>
+                <p class="feedback__text"
+                   v-if="pageInfo">{{pageInfo.ask}}</p>
                 <div class="feedback__contacts">
                     <p class="feedback__text">Звони&nbsp</p>
-                    <a class="feedback__phone" :href="'tel:' + getSettings.phones[0]">{{getSettings.phones[0]}}&nbsp</a>
+                    <a class="feedback__phone"
+                       v-if="getSettings"
+                       :href="'tel:' + getSettings.phones[0]">
+                        {{getSettings.phones[0]}}&nbsp</a>
                     <p class="feedback__text">или напиши&nbsp</p>
-                    <a class="feedback__mail" :href="'mailto:' + getSettings.email">{{getSettings.email}}</a>
+                    <a class="feedback__mail"
+                       v-if="getSettings"
+                       :href="'mailto:' + getSettings.email">
+                        {{getSettings.email}}</a>
                 </div>
             </div>
         </div>

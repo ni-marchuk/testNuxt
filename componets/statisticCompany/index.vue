@@ -1,5 +1,6 @@
 <template>
-    <div class="statisticCompany">
+    <div class="statisticCompany"
+         v-if="statistics">
         <div class="container">
             <div class="statisticCompany__list">
                 <img class="statisticCompany__bg" src="/img/bgParitet.png">

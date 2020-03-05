@@ -5,8 +5,12 @@
         <div class="container">
             <div class="servis__wrapper">
                 <div class="servis__inner">
-                    <h1 class="servis__title">{{getServisContent.title}}</h1>
+                    <h1 class="servis__title"
+                        v-if="getServisContent">
+                        {{getServisContent.title}}
+                    </h1>
                     <div class="servis__content"
+                         v-if="getServisContent"
                          v-html="getServisContent.text">
                     </div>
                 </div>
@@ -19,19 +23,21 @@
 <script>
     import BreadCrumbs from "../../componets/breadcrumbs/breadcrumbs"
     import ServicesForm from "../../componets/servicesForm/index"
+    import Meta from '../../mixins/meta';
 
     export default {
         name: "Servis",
-
+        mixins: [Meta],
+        middleware: ['services'],
         components: {
             BreadCrumbs,
             ServicesForm,
         },
 
-        middleware: ['services'],
-
         data() {
             return {
+                pageInfo : null,
+                metaInformation : {},
                 breadcrumbs: [
                     {
                         name: '/',
@@ -48,9 +54,31 @@
                 ],
             }
         },
+        async asyncData({app,params}) {
+            let pageInfo = null;
+            let metaInformation = {};
 
-        mounted() {
-            //
+            const getPageInfo = async () => {
+                await app.$axios.$get(`pageInfo?page=services&slug=${params.servis}`)
+                    .then((response) => {
+                        metaInformation = {
+                            ogDescription: response.ogDescription || null,
+                            ogThumb: response.ogThumb || null,
+                            ogThumb2x: response.ogThumb2x || null,
+                            ogTitle: response.ogTitle || null,
+                            metaKeyword: response.metaKeyword || null,
+                            metaDescription: response.metaDescription || null,
+                        };
+                        pageInfo = response;
+                    })
+                    .catch(err => console.log(err));
+            };
+            await getPageInfo();
+            return {pageInfo, metaInformation};
+        },
+
+        created() {
+            console.log("pageInfo?page=services&slug=" + this.$route.params.servis);
         },
 
         computed: {

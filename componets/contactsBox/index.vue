@@ -6,28 +6,33 @@
                 <button class="contactsBox__feedBackBtn">
                     <svg-icon class="contactsBox__feedBackImg" name="writing"></svg-icon>
                     <button class="contactsBox__feedBackLink"
-                    @click="$modal.show('servicesForm')">Обратная связь</button>
+                            @click="$modal.show('servicesForm')">Обратная связь
+                    </button>
                 </button>
             </div>
             <div class="contactsBox__body">
-                <div class="contactsBox__bodyRow">
+                <div class="contactsBox__bodyRow"
+                     v-if="getSettings">
                     <div class="contactsBox__bodyCollumn">
                         <p class="contactsBox__bodyTitle">Фактический адрес:</p>
                         <p class="contactsBox__bodyText">{{getSettings.address}}</p>
                     </div>
                     <div class="contactsBox__bodyCollumn">
                         <p class="contactsBox__bodyTitle">Позвонить:</p>
-                        <a class="contactsBox__phone" :href="'tel:' + getSettings.phones[0]">{{getSettings.phones[0]}}</a>
+                        <a class="contactsBox__phone"
+                           :href="'tel:' + getSettings.phones[0]">{{getSettings.phones[0]}}</a>
                     </div>
                 </div>
-                <div class="contactsBox__bodyRow">
+                <div class="contactsBox__bodyRow"
+                     v-if="getSettings">
                     <div class="contactsBox__bodyCollumn">
                         <p class="contactsBox__bodyTitle">Режим работы:</p>
                         <p class="contactsBox__bodyText">{{getSettings.workTime.text}}</p>
                     </div>
                     <div class="contactsBox__bodyCollumn">
                         <p class="contactsBox__bodyTitle">Написать нам:</p>
-                        <a class="contactsBox__mail" :href="'mailto:' + getSettings.email">{{getSettings.email}}</a>
+                        <a class="contactsBox__mail"
+                           :href="'mailto:' + getSettings.email">{{getSettings.email}}</a>
                     </div>
                 </div>
             </div>
@@ -39,12 +44,12 @@
     export default {
         name: "contactsBox",
 
-
         computed: {
             getSettings() {
                 return this.$store.getters.SETTINGS;
             },
         },
+
     }
 </script>
 

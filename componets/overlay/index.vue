@@ -26,7 +26,7 @@
         height: 100%;
         opacity: 0.5;
         z-index: 3;
-        background-image: linear-gradient(120deg, #eaee44, #33d0ff);
+        background-image: linear-gradient(250deg, #ff0000, #000000);
     }
 
 </style>

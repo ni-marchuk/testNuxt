@@ -4,14 +4,14 @@
                      :breadcrumbs="breadcrumbs"
         />
         <company-info class="about__companyInfo"
-                      :about="about"/>
+                      :pageInfo="pageInfo"/>
         <our-values class="about__ourValues"
-                    :about="about"/>
+                    :pageInfo="pageInfo"/>
         <statistic-company class="about__statisticCompany"
                            :statistics="statistics"/>
         <office-atmosphere class="about__officeAtmosphere"/>
         <mission class="about__mission"
-                 :about="about"/>
+                 :pageInfo="pageInfo"/>
     </div>
 </template>
 
@@ -22,9 +22,11 @@
     import StatisticCompany from "../../componets/statisticCompany/index"
     import OfficeAtmosphere from "../../componets/officeAtmosphere/index"
     import Mission from "../../componets/mission/index"
+    import Meta from '../../mixins/meta';
 
     export default {
         name: "Index",
+        mixins: [Meta],
 
         components: {
             Breadcrumbs,
@@ -37,8 +39,9 @@
 
         data() {
             return {
-                about: null,
+                pageInfo: null,
                 statistics: null,
+                metaInformation: {},
                 breadcrumbs: [
                     {
                         name: '/',
@@ -65,13 +68,26 @@
         },
 
         async asyncData({app}) {
-            let about = null;
+            let pageInfo = null;
             let statistics = null;
+            let metaInformation = {};
+
             let promiseList = [];
 
             const getPageInfo = async () => {
                 await app.$axios.$get("pageInfo?page=about")
-                    .then(response => about = response)
+                    .then((response) => {
+                        metaInformation = {
+                            ogDescription: response.ogDescription || null,
+                            ogThumb: response.ogThumb || null,
+                            ogThumb2x: response.ogThumb2x || null,
+                            ogTitle: response.ogTitle || null,
+                            metaKeyword: response.metaKeyword || null,
+                            metaDescription: response.metaDescription || null,
+                        };
+
+                        pageInfo = response;
+                    })
                     .catch(err => console.log(err));
             };
             promiseList.push(getPageInfo());
@@ -81,11 +97,12 @@
                     .then(response => statistics = response)
                     .catch(err => console.log(err));
             };
+
             promiseList.push(getStatistics());
 
             await Promise.all(promiseList);
 
-            return {about, statistics};
+            return {pageInfo, statistics, metaInformation};
         },
 
         methods: {

@@ -13,6 +13,7 @@
 <script>
     import BreadCrumbs from "../../componets/breadcrumbs/breadcrumbs"
     import ServicesBox from "../../componets/servicesBox/index"
+    import Meta from '../../mixins/meta';
 
     export default {
         name: "Index",
@@ -22,10 +23,37 @@
             ServicesBox,
         },
 
+        mixins: [Meta],
         middleware: ['services'],
+
+        async asyncData({app}) {
+            let pageInfo = null;
+            let metaInformation = {};
+
+            const getPageInfo = async () => {
+                await app.$axios.$get("pageInfo?page=services")
+                    .then((response) => {
+                        metaInformation = {
+                            ogDescription: response.ogDescription || null,
+                            ogThumb: response.ogThumb || null,
+                            ogThumb2x: response.ogThumb2x || null,
+                            ogTitle: response.ogTitle || null,
+                            metaKeyword: response.metaKeyword || null,
+                            metaDescription: response.metaDescription || null,
+                        };
+                        pageInfo = response;
+                    })
+                    .catch(err => console.log(err));
+            };
+            await getPageInfo();
+            return {pageInfo, metaInformation};
+        },
 
         data() {
             return {
+                pageInfo: null,
+                metaInformation: {},
+
                 breadcrumbs: [
                     {
                         name: '/',
@@ -39,20 +67,14 @@
             }
         },
 
-        mounted() {
-            //
-            // console.log(this.services);
-            // console.log(this.pageInfo);
-        },
-
         computed: {
             services() {
                 return this.$store.getters['services/SERVICES'];
             },
 
-            pageInfo() {
-                return this.$store.getters['services/PAGE_INFO'];
-            },
+            // pageInfo() {
+            //     return this.$store.getters['services/PAGE_INFO'];
+            // },
         },
 
         // beforeDestroy() {

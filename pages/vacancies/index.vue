@@ -15,15 +15,16 @@
 </template>
 
 <script>
-    import BreadCrumbs from "../../componets/breadcrumbs/breadcrumbs"
-    import Career from "../../componets/career/index"
-    import NewsSlider from "../../componets/newsSlider/index"
-    import Feedback from "../../componets/feedback/index"
-    import OpenVacancies from "../../componets/openVacancies/index"
+    import BreadCrumbs from "../../componets/breadcrumbs/breadcrumbs";
+    import Career from "../../componets/career/index";
+    import NewsSlider from "../../componets/newsSlider/index";
+    import Feedback from "../../componets/feedback/index";
+    import OpenVacancies from "../../componets/openVacancies/index";
+    import Meta from '../../mixins/meta';
 
     export default {
-        //       <bread-crumbs class="vacancies__breadCrumbs"/>
         name: "Index",
+        mixins: [Meta],
 
         components: {
             BreadCrumbs,
@@ -50,6 +51,7 @@
                 career: null,
                 vacanciesList: null,
                 lifeNews: null,
+                metaInformation: null,
             }
         },
 
@@ -58,12 +60,23 @@
             let career = null;
             let vacanciesList = null;
             let lifeNews = null;
+            let metaInformation = null;
 
             let promiseList = [];
 
             const getPageInfo = async () => {
                 await app.$axios.$get('pageInfo?page=vacancies')
-                    .then(response => pageInfo = response)
+                    .then((response) => {
+                        metaInformation = {
+                            ogDescription: response.ogDescription || null,
+                            ogThumb: response.ogThumb || null,
+                            ogThumb2x: response.ogThumb2x || null,
+                            ogTitle: response.ogTitle || null,
+                            metaKeyword: response.metaKeyword || null,
+                            metaDescription: response.metaDescription || null,
+                        };
+                        pageInfo = response;
+                    })
                     .catch(err => console.log(err));
             };
             promiseList.push(getPageInfo());
@@ -90,8 +103,7 @@
             promiseList.push(getLifeNews());
 
             await Promise.all(promiseList);
-            console.log(pageInfo, career);
-            return {pageInfo: pageInfo, career: career, vacanciesList: vacanciesList, lifeNews: lifeNews};
+            return {pageInfo: pageInfo, career: career, vacanciesList: vacanciesList, lifeNews: lifeNews, metaInformation};
         },
     }
 </script>

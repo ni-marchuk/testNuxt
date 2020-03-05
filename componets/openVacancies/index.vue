@@ -1,5 +1,5 @@
 <template>
-    <div class="openVacancies">
+    <div class="openVacancies" v-if="vacancies">
         <div class="container">
             <h2 class="openVacancies__title">Открытые вакансии</h2>
             <div class="openVacancies__wrapper">

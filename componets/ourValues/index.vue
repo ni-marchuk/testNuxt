@@ -1,9 +1,10 @@
 <template>
-    <div class="ourValues">
+    <div class="ourValues"
+         v-if="pageInfo">
         <div class="container">
-            <h2 class="ourValues__title">{{about.values['title']}}</h2>
+            <h2 class="ourValues__title">{{pageInfo.values['title']}}</h2>
             <ul class="ourValues__list">
-                <li class="ourValues__item" v-for="value in about.values.items">{{value}}</li>
+                <li class="ourValues__item" v-for="value in pageInfo.values.items">{{value}}</li>
             </ul>
         </div>
     </div>
@@ -14,7 +15,7 @@
         name: "OurValues",
 
         props: {
-            about: {
+            pageInfo: {
                 required: true,
             },
         },

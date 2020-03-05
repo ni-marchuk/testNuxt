@@ -3,14 +3,17 @@
         <div class="container">
             <div class="career__wrapper">
                 <div class="career__inner">
-                    <div class="career__content">
+                    <div class="career__content" v-if="pageInfo">
                         <h1 class="career__title">{{pageInfo.h1}}</h1>
                         <p class="career__slogan">{{pageInfo.preview_description}}</p>
                         <p class="career__text">{{pageInfo.description}}</p>
                     </div>
-                    <img class="career__img" src="/img/career.png">
+                    <img class="career__img"
+                         v-if="pageInfo"
+                         src="/img/career.png">
                 </div>
-                <div class="career__items">
+                <div class="career__items"
+                     v-if="career">
                     <div class="career__item" v-for="(item, index) in career">
                         <!--svg?-->
                         <img class="career__itemImg" :src="item.icon"/>

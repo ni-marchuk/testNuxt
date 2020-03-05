@@ -1,11 +1,11 @@
 <template>
     <div class="main">
         <short-info class="main__shortInfo"
-                    :main="main"
+                    :pageInfo="pageInfo"
                     :statistics="statistics"/>
         <services-box class="main__servicesBox"
                       :services="services"
-                      :pageInfo="pageInfo"/>
+                      :pageInfo="pageInfoServices"/>
         <work-scheme class="main__workScheme"
                      :workSchemes="workSchemes"/>
         <advantages class="main__advantages"
@@ -16,9 +16,9 @@
 <script>
     import ShortInfo from '../componets/shortInfo/index';
     import ServicesBox from '../componets/servicesBox/index';
-    import WorkScheme from '../componets/workScheme/index'
-    import Advantages from '../componets/advantages/index'
-    import Meta from '../mixins/meta'
+    import WorkScheme from '../componets/workScheme/index';
+    import Advantages from '../componets/advantages/index';
+    import Meta from '../mixins/meta';
 
     export default {
         name: 'Index',
@@ -35,7 +35,7 @@
 
         data() {
             return {
-                main: null,
+                pageInfo: null,
                 statistics: null,
                 benefits: null,
                 workSchemes: null,
@@ -44,7 +44,7 @@
         },
 
         async asyncData({app}) {
-            let main = null;
+            let pageInfo = null;
             let statistics = null;
             let benefits = null;
             let workSchemes = null;
@@ -52,32 +52,30 @@
 
             let promiseList = [];
 
-            const getMain = async () => {
+            const getPageInfo = async () => {
                 await app.$axios.$get("pageInfo?page=index")
                     .then((response) => {
                         //записать в metaInformation props кроме перечисленныех
                         // let {h1,slider_mini_title,slider_text,slider_title,name,title, ...metaInformation} = response;
                         metaInformation = {
                             ogDescription: response.ogDescription || null,
-                            ogThumb: response.ogThumb,
-                            ogThumb2x: response.ogThumb2x,
-                            ogTitle: response.ogTitle,
-                            metaKeyword: response.metaKeyword,
-                            metaDescription: response.metaDescription,
+                            ogThumb: response.ogThumb || null,
+                            ogThumb2x: response.ogThumb2x || null,
+                            ogTitle: response.ogTitle || null,
+                            metaKeyword: response.metaKeyword || null,
+                            metaDescription: response.metaDescription || null,
                         };
-                        main = response;
+                        pageInfo = response;
                     })
                     .catch(err => console.log(err));
             };
-
-            promiseList.push(getMain());
+            promiseList.push(getPageInfo());
 
             const getStatistics = async () => {
                 await app.$axios.$get("statistics")
                     .then(response => statistics = response)
                     .catch(err => console.log(err));
             };
-
             promiseList.push(getStatistics());
 
             const getBenefits = async () => {
@@ -85,7 +83,6 @@
                     .then(response => benefits = response)
                     .catch(err => console.log(err));
             };
-
             promiseList.push(getBenefits());
 
             const getWorkSchemes = async () => {
@@ -101,21 +98,18 @@
                     })
                     .catch(err => console.log(err));
             };
-
             promiseList.push(getWorkSchemes());
 
             await Promise.all(promiseList);
-            console.log(metaInformation);
-            return {main, statistics, benefits, workSchemes, metaInformation};
+            return {pageInfo, statistics, benefits, workSchemes, metaInformation};
         },
 
         computed: {
-
             services() {
                 return this.$store.getters['services/SERVICES'];
             },
 
-            pageInfo() {
+            pageInfoServices() {
                 return this.$store.getters['services/PAGE_INFO'];
             },
         },

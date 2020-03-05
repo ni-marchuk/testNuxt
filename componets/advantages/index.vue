@@ -1,5 +1,5 @@
 <template>
-    <div class="advantages">
+    <div class="advantages" v-if="benefits">
         <div class="container">
             <h2 class="advantages__title">Преимущества сотрудничества</h2>
             <div class="advantages__itemBox">
@@ -89,7 +89,6 @@
 
         &__itemText {
             font-size: 14px;
-
             text-align: center;
         }
     }
